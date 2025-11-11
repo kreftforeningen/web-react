@@ -160,7 +160,6 @@ const ButtonGlobalStyles = createGlobalStyle`
   }
 
   .kf-btn--outline {
-    background: var(--kf-color-white, #ffffff);
     color: var(--kf-color-blue-700, #1e40af);
     border-color: var(--kf-color-blue-700, #1e40af);
     --kf-ring-color: var(--kf-color-blue-700, #1e40af);
@@ -177,7 +176,6 @@ const ButtonGlobalStyles = createGlobalStyle`
   }
 
   .dark .kf-btn--outline {
-    background: transparent;
     color: var(--kf-color-blue-200, #bfdbfe);
     border-color: var(--kf-color-blue-200, #bfdbfe);
     --kf-ring-color: var(--kf-color-blue-200, #bfdbfe);

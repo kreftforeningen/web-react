@@ -8,11 +8,16 @@ const CardGlobalStyles = createGlobalStyle`
     font-family: var(--kf-font-sans);
     display: flex;
     flex-direction: column;
-    gap: calc(var(--kf-spacing, 0.25rem) * 6);
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
     border-radius: var(--kf-radius-2xl, 1rem);
     padding-block: calc(var(--kf-spacing, 0.25rem) * 8);
     background: var(--kf-color-gray-100, #ffffff);
     color: var(--kf-color-gray-950, #0f172a);
+  }
+
+  .dark .kf-card {
+    background: var(--kf-color-gray-900, #0f172a);
+    color: var(--kf-color-gray-200, #ffffff);
   }
 
   .kf-card__header {
@@ -44,9 +49,7 @@ const CardGlobalStyles = createGlobalStyle`
   }
 
   .kf-card__description {
-    font-size: var(--kf-text-sm, 0.875rem);
     line-height: var(--kf-text-sm--line-height, 1.4285714286);
-    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
     padding-bottom: calc(var(--kf-spacing, 0.25rem) * 2);
   }
 
