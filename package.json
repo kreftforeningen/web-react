@@ -1,6 +1,5 @@
 {
   "name": "@kreftforeningen/web-react",
-
   "version": "1.0.5",
   "type": "module",
   "publishConfig": {
