@@ -1,29 +1,18 @@
-# Repository settings for kf-component-library
-# https://github.com/repository-settings/app
-
 repository:
-  # Repository description
-  description: "kf components, shadcn/ui components. styles with kf-tailwind"
-
-  # Repository homepage URL
-  homepage: "https://www.npmjs.com/package/kf-component-library"
-
-  # Repository topics/tags
+  description: "Components with Kreftforeningen design tokens."
+  homepage: "https://www.npmjs.com/package/@kreftforeningen/web-react"
   topics:
     - react
     - typescript
     - component-library
-    - tailwindcss
     - radix-ui
     - shadcn-ui
     - ui-components
     - design-system
     - accessible
-    - kf-components
     - vite
     - npm-package
 
-  # Repository settings
   private: false
   has_issues: true
   has_projects: true
@@ -39,7 +28,6 @@ repository:
   enable_automated_security_fixes: true
   enable_vulnerability_alerts: true
 
-# Branch protection rules
 branches:
   - name: main
     protection:

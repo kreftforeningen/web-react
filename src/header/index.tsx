@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { createGlobalStyle } from "styled-components";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/theme-provider";
 
@@ -17,32 +17,141 @@ import {
   SheetClose,
 } from "../sheet";
 
-const headerVariants = cva(
-  "flex flex-row flex-stretch gap-2 items-center my-4 container mx-auto px-6",
-  {
-    variants: {
-      variant: {
-        default: "",
-        destructive: "",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
+const HeaderGlobalStyles = createGlobalStyle`
+  .kf-header {
+    font-family: var(--kf-font-sans);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    margin-block: calc(var(--kf-spacing, 0.25rem) * 4);
+    padding-inline: calc(var(--kf-spacing, 0.25rem) * 6);
+    width: min(var(--kf-container-7xl, 80rem), 100%);
+    margin-inline: auto;
   }
-);
+
+  .kf-header__logo,
+  .kf-header__title {
+    flex-grow: 1;
+  }
+
+  .kf-header__logo img {
+    max-height: 100px;
+    min-width: 150px;
+    height: auto;
+    width: auto;
+  }
+
+  .kf-header__title-span {
+    font-size: var(--kf-text-xl, 1.25rem);
+  }
+
+  .kf-header__title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .kf-header__title-link:hover {
+    color: var(--kf-color-blue-600, #0f172a);
+    text-decoration: underline;
+  }
+
+  .dark .kf-header__title-link:hover {
+    color: var(--kf-color-blue-200, #bfdbfe);
+  }
+
+  .kf-header__navigation {
+    display: flex;
+    flex-direction: row;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+    padding: calc(var(--kf-spacing, 0.25rem) * 4);
+    flex-grow: 1;
+  }
+
+  .kf-header__search {
+    padding-block: calc(var(--kf-spacing, 0.25rem) * 2);
+  }
+
+  .kf-header__search-field {
+    position: relative;
+    width: min(20rem, 100%);
+  }
+
+  .kf-header__search-icon {
+    position: absolute;
+    left: calc(var(--kf-spacing, 0.25rem) * 3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--kf-color-gray-400, #9ca3af);
+  }
+
+  .kf-header__search-input {
+    padding-left: calc(var(--kf-spacing, 0.25rem) * 10);
+  }
+
+  .kf-header__menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+    padding: calc(var(--kf-spacing, 0.25rem) * 8);
+    padding-top: calc(var(--kf-spacing, 0.25rem) * 14);
+    width: min(33.75rem, 100%);
+    background: var(--kf-color-gray-900, #111827);
+    color: var(--kf-color-gray-50, #f9fafb);
+    border: none;
+    box-shadow: var(--kf-shadow-2xl, 0 25px 50px -12px rgb(0 0 0 / 0.25));
+  }
+
+  .kf-header__menu-footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .kf-header__menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding-block: calc(var(--kf-spacing, 0.25rem) * 2);
+  }
+
+  .kf-header__menu-link {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .kf-header__menu-link:hover {
+    text-decoration: underline;
+  }
+
+  .kf-header__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+`;
 
 function HeaderWrapper({
   className,
-  variant,
   ...props
-}: React.ComponentProps<"header"> & VariantProps<typeof headerVariants>) {
+}: React.ComponentProps<"header">) {
   return (
-    <header
-      data-slot="header"
-      className={cn(headerVariants({ variant }), className)}
-      {...props}
-    />
+    <>
+      <HeaderGlobalStyles />
+      <header
+        data-slot="header"
+        className={cn("kf-header", className)}
+        {...props}
+      />
+    </>
   );
 }
 
@@ -60,16 +169,10 @@ function HeaderLogo({
   // Use darkSrc if provided and theme is dark, otherwise use the regular src
   const logoSrc = darkSrc && theme === "dark" ? darkSrc : src;
 
-  const imgElement = (
-    <img
-      className={cn("w-auto max-h-[100px] min-w-[150px]", className)}
-      src={logoSrc}
-      {...props}
-    />
-  );
+  const imgElement = <img className={cn(className)} src={logoSrc} {...props} />;
 
   return (
-    <div data-slot="header-logo" className="grow">
+    <div data-slot="header-logo" className="kf-header__logo">
       {href ? (
         <a href={href} tabIndex={0} aria-label="Logo">
           {imgElement}
@@ -86,15 +189,17 @@ function HeaderTitle({
   href,
   ...props
 }: React.ComponentProps<"span"> & { href?: string }) {
-  const content = <span className={cn("text-xl", className)} {...props} />;
+  const content = (
+    <span className={cn("kf-header__title-span", className)} {...props} />
+  );
   return (
-    <div data-slot="header-title" className="grow">
+    <div data-slot="header-title" className="kf-header__title">
       {href ? (
         <a
           href={href}
           tabIndex={0}
           aria-label="Title"
-          className="hover:underline dark:hover:text-blue-200 hover:text-primary"
+          className="kf-header__title-link"
         >
           {content}
         </a>
@@ -112,7 +217,7 @@ function HeaderNavigation({
   return (
     <main
       data-slot="header-navigation"
-      className={cn("flex flex-row gap-4 p-4 sm:grow", className)}
+      className={cn("kf-header__navigation", className)}
       {...props}
     />
   );
@@ -121,13 +226,14 @@ function HeaderNavigation({
 function HeaderSearch({ ...props }: React.ComponentProps<"input">) {
   return (
     <>
-      <div className="py-2">
-        <div className="relative w-full max-w-sm">
-          <SearchIcon
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-            size={18}
+      <div className="kf-header__search">
+        <div className="kf-header__search-field">
+          <SearchIcon className="kf-header__search-icon" size={18} />
+          <Input
+            placeholder="Søk"
+            className="kf-header__search-input"
+            {...props}
           />
-          <Input placeholder="Søk" className="pl-10" {...props} />
         </div>
       </div>
     </>
@@ -169,8 +275,8 @@ function HeaderMenuTrigger({ children }: React.ComponentProps<"div">) {
 function HeaderMenuContent({ children }: React.ComponentProps<"div">) {
   return (
     <>
-      <SheetContent className="w-[400px] sm:w-[540px] pt-14 flex flex-col gap-4 px-8 text-xl pb-2 bg-gray-900 text-gray-50 border-none shadow-2xl">
-        <SheetHeader className="sr-only">
+      <SheetContent className="kf-header__menu-content">
+        <SheetHeader className="kf-header__sr-only">
           <SheetTitle>Menu</SheetTitle>
           <SheetDescription>Menu.</SheetDescription>
         </SheetHeader>
@@ -185,14 +291,14 @@ function HeaderMenuFooter({
   children,
 }: React.ComponentProps<"div">) {
   return (
-    <SheetFooter className={cn("flex flex-row justify-between", className)}>
+    <SheetFooter className={cn("kf-header__menu-footer", className)}>
       {children}
     </SheetFooter>
   );
 }
 
 function HeaderMenuList({ children }: React.ComponentProps<"ul">) {
-  return <ul className="flex flex-col gap-2 py-2">{children}</ul>;
+  return <ul className="kf-header__menu-list">{children}</ul>;
 }
 
 function HeaderMenuListItem({
@@ -202,7 +308,7 @@ function HeaderMenuListItem({
 }: React.ComponentProps<"a"> & { href: string }) {
   return (
     <li>
-      <a href={href} className="flex items-center gap-2 s8" {...props}>
+      <a href={href} className="kf-header__menu-link" {...props}>
         {children}
       </a>
     </li>

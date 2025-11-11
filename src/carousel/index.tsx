@@ -3,6 +3,7 @@ import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
 import { Button } from "../button";
@@ -31,6 +32,188 @@ type CarouselContextProps = {
 } & CarouselProps;
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
+
+const CarouselGlobalStyles = createGlobalStyle`
+  .kf-carousel {
+    font-family: var(--kf-font-sans);
+    position: relative;
+    width: 100%;
+  }
+
+  .kf-carousel__viewport-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .kf-carousel__viewport {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--kf-radius-xl, 0.75rem);
+  }
+
+  .kf-carousel__track {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .kf-carousel[data-orientation="horizontal"] .kf-carousel__track {
+    flex-direction: row;
+    margin-left: calc(var(--kf-spacing, 0.25rem) * -4);
+  }
+
+  .kf-carousel[data-orientation="vertical"] .kf-carousel__track {
+    flex-direction: column;
+    margin-top: calc(var(--kf-spacing, 0.25rem) * -4);
+  }
+
+  .kf-carousel__item {
+    position: relative;
+    min-width: 0;
+    flex: 0 0 100%;
+    overflow: hidden;
+  }
+
+  .kf-carousel[data-orientation="horizontal"] .kf-carousel__item {
+    padding-left: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-carousel[data-orientation="vertical"] .kf-carousel__item {
+    padding-top: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-carousel[data-orientation="horizontal"] .kf-carousel__item:first-of-type {
+    padding-left: 0;
+  }
+
+  .kf-carousel[data-orientation="vertical"] .kf-carousel__item:first-of-type {
+    padding-top: 0;
+  }
+
+  .kf-carousel__item-description {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    width: 100%;
+    color: var(--kf-color-white, #ffffff);
+    pointer-events: none;
+  }
+
+  .kf-carousel__item-description::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: calc(100% + calc(var(--kf-spacing, 0.25rem) * 4));
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 60%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .kf-carousel__item-description-content {
+    position: relative;
+    padding: calc(var(--kf-spacing, 0.25rem) * 2);
+    font-size: var(--kf-text-sm, 0.875rem);
+    line-height: var(--kf-text-sm--line-height, 1.4285714286);
+    text-align: center;
+    pointer-events: auto;
+  }
+
+  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+    .kf-carousel__item-description-content {
+      font-size: var(--kf-text-base, 1rem);
+      line-height: var(--kf-text-base--line-height, 1.5);
+    }
+  }
+
+  .kf-carousel__dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    width: 100%;
+    margin-top: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-carousel__dot {
+    width: calc(var(--kf-spacing, 0.25rem) * 4);
+    height: calc(var(--kf-spacing, 0.25rem) * 4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--kf-radius-full, 9999px);
+    border: var(--kf-border-2, 2px) solid var(--kf-color-blue-400, rgba(59, 130, 246, 1));
+    background: transparent;
+    cursor: pointer;
+    transition:
+      width 160ms var(--kf-ease-in-out, ease),
+      background-color 160ms var(--kf-ease-in-out, ease),
+      transform 160ms var(--kf-ease-in-out, ease);
+  }
+
+  .kf-carousel__dot:hover,
+  .kf-carousel__dot:focus-visible {
+    outline: none;
+    background: color-mix(in srgb, var(--kf-color-blue-400, rgba(59, 130, 246, 1)) 20%, transparent);
+  }
+
+  .kf-carousel__dot[data-selected="true"] {
+    width: calc(var(--kf-spacing, 0.25rem) * 8);
+    background: var(--kf-color-blue-400, rgba(59, 130, 246, 1));
+    cursor: default;
+  }
+
+  .kf-carousel__control {
+    position: absolute;
+    width: calc(var(--kf-spacing, 0.25rem) * 8);
+    height: calc(var(--kf-spacing, 0.25rem) * 8);
+    border-radius: var(--kf-radius-full, 9999px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .kf-carousel[data-orientation="horizontal"] .kf-carousel__control--previous {
+    top: 50%;
+    left: calc(var(--kf-spacing, 0.25rem) * -4);
+    transform: translateY(-50%);
+  }
+
+  .kf-carousel[data-orientation="horizontal"] .kf-carousel__control--next {
+    top: 50%;
+    right: calc(var(--kf-spacing, 0.25rem) * -4);
+    transform: translateY(-50%);
+  }
+
+  .kf-carousel[data-orientation="vertical"] .kf-carousel__control--previous {
+    top: calc(var(--kf-spacing, 0.25rem) * -12);
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .kf-carousel[data-orientation="vertical"] .kf-carousel__control--next {
+    bottom: calc(var(--kf-spacing, 0.25rem) * -12);
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .kf-carousel__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+`;
 
 function useCarousel() {
   const context = React.useContext(CarouselContext);
@@ -119,32 +302,38 @@ function Carousel({
   }, [api, onSelect]);
 
   return (
-    <CarouselContext.Provider
-      value={{
-        carouselRef,
-        api,
-        opts,
-        orientation:
-          orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
-        scrollPrev,
-        scrollNext,
-        scrollTo,
-        canScrollPrev,
-        canScrollNext,
-        selectedIndex,
-      }}
-    >
-      <div
-        onKeyDownCapture={handleKeyDown}
-        className={cn("relative", className)}
-        role="region"
-        aria-roledescription="carousel"
-        data-slot="carousel"
-        {...props}
+    <>
+      <CarouselGlobalStyles />
+      <CarouselContext.Provider
+        value={{
+          carouselRef,
+          api,
+          opts,
+          orientation:
+            orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
+          scrollPrev,
+          scrollNext,
+          scrollTo,
+          canScrollPrev,
+          canScrollNext,
+          selectedIndex,
+        }}
       >
-        {children}
-      </div>
-    </CarouselContext.Provider>
+        <div
+          onKeyDownCapture={handleKeyDown}
+          className={cn("kf-carousel", className)}
+          role="region"
+          aria-roledescription="carousel"
+          data-slot="carousel"
+          data-orientation={
+            orientation || (opts?.axis === "y" ? "vertical" : "horizontal")
+          }
+          {...props}
+        >
+          {children}
+        </div>
+      </CarouselContext.Provider>
+    </>
   );
 }
 
@@ -154,7 +343,7 @@ function CarouselContentWrapper({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("relative", className)} {...props}>
+    <div className={cn("kf-carousel__viewport-wrapper", className)} {...props}>
       {children}
     </div>
   );
@@ -164,20 +353,19 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div
-      ref={carouselRef}
-      id="carousel-content"
-      className="overflow-hidden rounded-xl"
-      data-slot="carousel-content"
-    >
+    <div className="kf-carousel__viewport-wrapper" data-slot="carousel-content">
       <div
-        className={cn(
-          "flex",
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
-          className
-        )}
-        {...props}
-      />
+        ref={carouselRef}
+        id="carousel-content"
+        className="kf-carousel__viewport"
+        data-orientation={orientation}
+      >
+        <div
+          className={cn("kf-carousel__track", className)}
+          data-orientation={orientation}
+          {...props}
+        />
+      </div>
     </div>
   );
 }
@@ -193,10 +381,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       role="tablist"
-      className={cn(
-        "mt-4 w-full flex items-center justify-center gap-2",
-        className
-      )}
+      className={cn("kf-carousel__dots", className)}
       {...props}
     >
       {api?.scrollSnapList().map((_, index) => (
@@ -207,12 +392,8 @@ function CarouselDots({ className, ...props }: React.ComponentProps<"div">) {
           aria-selected={index === selectedIndex}
           aria-controls="carousel-content"
           aria-label={`Slide ${index + 1}`}
-          className={cn(
-            "size-4 rounded-full border-2 border-ring  cursor-pointer hover:bg-ring/20",
-            index === selectedIndex
-              ? "bg-ring w-8 transition-all duration-500 animate-in hover:bg-ring hover:cursor-default"
-              : "bg-transparent transition-all duration-500 animate-out"
-          )}
+          className="kf-carousel__dot"
+          data-selected={index === selectedIndex ? "true" : undefined}
           onClick={() => scrollTo(index)}
         />
       ))}
@@ -228,11 +409,8 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
       role="group"
       aria-roledescription="slide"
       data-slot="carousel-item"
-      className={cn(
-        "relative min-w-0 shrink-0 grow-0 basis-full overflow-hidden",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
-        className
-      )}
+      className={cn("kf-carousel__item", className)}
+      data-orientation={orientation}
       {...props}
     />
   );
@@ -246,16 +424,10 @@ function CarouselItemDescription({
   return (
     <div
       data-slot="carousel-item-description"
-      className={cn("absolute bottom-0 w-full text-white", className)}
+      className={cn("kf-carousel__item-description", className)}
       {...props}
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-        style={{ height: "calc(100% + 1rem)" }}
-      />
-      <div className="relative text-sm sm:text-base text-center p-2">
-        {children}
-      </div>
+      <div className="kf-carousel__item-description-content">{children}</div>
     </div>
   );
 }
@@ -274,18 +446,16 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
-        orientation === "horizontal"
-          ? "top-1/2 -left-4 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+        "kf-carousel__control kf-carousel__control--previous",
         className
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      data-orientation={orientation}
       {...props}
     >
       <ArrowLeft />
-      <span className="sr-only">Previous slide</span>
+      <span className="kf-carousel__sr-only">Previous slide</span>
     </Button>
   );
 }
@@ -304,18 +474,16 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        "absolute size-8 rounded-full",
-        orientation === "horizontal"
-          ? "top-1/2 -right-4 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+        "kf-carousel__control kf-carousel__control--next",
         className
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      data-orientation={orientation}
       {...props}
     >
       <ArrowRight />
-      <span className="sr-only">Next slide</span>
+      <span className="kf-carousel__sr-only">Next slide</span>
     </Button>
   );
 }

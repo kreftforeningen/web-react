@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cva, VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
+import { createGlobalStyle } from "styled-components";
 
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cva, type VariantProps } from "class-variance-authority";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/button";
 import { Input } from "@/input";
@@ -22,6 +24,335 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/tooltip";
+
+const SidebarGlobalStyles = createGlobalStyle`
+  .kf-sidebar-wrapper {
+    font-family: var(--kf-font-sans);
+    min-height: 100svh;
+    width: 100%;
+    display: flex;
+    background: var(--kf-color-sidebar-background, transparent);
+  }
+
+  .kf-sidebar-wrapper[data-variant="inset"] {
+    background: var(--kf-color-sidebar-background, transparent);
+  }
+
+  .kf-sidebar {
+    color: var(--kf-color-gray-950, var(--kf-color-gray-950, #0f172a));
+  }
+
+  .dark .kf-sidebar {
+    color: var(--kf-color-gray-950, var(--kf-color-gray-950, #f8fafc));
+  }
+
+  .kf-sidebar__gap {
+    position: relative;
+    background: transparent;
+    transition: width 200ms var(--kf-ease-linear, linear);
+  }
+
+  .kf-sidebar__container {
+    position: fixed;
+    inset-block: 0;
+    z-index: 10;
+    display: none;
+    height: 100svh;
+    transition:
+      left 200ms var(--kf-ease-linear, linear),
+      right 200ms var(--kf-ease-linear, linear),
+      width 200ms var(--kf-ease-linear, linear);
+  }
+
+  @media (min-width: 48rem) {
+    .kf-sidebar__container {
+      display: flex;
+    }
+  }
+
+  .kf-sidebar__inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: var(--kf-color-gray-100, var(--kf-color-gray-100, #ffffff));
+    border-radius: var(--kf-radius-xl, 0.75rem);
+    border: none;
+    box-shadow: none;
+    transition: border-color 200ms var(--kf-ease-in-out, ease);
+  }
+
+  .kf-sidebar__inner[data-variant="floating"],
+  .kf-sidebar__inner[data-variant="inset"] {
+    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
+    box-shadow: var(--kf-shadow-sm, 0 1px 3px 0 rgb(15 23 42 / 0.1), 0 1px 2px -1px rgb(15 23 42 / 0.1));
+  }
+
+  .dark .kf-sidebar__inner[data-variant="floating"],
+  .dark .kf-sidebar__inner[data-variant="inset"] {
+    border-color: color-mix(in srgb, var(--kf-color-gray-300, rgba(248, 250, 252, 0.16)) 70%, transparent);
+    box-shadow: var(--kf-shadow-md, 0 4px 6px -1px rgb(15 23 42 / 0.45), 0 2px 4px -2px rgb(15 23 42 / 0.4));
+  }
+
+  .kf-sidebar__trigger {
+    width: calc(var(--kf-spacing, 0.25rem) * 7);
+    height: calc(var(--kf-spacing, 0.25rem) * 7);
+  }
+
+  .kf-sidebar__rail {
+    position: absolute;
+    inset-block: 0;
+    z-index: 20;
+    display: none;
+    width: 1rem;
+    transform: translateX(-50%);
+    transition: all 200ms var(--kf-ease-linear, linear);
+    background: transparent;
+  }
+
+  .kf-sidebar__rail::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: transparent;
+  }
+
+  @media (min-width: 40rem) {
+    .kf-sidebar__rail {
+      display: flex;
+    }
+  }
+
+  .kf-sidebar__rail:hover::after {
+    background: var(--kf-color-gray-100, rgba(15, 23, 42, 0.16));
+  }
+
+  .kf-sidebar__inset {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    width: 100%;
+    flex-direction: column;
+    background: var(--kf-color-gray-50, #ffffff);
+  }
+
+  .kf-sidebar__inset[data-variant="inset"] {
+    margin: calc(var(--kf-spacing, 0.25rem) * 8);
+    margin-left: 0;
+    border-radius: var(--kf-radius-2xl, 1rem);
+    box-shadow: var(--kf-shadow-sm, 0 1px 3px 0 rgb(15 23 42 / 0.1), 0 1px 2px -1px rgb(15 23 42 / 0.1));
+  }
+
+  .kf-sidebar__input {
+    background: var(--kf-color-gray-50, #ffffff);
+    height: calc(var(--kf-spacing, 0.25rem) * 8);
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .kf-sidebar__header,
+  .kf-sidebar__footer {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding: calc(var(--kf-spacing, 0.25rem) * 2);
+  }
+
+  .kf-sidebar__separator {
+    margin-inline: calc(var(--kf-spacing, 0.25rem) * 2);
+    width: auto;
+    background: var(--kf-color-gray-100, rgba(15, 23, 42, 0.12));
+  }
+
+  .kf-sidebar__content {
+    display: flex;
+    min-height: 0;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    overflow: auto;
+  }
+
+  .kf-sidebar__icon-collapsed .kf-sidebar__content {
+    overflow: hidden;
+  }
+
+  .kf-sidebar__group {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    padding: calc(var(--kf-spacing, 0.25rem) * 2);
+  }
+
+  .kf-sidebar__group-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding: calc(var(--kf-spacing, 0.25rem) * 2);
+    border-radius: var(--kf-radius-lg, 0.5rem);
+    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+    font-size: var(--kf-text-sm, 0.875rem);
+    font-weight: 500;
+  }
+
+  .kf-sidebar__group-label:has(:focus-visible) {
+    outline: none;
+    box-shadow: var(--kf-ring-offset-width, 0) var(--kf-ring-offset-color, transparent);
+  }
+
+  .kf-sidebar__group-content {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 1.5);
+    padding: calc(var(--kf-spacing, 0.25rem) * 1);
+  }
+
+  .kf-sidebar__menu {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 0.5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .kf-sidebar__menu-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    border-radius: var(--kf-radius-lg, 0.5rem);
+    padding: calc(var(--kf-spacing, 0.25rem) * 2);
+    color: inherit;
+    transition:
+      background 120ms var(--kf-ease-in-out, ease),
+      color 120ms var(--kf-ease-in-out, ease);
+  }
+
+  .kf-sidebar__menu-item[data-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .kf-sidebar__menu-item[data-active="true"],
+  .kf-sidebar__menu-item:focus-visible {
+    background: color-mix(in srgb, var(--kf-color-blue-600, #1d4ed8) 14%, transparent);
+    color: var(--kf-color-blue-50, #ffffff);
+  }
+
+  .kf-sidebar__menu-item:hover {
+    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 60%, transparent);
+  }
+
+  .kf-sidebar__menu-item[data-variant="floating"],
+  .kf-sidebar__menu-item[data-variant="inset"] {
+    border-radius: var(--kf-radius-md, 0.375rem);
+  }
+
+  .kf-sidebar__menu-button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding: calc(var(--kf-spacing, 0.25rem) * 2);
+    border-radius: var(--kf-radius-lg, 0.5rem);
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    transition:
+      background 120ms var(--kf-ease-in-out, ease),
+      color 120ms var(--kf-ease-in-out, ease);
+  }
+
+  .kf-sidebar__menu-button:hover {
+    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 50%, transparent);
+  }
+
+  .kf-sidebar__menu-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--kf-color-blue-600, #1d4ed8) 20%, transparent);
+  }
+
+  .kf-sidebar__menu-button[data-active="true"] {
+    background: color-mix(in srgb, var(--kf-color-blue-600, #1d4ed8) 14%, transparent);
+    color: var(--kf-color-blue-50, #ffffff);
+  }
+
+  .kf-sidebar__menu-button[data-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .kf-sidebar__menu-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    width: 100%;
+    padding: calc(var(--kf-spacing, 0.25rem) * 2);
+    border-radius: var(--kf-radius-lg, 0.5rem);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      background 120ms var(--kf-ease-in-out, ease),
+      color 120ms var(--kf-ease-in-out, ease);
+  }
+
+  .kf-sidebar__menu-link:hover {
+    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 60%, transparent);
+  }
+
+  .kf-sidebar__menu-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--kf-color-blue-600, #1d4ed8) 20%, transparent);
+  }
+
+  .kf-sidebar__menu-link[data-active="true"] {
+    background: color-mix(in srgb, var(--kf-color-blue-600, #1d4ed8) 14%, transparent);
+    color: var(--kf-color-blue-50, #ffffff);
+  }
+
+  .kf-sidebar__menu-badge {
+    font-size: var(--kf-text-xs, 0.75rem);
+    font-weight: 600;
+    border-radius: var(--kf-radius-md, 0.375rem);
+    padding-inline: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding-block: calc(var(--kf-spacing, 0.25rem) * 0.5);
+    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 80%, transparent);
+    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+  }
+
+  .dark .kf-sidebar__menu-badge {
+    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.32)) 80%, transparent);
+    color: var(--kf-color-gray-500, rgba(248, 250, 252, 0.76));
+  }
+
+  .kf-sidebar__skeleton {
+    width: 100%;
+    height: calc(var(--kf-spacing, 0.25rem) * 10);
+    border-radius: var(--kf-radius-lg, 0.5rem);
+  }
+
+  .kf-sidebar__menu-item[data-collapsible="icon"] .kf-sidebar__menu-text,
+  .kf-sidebar__menu-button[data-collapsible="icon"] .kf-sidebar__menu-text,
+  .kf-sidebar__menu-link[data-collapsible="icon"] .kf-sidebar__menu-text {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .kf-sidebar__menu-item[data-collapsible="icon"] .kf-sidebar__menu-icon,
+  .kf-sidebar__menu-button[data-collapsible="icon"] .kf-sidebar__menu-icon,
+  .kf-sidebar__menu-link[data-collapsible="icon"] .kf-sidebar__menu-icon {
+    margin-inline: auto;
+  }
+`;
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -127,6 +458,7 @@ function SidebarProvider({
   return (
     <SidebarContext.Provider value={contextValue}>
       <TooltipProvider delayDuration={0}>
+        <SidebarGlobalStyles />
         <div
           data-slot="sidebar-wrapper"
           style={

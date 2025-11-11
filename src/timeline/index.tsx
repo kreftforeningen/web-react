@@ -1,34 +1,98 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { createGlobalStyle } from "styled-components";
+
 import { cn } from "@/lib/utils";
 
-const timelineVariants = cva("", {
-  variants: {
-    variant: {
-      default: "",
-      icon: "",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
+type TimelineVariant = "default" | "icon";
 
-type TimelineItemProps = React.ComponentProps<"div"> &
-  VariantProps<typeof timelineVariants> & {
-    isLast?: boolean;
-  };
+type TimelineItemProps = React.ComponentProps<"div"> & {
+  variant?: TimelineVariant;
+  isLast?: boolean;
+};
+
+const TimelineGlobalStyles = createGlobalStyle`
+  .kf-timeline {
+    font-family: var(--kf-font-sans);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-timeline__item {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+    justify-content: space-between;
+  }
+
+  @media (min-width: 60rem) {
+    .kf-timeline__item {
+      flex-direction: row;
+      gap: calc(var(--kf-spacing, 0.25rem) * 10);
+    }
+
+    .kf-timeline__item-content-wrapper {
+      max-width: 24rem;
+    }
+  }
+
+  .kf-timeline__node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+  }
+
+  .kf-timeline__icon {
+    display: inline-flex;
+    width: calc(var(--kf-spacing, 0.25rem) * 4);
+    height: calc(var(--kf-spacing, 0.25rem) * 4);
+    border-radius: 9999px;
+    align-items: center;
+    justify-content: center;
+    background: var(--kf-color-red-600, #dc2626);
+  }
+
+  .kf-timeline__connector {
+    width: 2px;
+    height: calc(var(--kf-spacing, 0.25rem) * 14);
+    background: var(--kf-color-red-600, #dc2626);
+  }
+
+  .kf-timeline__content {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding: calc(var(--kf-spacing, 0.25rem) * 2) calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-timeline__title {
+    margin: 0;
+    font-size: var(--kf-text-base, 1rem);
+    font-weight: 600;
+  }
+
+  .kf-timeline__description {
+    margin: 0;
+    font-size: var(--kf-text-sm, 0.875rem);
+    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.7));
+  }
+`;
 
 function Timeline({
   className,
-  variant,
+  variant = "default",
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof timelineVariants>) {
+}: React.ComponentProps<"div"> & { variant?: TimelineVariant }) {
   return (
-    <div
-      data-slot="timeline"
-      className={cn(timelineVariants({ variant }), className)}
-      {...props}
-    />
+    <>
+      <TimelineGlobalStyles />
+      <div
+        data-slot="timeline"
+        data-variant={variant}
+        className={cn("kf-timeline", className)}
+        {...props}
+      />
+    </>
   );
 }
 
@@ -36,27 +100,24 @@ function TimelineItem({
   className,
   children,
   isLast,
+  variant = "default",
   ...props
 }: TimelineItemProps) {
   return (
     <div
       data-slot="timeline-item"
-      className={cn(
-        "flex flex-col justify-between min-[960px]:flex-row gap-4 min-[960px]:gap-10",
-        className
-      )}
+      data-variant={variant}
+      className={cn("kf-timeline__item", className)}
       {...props}
     >
-      <div className="flex gap-4 min-[960px]:max-w-md">
-        <div className="flex flex-col items-center">
-          <span className="h-3 shrink-0"></span>
-          <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-red-600"></span>
-          <span className="h-2 shrink-0"></span>
-          <span
-            className={isLast ? "" : "h-14 w-[2px] shrink-0 bg-red-600"}
-          ></span>
+      <div className="kf-timeline__item-content-wrapper flex gap-[calc(var(--kf-spacing,0.25rem)*4)]">
+        <div className="kf-timeline__node">
+          <span className="block h-3" />
+          <span className="kf-timeline__icon" />
+          <span className="block h-2" />
+          {!isLast && <span className="kf-timeline__connector" />}
         </div>
-        <div className="flex flex-col gap-2 py-2 px-4">{children}</div>
+        <div className="kf-timeline__content">{children}</div>
       </div>
     </div>
   );
@@ -69,7 +130,7 @@ function TimelineItemTitle({
   return (
     <h3
       data-slot="timeline-item-title"
-      className={cn("text-base m-0", className)}
+      className={cn("kf-timeline__title", className)}
       {...props}
     />
   );
@@ -82,7 +143,7 @@ function TimelineItemDescription({
   return (
     <p
       data-slot="timeline-item-description"
-      className={cn("", className)}
+      className={cn("kf-timeline__description", className)}
       {...props}
     />
   );

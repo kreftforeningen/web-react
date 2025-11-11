@@ -1,4 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
@@ -12,7 +11,6 @@ export default defineConfig({
   plugins: [
     dts({ include: ["src/lib"] }), // Generate .d.ts files
     react(), // Enable React
-    tailwindcss(), // Enable Tailwind
     cssInjectedByJsPlugin(), // Inject CSS into JS
   ],
   resolve: {

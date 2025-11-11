@@ -1,2240 +1,936 @@
-import * as React from "react";
-
-import { ModeToggle } from "./mode-toggle";
-import { ThemeProvider } from "./theme-provider";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Link,
+} from "react-router-dom";
+import { lazy, Suspense } from "react";
 
 import {
-  AccentuatedLink,
-  AccentuatedLinkTitle,
-  AccentuatedLinkSubtitle,
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  Alert,
-  AlertDescription,
-  AlertTitle,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-  AlertDialogHeader,
-  AspectRatio,
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Banner,
-  BannerButtons,
-  BannerContent,
-  BannerDescription,
-  BannerImage,
-  BannerTitle,
-  Badge,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
   Button,
-  ButtonGroup,
-  ButtonGroupSeparator,
-  ButtonGroupText,
-  Calendar,
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Carousel,
-  CarouselContent,
-  CarouselContentWrapper,
-  CarouselDots,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  Checkbox,
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-  Input,
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-  Label,
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Progress,
-  RadioGroup,
-  RadioGroupItem,
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-  ScrollArea,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Separator,
-  Sheet,
-  SheetClose,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-  SheetContent,
-  Skeleton,
-  Slider,
-  Switch,
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-  Toaster,
-  Toggle,
-  ToggleGroup,
-  ToggleGroupItem,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  Download,
-  DownloadImage,
-  DownloadFooter,
-  DownloadOrderUrl,
-  DownloadDownloadUrl,
-  DownloadContent,
-  DownloadMain,
-  DownloadDescription,
-  DownloadTitle,
-  Person,
-  PersonItem,
-  PersonItemPhone,
-  PersonItemContent,
-  PersonItemDescription,
-  PersonItemEmail,
-  PersonItemName,
-  PersonItemTitle,
-  PersonItemImage,
-  FactBox,
-  FactBoxAction,
-  FactBoxContent,
-  FactBoxDescription,
-  FactBoxTitle,
-  Infographic,
-  InfographicItem,
-  InfographicItemDescription,
-  InfographicItemTitleText,
-  InfographicItemTitle,
-  InfographicItemTitleNumber,
-  InfographicItemIcon,
-  LinkList,
-  LinkListItem,
-  LinkListDescription,
-  LinkListTitle,
-  ChartContainer,
-  ChartTooltipContent,
-  ChartTooltip,
-  ChartLegendContent,
-  ChartLegend,
-  Textarea,
-  HeaderWrapper,
-  HeaderLogo,
-  HeaderButton,
-  HeaderMenu,
-  HeaderMenuTrigger,
-  HeaderMenuContent,
-  HeaderSearch,
-  HeaderMenuList,
-  HeaderMenuListItem,
-  HeaderMenuFooter,
-  HeaderTitle,
-  FooterNavigationItem,
-  FooterNavigationLink,
-  FooterSocial,
-  FooterWrapper,
-  FooterNavigation,
-  FooterContact,
-  FooterActions,
-  FooterContactItem,
-  FooterCopyright,
-  Spinner,
-  Feedback,
-  FeedbackAction,
-  FeedbackTitle,
-  FeedbackHeader,
-  FeedbackDescription,
-  FeedbackButtons,
-  FeedbackContent,
-  FeedbackComment,
-  FeedbackCommentInput,
-  FeedbackButtonPositive,
-  FeedbackButtonNegative,
-  FeedbackSubmit,
-  CarouselItemDescription,
-  Field,
-  FieldLabel,
-  FieldDescription,
-  FieldGroup,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  Empty,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-  EmptyDescription,
-  EmptyContent,
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupText,
-  InputGroupTextarea,
-  Item,
-  ItemDescription,
-  ItemContent,
-  ItemTitle,
-  ItemActions,
-  ItemMedia,
-  ItemGroup,
-  Kbd,
-  KbdGroup,
-  NativeSelect,
-  NativeSelectOption,
+  DropdownMenuTrigger,
+  ModeToggle,
 } from "./lib/main";
-import { toast } from "sonner";
+import { Spinner } from "./lib/main";
 
-import type { ChartConfig } from "./lib/main";
+const HomeDemo = lazy(() => import("@/demo/home"));
 
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+const AccentuatedLinkDemo = lazy(() => import("@/demo/accentuated-link"));
+const AccordionDemo = lazy(() => import("@/demo/accordion"));
+const AlertDemo = lazy(() => import("@/demo/alert"));
+const AlertDialogDemo = lazy(() => import("@/demo/alert-dialog"));
+const AspectRatioDemo = lazy(() => import("@/demo/aspect-ratio"));
+const AvatarDemo = lazy(() => import("@/demo/avatar"));
+const BadgeDemo = lazy(() => import("@/demo/badge"));
+const BannerDemo = lazy(() => import("@/demo/banner"));
+const BreadcrumbDemo = lazy(() => import("@/demo/breadcrumb"));
+const ButtonDemo = lazy(() => import("@/demo/button"));
+const ButtonGroupDemo = lazy(() => import("@/demo/button-group"));
+const CalendarDemo = lazy(() => import("@/demo/calendar"));
+const CardDemo = lazy(() => import("@/demo/card"));
+const CarouselDemo = lazy(() => import("@/demo/carousel"));
+const ChartDemo = lazy(() => import("@/demo/chart"));
+const CheckboxDemo = lazy(() => import("@/demo/checkbox"));
+const CollapsibleDemo = lazy(() => import("@/demo/collapsible"));
+const CommandDemo = lazy(() => import("@/demo/command"));
+const ContextMenuDemo = lazy(() => import("@/demo/context-menu"));
+const DialogDemo = lazy(() => import("@/demo/dialog"));
+const DownloadDemo = lazy(() => import("@/demo/download"));
+const DrawerDemo = lazy(() => import("@/demo/drawer"));
+const DropdownMenuDemo = lazy(() => import("@/demo/dropdown-menu"));
+const EmptyDemo = lazy(() => import("@/demo/empty"));
+const FactBoxDemo = lazy(() => import("@/demo/fact-box"));
+const FeedbackDemo = lazy(() => import("@/demo/feedback"));
+const FieldDemo = lazy(() => import("@/demo/field"));
+const FooterDemo = lazy(() => import("@/demo/footer"));
+const HeaderDemo = lazy(() => import("@/demo/header"));
+const HoverCardDemo = lazy(() => import("@/demo/hover-card"));
+const InfographicDemo = lazy(() => import("@/demo/infographic"));
+const InputDemo = lazy(() => import("@/demo/input"));
+const InputGroupDemo = lazy(() => import("@/demo/input-group"));
+const InputOTPDemo = lazy(() => import("@/demo/input-otp"));
+const ItemDemo = lazy(() => import("@/demo/item"));
+const KbdDemo = lazy(() => import("@/demo/kbd"));
+const LabelDemo = lazy(() => import("@/demo/label"));
+const LinkListDemo = lazy(() => import("@/demo/link-list"));
+const MenubarDemo = lazy(() => import("@/demo/menubar"));
+const ModeToggleDemo = lazy(() => import("@/demo/mode-toggle"));
+const NativeSelectDemo = lazy(() => import("@/demo/native-select"));
+const NavigationMenuDemo = lazy(() => import("@/demo/navigation-menu"));
+const PaginationDemo = lazy(() => import("@/demo/pagination"));
+const PersonDemo = lazy(() => import("@/demo/person"));
+const PopoverDemo = lazy(() => import("@/demo/popover"));
+const ProgressDemo = lazy(() => import("@/demo/progress"));
+const RadioGroupDemo = lazy(() => import("@/demo/radio-group"));
+const ResizableDemo = lazy(() => import("@/demo/resizable"));
+const ScrollAreaDemo = lazy(() => import("@/demo/scroll-area"));
+const SelectDemo = lazy(() => import("@/demo/select"));
+const SeparatorDemo = lazy(() => import("@/demo/separator"));
+const SheetDemo = lazy(() => import("@/demo/sheet"));
+const SidebarDemo = lazy(() => import("@/demo/sidebar"));
+const SkeletonDemo = lazy(() => import("@/demo/skeleton"));
+const SliderDemo = lazy(() => import("@/demo/slider"));
+const SonnerDemo = lazy(() => import("@/demo/sonner"));
+const SpinnerDemo = lazy(() => import("@/demo/spinner"));
+const SwitchDemo = lazy(() => import("@/demo/switch"));
+const TableDemo = lazy(() => import("@/demo/table"));
+const TabsDemo = lazy(() => import("@/demo/tabs"));
+const TextareaDemo = lazy(() => import("@/demo/textarea"));
+const TimelineDemo = lazy(() => import("@/demo/timeline"));
+const ToggleDemo = lazy(() => import("@/demo/toggle"));
+const ToggleGroupDemo = lazy(() => import("@/demo/toggle-group"));
+const TooltipDemo = lazy(() => import("@/demo/tooltip"));
 
-import {
-  Calendar as CalendarIcon,
-  ChevronsUpDown,
-  CircleCheck,
-  Smile,
-  Calculator,
-  User,
-  CreditCard,
-  Settings,
-  ArrowRight,
-  CircleAlert,
-  CircleHelp,
-  ServerIcon,
-  HeartIcon,
-  MenuIcon,
-  UserIcon,
-  GlobeIcon,
-  ChevronRightIcon,
-  ShoppingBasketIcon,
-  Phone,
-  Map,
-  MessageCircle,
-  Mail,
-  HandCoins,
-  Cog,
-  ArrowRightIcon,
-  ThumbsUpIcon,
-  ThumbsDownIcon,
-  ArrowLeftIcon,
-  FolderCodeIcon,
-  ArrowUpRightIcon,
-  SearchIcon,
-  InfoIcon,
-  PlusIcon,
-  CheckIcon,
-  ArrowUpIcon,
-  BadgeCheckIcon,
-} from "lucide-react";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-  FaLinkedin,
-  FaTiktok,
-} from "react-icons/fa";
-import { BannerButtonPrimary, BannerButtonSecondary } from "./banner";
+import { ThemeProvider } from "./theme-provider";
 
-const personItems = [
+function RootLayout() {
+  return <Outlet />;
+}
+
+const navigationItems = [
   {
-    id: 1,
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.long.name.johnson.doe@example.com",
-    phone: "+47 98765432",
-    title: "Software Engineer",
-    image: "https://robohash.org/John?set=set4",
-    description:
-      "John Doe is a software engineer with a passion for building scalable and efficient systems. He is a quick learner and always looking for new challenges.",
+    label: "Home",
+    to: "/",
   },
   {
-    id: 2,
-    firstName: "Jane",
-    lastName: "Doe",
-    email: "j.doe@example.com",
-    phone: "+47 98765432",
-    title: "Marketing Manager",
-    description:
-      "Jane Doe is a marketing manager with a passion for building scalable and efficient systems. She is a quick learner and always looking for new challenges.",
+    label: "Accentuated Link",
+    to: "/accentuated-link",
   },
   {
-    id: 3,
-    firstName: "Alfred",
-    lastName: "Hitchcock",
-    email: "a.hitchcock@example.com",
-    phone: "+47 98765432",
-    title: "Product Manager",
-    image: "https://robohash.org/Alfred?set=set4",
-    description:
-      "Alfred Hitchcock is a product manager with a passion for building scalable and efficient systems. He is a quick learner and always looking for new challenges.",
+    label: "Accordion",
+    to: "/accordion",
   },
   {
-    id: 4,
-    firstName: "Jane",
-    lastName: "Fonda",
-    email: "j.fonda@example.com",
-    phone: "+47 98765432",
-    title: "Sales Manager",
-    image: "https://robohash.org/Jane?set=set4",
-    description:
-      "Jane Fonda is a sales manager with a passion for building scalable and efficient systems. She is a quick learner and always looking for new challenges.",
+    label: "Alert",
+    to: "/alert",
   },
   {
-    id: 5,
-    firstName: "Lars Ola",
-    lastName: "Wayne",
-    email: "lwayne@example.com",
-    phone: "+47 98765432",
-    title: "CEO",
-    description:
-      "Lars Wayne is a CEO with a passion for building scalable and efficient systems. He is a quick learner and always looking for new challenges.",
+    label: "Alert Dialog",
+    to: "/alert-dialog",
+  },
+  {
+    label: "Aspect Ratio",
+    to: "/aspect-ratio",
+  },
+  {
+    label: "Avatar",
+    to: "/avatar",
+  },
+  {
+    label: "Badge",
+    to: "/badge",
+  },
+  {
+    label: "Banner",
+    to: "/banner",
+  },
+  {
+    label: "Breadcrumb",
+    to: "/breadcrumb",
+  },
+  {
+    label: "Button",
+    to: "/button",
+  },
+  {
+    label: "Button Group",
+    to: "/button-group",
+  },
+  {
+    label: "Calendar",
+    to: "/calendar",
+  },
+  {
+    label: "Card",
+    to: "/card",
+  },
+  {
+    label: "Carousel",
+    to: "/carousel",
+  },
+  {
+    label: "Chart",
+    to: "/chart",
+  },
+  {
+    label: "Checkbox",
+    to: "/checkbox",
+  },
+  {
+    label: "Collapsible",
+    to: "/collapsible",
+  },
+  {
+    label: "Command",
+    to: "/command",
+  },
+  {
+    label: "Context Menu",
+    to: "/context-menu",
+  },
+  {
+    label: "Dialog",
+    to: "/dialog",
+  },
+  {
+    label: "Download",
+    to: "/download",
+  },
+  {
+    label: "Drawer",
+    to: "/drawer",
+  },
+  {
+    label: "Dropdown Menu",
+    to: "/dropdown-menu",
+  },
+  {
+    label: "Empty",
+    to: "/empty",
+  },
+  {
+    label: "Fact Box",
+    to: "/fact-box",
+  },
+  {
+    label: "Feedback",
+    to: "/feedback",
+  },
+  {
+    label: "Field",
+    to: "/field",
+  },
+  {
+    label: "Footer",
+    to: "/footer",
+  },
+  {
+    label: "Header",
+    to: "/header",
+  },
+  {
+    label: "Hover Card",
+    to: "/hover-card",
+  },
+  {
+    label: "Infographic",
+    to: "/infographic",
+  },
+  {
+    label: "Input",
+    to: "/input",
+  },
+  {
+    label: "Input Group",
+    to: "/input-group",
+  },
+  {
+    label: "Input OTP",
+    to: "/input-otp",
+  },
+  {
+    label: "Item",
+    to: "/item",
+  },
+  {
+    label: "Kbd",
+    to: "/kbd",
+  },
+  {
+    label: "Label",
+    to: "/label",
+  },
+  {
+    label: "Link List",
+    to: "/link-list",
+  },
+  {
+    label: "Menubar",
+    to: "/menubar",
+  },
+  {
+    label: "Mode Toggle",
+    to: "/mode-toggle",
+  },
+  {
+    label: "Native Select",
+    to: "/native-select",
+  },
+  {
+    label: "Navigation Menu",
+    to: "/navigation-menu",
+  },
+  {
+    label: "Pagination",
+    to: "/pagination",
+  },
+  {
+    label: "Person",
+    to: "/person",
+  },
+  {
+    label: "Popover",
+    to: "/popover",
+  },
+  {
+    label: "Progress",
+    to: "/progress",
+  },
+  {
+    label: "Radio Group",
+    to: "/radio-group",
+  },
+  {
+    label: "Resizable",
+    to: "/resizable",
+  },
+  {
+    label: "Scroll Area",
+    to: "/scroll-area",
+  },
+  {
+    label: "Select",
+    to: "/select",
+  },
+  {
+    label: "Separator",
+    to: "/separator",
+  },
+  {
+    label: "Sheet",
+    to: "/sheet",
+  },
+  {
+    label: "Sidebar",
+    to: "/sidebar",
+  },
+  {
+    label: "Skeleton",
+    to: "/skeleton",
+  },
+  {
+    label: "Slider",
+    to: "/slider",
+  },
+  {
+    label: "Sonner",
+    to: "/sonner",
+  },
+  {
+    label: "Spinner",
+    to: "/spinner",
+  },
+  {
+    label: "Switch",
+    to: "/switch",
+  },
+  {
+    label: "Table",
+    to: "/table",
+  },
+  {
+    label: "Tabs",
+    to: "/tabs",
+  },
+  {
+    label: "Textarea",
+    to: "/textarea",
+  },
+  {
+    label: "Timeline",
+    to: "/timeline",
+  },
+  {
+    label: "Toggle",
+    to: "/toggle",
+  },
+  {
+    label: "Toggle Group",
+    to: "/toggle-group",
+  },
+  {
+    label: "Tooltip",
+    to: "/tooltip",
   },
 ];
 
-const infographicItems = [
+const router = createBrowserRouter([
   {
-    id: 1,
-    titleNumber: "3 %",
-    titleText: "Project Kickoff",
-    description: "Initial meeting with the team and stakeholders.",
-    url: "https://www.example.com",
+    element: (
+      <>
+        <nav
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <ModeToggle />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button>Menu</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: "0.5rem",
+              }}
+            >
+              {navigationItems.map((item) => (
+                <DropdownMenuItem key={item.to}>
+                  <Link to={item.to}>{item.label}</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </nav>
+        <main className="app-main-section">
+          <RootLayout />
+        </main>
+      </>
+    ),
+    children: [
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <HomeDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/accentuated-link",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AccentuatedLinkDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/accordion",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AccordionDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/alert",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AlertDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/alert-dialog",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AlertDialogDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/aspect-ratio",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AspectRatioDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/avatar",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AvatarDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/badge",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <BadgeDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/banner",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <BannerDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/breadcrumb",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <BreadcrumbDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/button",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ButtonDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/button-group",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ButtonGroupDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/calendar",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <CalendarDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/card",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <CardDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/carousel",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <CarouselDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/chart",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ChartDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/checkbox",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <CheckboxDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/collapsible",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <CollapsibleDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/command",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <CommandDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/context-menu",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ContextMenuDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/dialog",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <DialogDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/download",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <DownloadDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/drawer",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <DrawerDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/dropdown-menu",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <DropdownMenuDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/empty",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <EmptyDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/fact-box",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <FactBoxDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/feedback",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <FeedbackDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/field",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <FieldDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/footer",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <FooterDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/header",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <HeaderDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/hover-card",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <HoverCardDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/infographic",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <InfographicDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/input",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <InputDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/input-group",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <InputGroupDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/input-otp",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <InputOTPDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/item",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ItemDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/kbd",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <KbdDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/label",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <LabelDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/link-list",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <LinkListDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/menubar",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <MenubarDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/mode-toggle",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ModeToggleDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/native-select",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <NativeSelectDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/navigation-menu",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <NavigationMenuDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/pagination",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <PaginationDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/person",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <PersonDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/popover",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <PopoverDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/progress",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ProgressDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/radio-group",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <RadioGroupDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/resizable",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ResizableDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/scroll-area",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ScrollAreaDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/select",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SelectDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/separator",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SeparatorDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/sheet",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SheetDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/sidebar",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SidebarDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/skeleton",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SkeletonDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/slider",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SliderDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/sonner",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SonnerDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/spinner",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SpinnerDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/switch",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SwitchDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/table",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <TableDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/tabs",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <TabsDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/textarea",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <TextareaDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/timeline",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <TimelineDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/toggle",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ToggleDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/toggle-group",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ToggleGroupDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/tooltip",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <TooltipDemo />
+          </Suspense>
+        ),
+      },
+    ],
   },
-  {
-    id: 2,
-    titleNumber: "2",
-    titleText: "Design Phase",
-    description: "UI/UX design and prototyping.",
-    url: "https://www.google.com",
-  },
-];
-
-const linklistItems = [
-  {
-    id: 1,
-    title: "Project Kickoff",
-    content: "Initial meeting with the team and stakeholders.",
-    url: "https://www.example.com",
-  },
-  {
-    id: 2,
-    title: "Design Phase",
-    content: "UI/UX design and prototyping.",
-    url: "https://www.google.com",
-  },
-  {
-    id: 3,
-    title: "Development Start",
-    content: "Begin coding the main features.",
-    url: "https://www.altavista.com",
-  },
-  {
-    id: 4,
-    title: "Testing",
-    content: "QA and bug fixing.",
-    url: "https://www.reddit.com",
-  },
-  {
-    id: 5,
-    title: "Launch",
-    content: "Release the product to users.",
-    url: "https://www.youtube.com",
-  },
-];
-
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-  },
-  mobile: {
-    label: "Mobile",
-  },
-} satisfies ChartConfig;
-
-const music = [
-  {
-    title: "Midnight City Lights",
-    artist: "Neon Dreams",
-    album: "Electric Nights",
-    duration: "3:45",
-  },
-  {
-    title: "Coffee Shop Conversations",
-    artist: "The Morning Brew",
-    album: "Urban Stories",
-    duration: "4:05",
-  },
-  {
-    title: "Digital Rain",
-    artist: "Cyber Symphony",
-    album: "Binary Beats",
-    duration: "3:30",
-  },
-];
+]);
 
 function App() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
-  const [isCollapsibleOpen, setIsCollapsibleOpen] = React.useState(false);
-  const tags = Array.from({ length: 50 }).map(
-    (_, i, a) => `v1.2.0-beta.${a.length - i}`
-  );
-
   return (
-    <>
-      <ThemeProvider>
-        <main className="container w-5/6 md:w-2/3 mx-auto my-10">
-          <Toaster position="top-center" richColors closeButton />
-          <div className="fixed z-50 -ml-40">
-            <ModeToggle variant="outline" size="default">
-              Text/Icon
-            </ModeToggle>
-          </div>
-          <h1>kf-component-library</h1>
-
-          <h2>Accentuated Link</h2>
-          <AccentuatedLink href="https://www.google.com">
-            <AccentuatedLinkSubtitle>Read more</AccentuatedLinkSubtitle>
-            <AccentuatedLinkTitle>
-              World's Most Used Search Engine
-            </AccentuatedLinkTitle>
-          </AccentuatedLink>
-
-          <h2>Accordion</h2>
-          <Accordion type="single" collapsible defaultValue="item-1">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Is it accessible?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It adheres to the WAI-ARIA design pattern.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>Is it accessible?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It adheres to the WAI-ARIA design pattern.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger>Is it accessible?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It adheres to the WAI-ARIA design pattern.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-
-          <h2>Alert</h2>
-          <Alert>
-            <AlertTitle>Heads up!</AlertTitle>
-            <AlertDescription>
-              You can add components and dependencies to your app using the CLI.
-            </AlertDescription>
-          </Alert>
-
-          <Alert variant="destructive" className="my-4">
-            <CircleAlert />
-            <AlertTitle>Heads up!</AlertTitle>
-            <AlertDescription>
-              You can add components and dependencies to your app using the CLI.
-            </AlertDescription>
-          </Alert>
-
-          <Alert variant="success" className="my-4">
-            <CircleCheck />
-            <AlertTitle>Success!</AlertTitle>
-            <AlertDescription>
-              You can add components and dependencies to your app using the CLI.
-            </AlertDescription>
-          </Alert>
-
-          <h2>Alert Dialog</h2>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="outline">Open Alert Dialog</Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Continue</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-
-          <h2>Aspect Ratio</h2>
-          <p className="mb-4">Image using aspect ratio set to 21/9.</p>
-          <AspectRatio ratio={21 / 9}>
-            <img
-              src="https://picsum.photos/id/260/1600/900"
-              alt="Card Image"
-              className="object-cover w-full h-full rounded-md"
-            />
-          </AspectRatio>
-
-          <h2>Avatar</h2>
-          <div className="flex flex-row flex-wrap items-center gap-12">
-            <Avatar>
-              <AvatarImage
-                src="https://robohash.org/CN?set=set4"
-                alt="@shadcn"
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <Avatar className="rounded-lg">
-              <AvatarImage
-                src="https://robohash.org/ER?set=set4"
-                alt="@evilrabbit"
-              />
-              <AvatarFallback>ER</AvatarFallback>
-            </Avatar>
-            <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
-              <Avatar>
-                <AvatarImage
-                  src="https://robohash.org/AB?set=set4"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>AB</AvatarFallback>
-              </Avatar>
-              <Avatar>
-                <AvatarImage
-                  src="https://robohash.org/LR?set=set4"
-                  alt="@leerob"
-                />
-                <AvatarFallback>LR</AvatarFallback>
-              </Avatar>
-              <Avatar>
-                <AvatarImage
-                  src="https://robohash.org/BR?set=set4"
-                  alt="@evilrabbit"
-                />
-                <AvatarFallback>BR</AvatarFallback>
-              </Avatar>
-            </div>
-          </div>
-
-          <h2>Badge</h2>
-          <div className="flex flex-col items-center gap-2">
-            <div className="flex w-full flex-wrap gap-2">
-              <Badge>Badge</Badge>
-              <Badge variant="secondary">Secondary</Badge>
-              <Badge variant="destructive">Destructive</Badge>
-              <Badge variant="outline">Outline</Badge>
-            </div>
-            <div className="flex w-full flex-wrap gap-2">
-              <Badge
-                variant="secondary"
-                className="bg-blue-500 text-white dark:bg-primary"
-              >
-                <CircleCheck />
-                Verified
-              </Badge>
-              <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">
-                8
-              </Badge>
-              <Badge
-                className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums"
-                variant="destructive"
-              >
-                99
-              </Badge>
-              <Badge
-                className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums"
-                variant="outline"
-              >
-                20+
-              </Badge>
-            </div>
-          </div>
-
-          <h2 id="banner">Banner</h2>
-          <Banner>
-            <BannerImage
-              src="https://picsum.photos/id/240/1600/900"
-              alt="Banner"
-            />
-            <BannerContent>
-              <BannerTitle>Banner</BannerTitle>
-              <BannerDescription>
-                <p className="mb-4">
-                  Text. Text. Text. Text. Text. Text. Text. Text. Text. Text.
-                  Text. Text. Text. Text. Text. Text. Text. Text. Text. Text.
-                  Text. Text. Text. Text.
-                </p>
-              </BannerDescription>
-              <BannerButtons>
-                <BannerButtonPrimary href="https://example.com">
-                  Example
-                </BannerButtonPrimary>
-                <BannerButtonSecondary href="https://example.com">
-                  Example
-                </BannerButtonSecondary>
-              </BannerButtons>
-            </BannerContent>
-          </Banner>
-
-          <h2>Breadcrumb</h2>
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/components">Components</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-
-          <h2>Button</h2>
-          <div className="flex flex-row flex-wrap gap-2">
-            <Button variant="default">Default</Button>
-            <Button variant="default" disabled>
-              Default Disabled
-            </Button>
-            <Button variant="destructive">Destructive</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="outline" shape="square">
-              Square
-            </Button>
-            <Button variant="link">Link</Button>
-          </div>
-
-          <h2>Button Group</h2>
-          <ButtonGroup>
-            <ButtonGroup className="hidden sm:flex">
-              <Button variant="outline" size="icon" aria-label="Go Back">
-                <ArrowLeftIcon />
-              </Button>
-            </ButtonGroup>
-            <ButtonGroup>
-              <Button variant="outline">Archive</Button>
-              <Button variant="outline">Report</Button>
-            </ButtonGroup>
-            <ButtonGroupSeparator />
-            <ButtonGroup>
-              <Button variant="outline">Archive</Button>
-              <Button variant="outline">Report</Button>
-            </ButtonGroup>
-            <ButtonGroupText>Button Group Text</ButtonGroupText>
-          </ButtonGroup>
-
-          <h2>Calendar</h2>
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="rounded-lg bg-gray-100"
-          />
-
-          <h2>Card</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card className="pt-0">
-              <AspectRatio
-                ratio={16 / 9}
-                className="rounded-t-md overflow-hidden"
-              >
-                <img
-                  src="https://picsum.photos/id/241/1600/900"
-                  alt="Card Image"
-                  className="object-cover w-full h-full"
-                />
-              </AspectRatio>
-              <CardHeader>
-                <CardDescription>29.05.2020</CardDescription>
-                <CardTitle>– In About Five Minutes I'll Be There</CardTitle>
-                <CardAction>
-                  <Badge>Badge</Badge>
-                </CardAction>
-              </CardHeader>
-              <CardContent>
-                <p>
-                  During the first few minutes of the conversation, I'll be
-                  there. But where will you be?
-                </p>
-              </CardContent>
-              <CardFooter>
-                <ArrowRight />
-              </CardFooter>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardDescription>29.05.2020</CardDescription>
-                <CardTitle>– In About Five Minutes I'll Be There</CardTitle>
-                <CardAction>
-                  <Badge>Badge</Badge>
-                </CardAction>
-              </CardHeader>
-              <CardContent>
-                <p>
-                  During the first few minutes of the conversation, I'll be
-                  there. But where will you be?
-                </p>
-              </CardContent>
-              <CardFooter>
-                <p>Card Footer</p>
-              </CardFooter>
-            </Card>
-          </div>
-
-          <h2 id="carousel">Carousel</h2>
-          <Carousel>
-            <CarouselContentWrapper>
-              <CarouselContent>
-                <CarouselItem>
-                  <AspectRatio ratio={16 / 9}>
-                    <img
-                      src="https://picsum.photos/id/237/1600/900"
-                      alt="Card Image"
-                      className="object-cover w-full h-full rounded-xl"
-                    />
-                    <CarouselItemDescription>
-                      A dog. A dog is a good boy. A dog is a good boy. A dog is
-                      a good boy. What a dog can do is amazing. A dog can save a
-                      life. A dog can be a good friend. A dog can be a good
-                      companion. A dog can be a good pet. A dog can be a good
-                      friend. A dog can be a good companion. A dog can be a good
-                      pet. A dog can be a good friend. A dog can be a good
-                      companion. A dog can be a good pet.
-                    </CarouselItemDescription>
-                  </AspectRatio>
-                </CarouselItem>
-                <CarouselItem>
-                  <AspectRatio ratio={16 / 9}>
-                    <img
-                      src="https://picsum.photos/id/238/1600/900"
-                      alt="Card Image"
-                      className="object-cover w-full h-full rounded-xl"
-                    />
-                  </AspectRatio>
-                  <CarouselItemDescription>A city.</CarouselItemDescription>
-                </CarouselItem>
-                <CarouselItem>
-                  <AspectRatio ratio={16 / 9}>
-                    <img
-                      src="https://picsum.photos/id/239/1600/900"
-                      alt="Card Image"
-                      className="object-cover w-full h-full rounded-xl"
-                    />
-                  </AspectRatio>
-                  <CarouselItemDescription>
-                    A flower. So beautiful that it needs a longer description.
-                  </CarouselItemDescription>
-                </CarouselItem>
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </CarouselContentWrapper>
-            <CarouselDots />
-          </Carousel>
-
-          <h2>Chart</h2>
-          <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) =>
-                  typeof value === "string" ? value.slice(0, 3) : value
-                }
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey="desktop" fill="var(--color-primary)" radius={4} />
-              <Bar
-                dataKey="mobile"
-                fill="var(--color-destructive)"
-                radius={4}
-              />
-            </BarChart>
-          </ChartContainer>
-
-          <h2>Checkbox</h2>
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3">
-              <Checkbox id="terms" />
-              <Label htmlFor="terms">Accept terms and conditions</Label>
-            </div>
-            <div className="flex items-start gap-3">
-              <Checkbox id="terms-2" defaultChecked />
-              <div className="grid gap-2">
-                <Label htmlFor="terms-2">Accept terms and conditions</Label>
-                <p className="text-muted-foreground text-sm">
-                  By clicking this checkbox, you agree to the terms and
-                  conditions.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Checkbox id="toggle" disabled />
-              <Label htmlFor="toggle">Enable notifications</Label>
-            </div>
-            <Label className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-primary has-[[aria-checked=true]]:bg-primary-foreground dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
-              <Checkbox
-                id="toggle-2"
-                defaultChecked
-                className="data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
-              />
-              <div className="grid gap-1.5 font-normal">
-                <p className="text-sm leading-none font-medium">
-                  Enable notifications
-                </p>
-                <p className="text-muted-foreground text-sm">
-                  You can enable or disable notifications at any time.
-                </p>
-              </div>
-            </Label>
-          </div>
-
-          <h2>Collapsible</h2>
-          <Collapsible
-            open={isCollapsibleOpen}
-            onOpenChange={setIsCollapsibleOpen}
-            className="flex w-[350px] flex-col gap-2"
-          >
-            <div className="flex items-center justify-between gap-4 px-4">
-              <h4 className="text-sm font-semibold">
-                @peduarte starred 3 repositories
-              </h4>
-              <CollapsibleTrigger asChild>
-                <Button variant="ghost" size="icon" className="size-8">
-                  <ChevronsUpDown />
-                  <span className="sr-only">Toggle</span>
-                </Button>
-              </CollapsibleTrigger>
-            </div>
-            <div className="rounded-md border px-4 py-2 font-mono text-sm">
-              @radix-ui/primitives
-            </div>
-            <CollapsibleContent className="flex flex-col gap-2">
-              <div className="rounded-md border px-4 py-2 font-mono text-sm">
-                @radix-ui/colors
-              </div>
-              <div className="rounded-md border px-4 py-2 font-mono text-sm">
-                @stitches/react
-              </div>
-            </CollapsibleContent>
-          </Collapsible>
-
-          <h2>Command</h2>
-          <Command className="rounded-lg border shadow-md md:min-w-[450px]">
-            <CommandInput placeholder="Type a command or search..." />
-            <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
-              <CommandGroup heading="Suggestions">
-                <CommandItem>
-                  <CalendarIcon />
-                  <span>Calendar</span>
-                </CommandItem>
-                <CommandItem>
-                  <Smile />
-                  <span>Search Emoji</span>
-                </CommandItem>
-                <CommandItem disabled>
-                  <Calculator />
-                  <span>Calculator</span>
-                </CommandItem>
-              </CommandGroup>
-              <CommandSeparator />
-              <CommandGroup heading="Settings">
-                <CommandItem>
-                  <User />
-                  <span>Profile</span>
-                  <CommandShortcut>⌘P</CommandShortcut>
-                </CommandItem>
-                <CommandItem>
-                  <CreditCard />
-                  <span>Billing</span>
-                  <CommandShortcut>⌘B</CommandShortcut>
-                </CommandItem>
-                <CommandItem>
-                  <Settings />
-                  <span>Settings</span>
-                  <CommandShortcut>⌘S</CommandShortcut>
-                </CommandItem>
-              </CommandGroup>
-            </CommandList>
-          </Command>
-
-          <h2>Context Menu</h2>
-          <ContextMenu>
-            <ContextMenuTrigger asChild>
-              <Button variant="outline">Right click to show menu</Button>
-            </ContextMenuTrigger>
-            <ContextMenuContent>
-              <ContextMenuItem>Profile</ContextMenuItem>
-              <ContextMenuItem>Billing</ContextMenuItem>
-              <ContextMenuItem>Team</ContextMenuItem>
-              <ContextMenuItem>Subscription</ContextMenuItem>
-            </ContextMenuContent>
-          </ContextMenu>
-
-          <h2>Dialog</h2>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline">Click to show dialog</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                <DialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
-
-          <h2>Download</h2>
-          <Download>
-            <DownloadContent>
-              <DownloadImage src="https://picsum.photos/id/200/200/300" />
-              <DownloadMain>
-                <DownloadTitle>Download</DownloadTitle>
-                <DownloadDescription>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </DownloadDescription>
-              </DownloadMain>
-            </DownloadContent>
-            <DownloadFooter>
-              <DownloadDownloadUrl href="https://www.google.com">
-                Last ned
-              </DownloadDownloadUrl>
-              <DownloadOrderUrl href="https://www.google.com">
-                Bestill
-              </DownloadOrderUrl>
-            </DownloadFooter>
-          </Download>
-
-          <h2>Drawer</h2>
-          <Drawer>
-            <DrawerTrigger asChild>
-              <Button variant="outline">Open Drawer</Button>
-            </DrawerTrigger>
-            <DrawerContent>
-              <div className="mx-auto w-full max-w-sm">
-                <DrawerHeader>
-                  <DrawerTitle>Drawer</DrawerTitle>
-                  <DrawerDescription>Achieve your goals.</DrawerDescription>
-                </DrawerHeader>
-                <div className="p-4 pb-0 text-center">
-                  Some content in this drawer.
-                </div>
-                <DrawerFooter>
-                  <Button>Submit</Button>
-                  <DrawerClose asChild>
-                    <Button variant="outline">Cancel</Button>
-                  </DrawerClose>
-                </DrawerFooter>
-              </div>
-            </DrawerContent>
-          </Drawer>
-
-          <h2>DropdownMenu</h2>
-          <div className="flex flex-row flex-wrap gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" shape="square">
-                  Open
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem variant="default">Default</DropdownMenuItem>
-                <DropdownMenuItem variant="destructive">
-                  Destructive
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          <h2 id="empty">Empty</h2>
-          <Empty>
-            <EmptyHeader>
-              <EmptyMedia variant="icon">
-                <FolderCodeIcon />
-              </EmptyMedia>
-              <EmptyTitle>No Projects Yet</EmptyTitle>
-              <EmptyDescription>
-                You haven&apos;t created any projects yet. Get started by
-                creating your first project.
-              </EmptyDescription>
-            </EmptyHeader>
-            <EmptyContent>
-              <div className="flex gap-2">
-                <Button>Create Project</Button>
-                <Button variant="outline">Import Project</Button>
-              </div>
-            </EmptyContent>
-            <Button
-              variant="link"
-              asChild
-              className="text-muted-foreground"
-              size="sm"
-            >
-              <a href="#">
-                Learn More <ArrowUpRightIcon />
-              </a>
-            </Button>
-          </Empty>
-
-          <h2>Fact Box</h2>
-          <FactBox>
-            <FactBoxContent>
-              <FactBoxTitle>Fact About Cancer</FactBoxTitle>
-              <FactBoxDescription>
-                <p className="mb-4">
-                  Something you should know about cancer. Is that it is a
-                  disease that affects many people. It can be treated and cured
-                  in many cases. But it can also be fatal.
-                </p>
-                <p className="mb-4">
-                  Do you think you have cancer? You probably don't. But you
-                  should still get checked out.
-                </p>
-                <p>
-                  If you do not have cancer, you are lucky. But you should still
-                  get checked out.
-                </p>
-              </FactBoxDescription>
-            </FactBoxContent>
-            <FactBoxAction>Fact Box</FactBoxAction>
-          </FactBox>
-
-          <h2 id="feedback">Feedback</h2>
-          <Feedback>
-            <FeedbackHeader>
-              <FeedbackTitle>We value your feedback</FeedbackTitle>
-              <FeedbackDescription>
-                Please let us know if our service met your expectations.
-              </FeedbackDescription>
-              <FeedbackAction className="flex flex-row gap-2 text-gray-500">
-                <ThumbsUpIcon size={16} />
-                <ThumbsDownIcon size={16} />
-              </FeedbackAction>
-            </FeedbackHeader>
-            <FeedbackContent>
-              <FeedbackButtons>
-                <FeedbackButtonPositive>Positiv</FeedbackButtonPositive>
-                <FeedbackButtonNegative>Negativ</FeedbackButtonNegative>
-              </FeedbackButtons>
-              <FeedbackComment>
-                <FeedbackCommentInput />
-                <FeedbackSubmit>Submit Feedback</FeedbackSubmit>
-              </FeedbackComment>
-            </FeedbackContent>
-          </Feedback>
-
-          <h2 id="field">Field</h2>
-          <div className="w-full max-w-md">
-            <form>
-              <FieldGroup>
-                <FieldSet>
-                  <FieldLegend>Payment Method</FieldLegend>
-                  <FieldDescription>
-                    All transactions are secure and encrypted
-                  </FieldDescription>
-                  <FieldGroup>
-                    <Field>
-                      <FieldLabel htmlFor="checkout-7j9-card-name-43j">
-                        Name on Card
-                      </FieldLabel>
-                      <Input
-                        id="checkout-7j9-card-name-43j"
-                        placeholder="Evil Rabbit"
-                        required
-                      />
-                    </Field>
-                    <Field>
-                      <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                        Card Number
-                      </FieldLabel>
-                      <Input
-                        id="checkout-7j9-card-number-uw1"
-                        placeholder="1234 5678 9012 3456"
-                        required
-                      />
-                      <FieldDescription>
-                        Enter your 16-digit card number
-                      </FieldDescription>
-                    </Field>
-                    <div className="grid grid-cols-3 gap-4">
-                      <Field>
-                        <FieldLabel htmlFor="checkout-exp-month-ts6">
-                          Month
-                        </FieldLabel>
-                        <Select defaultValue="">
-                          <SelectTrigger id="checkout-exp-month-ts6">
-                            <SelectValue placeholder="MM" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="01">01</SelectItem>
-                            <SelectItem value="02">02</SelectItem>
-                            <SelectItem value="03">03</SelectItem>
-                            <SelectItem value="04">04</SelectItem>
-                            <SelectItem value="05">05</SelectItem>
-                            <SelectItem value="06">06</SelectItem>
-                            <SelectItem value="07">07</SelectItem>
-                            <SelectItem value="08">08</SelectItem>
-                            <SelectItem value="09">09</SelectItem>
-                            <SelectItem value="10">10</SelectItem>
-                            <SelectItem value="11">11</SelectItem>
-                            <SelectItem value="12">12</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </Field>
-                      <Field>
-                        <FieldLabel htmlFor="checkout-7j9-exp-year-f59">
-                          Year
-                        </FieldLabel>
-                        <Select defaultValue="">
-                          <SelectTrigger id="checkout-7j9-exp-year-f59">
-                            <SelectValue placeholder="YYYY" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="2024">2024</SelectItem>
-                            <SelectItem value="2025">2025</SelectItem>
-                            <SelectItem value="2026">2026</SelectItem>
-                            <SelectItem value="2027">2027</SelectItem>
-                            <SelectItem value="2028">2028</SelectItem>
-                            <SelectItem value="2029">2029</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </Field>
-                      <Field>
-                        <FieldLabel htmlFor="checkout-7j9-cvv">CVV</FieldLabel>
-                        <Input
-                          id="checkout-7j9-cvv"
-                          placeholder="123"
-                          required
-                        />
-                      </Field>
-                    </div>
-                  </FieldGroup>
-                </FieldSet>
-                <FieldSeparator />
-                <FieldSet>
-                  <FieldLegend>Billing Address</FieldLegend>
-                  <FieldDescription>
-                    The billing address associated with your payment method
-                  </FieldDescription>
-                  <FieldGroup>
-                    <Field orientation="horizontal">
-                      <Checkbox
-                        id="checkout-7j9-same-as-shipping-wgm"
-                        defaultChecked
-                      />
-                      <FieldLabel
-                        htmlFor="checkout-7j9-same-as-shipping-wgm"
-                        className="font-normal"
-                      >
-                        Same as shipping address
-                      </FieldLabel>
-                    </Field>
-                  </FieldGroup>
-                </FieldSet>
-                <FieldSet>
-                  <FieldGroup>
-                    <Field>
-                      <FieldLabel htmlFor="checkout-7j9-optional-comments">
-                        Comments
-                      </FieldLabel>
-                      <Textarea
-                        id="checkout-7j9-optional-comments"
-                        placeholder="Add any additional comments"
-                        className="resize-none"
-                      />
-                    </Field>
-                  </FieldGroup>
-                </FieldSet>
-                <Field orientation="horizontal">
-                  <Button type="submit">Submit</Button>
-                  <Button variant="outline" type="button">
-                    Cancel
-                  </Button>
-                </Field>
-              </FieldGroup>
-            </form>
-          </div>
-
-          <h2 id="footer">Footer</h2>
-        </main>
-        <FooterWrapper className="dark">
-          <FooterActions>
-            <Button variant="destructive" asChild>
-              <a href="#">
-                Støtt oss <HeartIcon className="hidden sm:block" />
-              </a>
-            </Button>
-            <Button variant="outline" asChild>
-              <a href="#">
-                Nettbutikk <ShoppingBasketIcon className="hidden sm:block" />
-              </a>
-            </Button>
-            <Button variant="outline" asChild>
-              <a href="#">
-                Vipps 2277 <HandCoins className="hidden sm:block" />
-              </a>
-            </Button>
-          </FooterActions>
-
-          <FooterNavigation>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Kontonummer</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">SMS</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">
-                Har vi forsøkt å ringe deg?
-              </FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Nyhetsbrev</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Aktuelt</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Presse</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">
-                Skattefradrag
-              </FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Bli medlem</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Gi en gave</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">
-                Bli frivillig
-              </FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Min side</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Om oss</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">
-                Bestill brosjyrer
-              </FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">Personvern</FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">
-                Informasjonskapsler
-              </FooterNavigationLink>
-            </FooterNavigationItem>
-            <FooterNavigationItem>
-              <FooterNavigationLink href="/">
-                Ledige stillinger
-              </FooterNavigationLink>
-            </FooterNavigationItem>
-          </FooterNavigation>
-
-          <FooterSocial>
-            <Button variant="outline" size="icon" aria-label="Facebook">
-              <FaFacebook />
-            </Button>
-            <Button variant="outline" size="icon" aria-label="Instagram">
-              <FaInstagram />
-            </Button>
-            <Button variant="outline" size="icon" aria-label="Youtube">
-              <FaYoutube />
-            </Button>
-            <Button variant="outline" size="icon" aria-label="Linkedin">
-              <FaLinkedin />
-            </Button>
-            <Button variant="outline" size="icon" aria-label="Tiktok">
-              <FaTiktok />
-            </Button>
-          </FooterSocial>
-
-          <FooterContact>
-            <FooterContactItem href="#" aria-label="Phone">
-              <Phone /> 21 49 49 21
-            </FooterContactItem>
-            <FooterContactItem href="#" aria-label="Email">
-              <Mail />
-              post@kreftforeningen.no
-            </FooterContactItem>
-            <FooterContactItem href="#" aria-label="Chat">
-              <MessageCircle /> Chat med oss
-            </FooterContactItem>
-            <FooterContactItem href="#" aria-label="Map">
-              <Map /> Kontorer og adresser
-            </FooterContactItem>
-          </FooterContact>
-
-          <FooterCopyright>
-            Vi er medlem av{" "}
-            <a href="https://www.innsamlingskontrollen.no/">
-              Innsamlingskontrollen i Norge
-            </a>
-            , <a href="https://oslocancercluster.no/">Oslo Cancer Cluster</a>,{" "}
-            <a href="https://www.norwayhealthtech.com/nb/">
-              Norway Health Tech
-            </a>
-            ,{" "}
-            <a href="https://www.smartcarecluster.no/">
-              Norwegian Smart Care Cluster
-            </a>
-            , <a href="https://www.uicc.org/">UICC </a>og{" "}
-            <a href="https://ncu.nu/">NCU</a>.
-          </FooterCopyright>
-        </FooterWrapper>
-        <main className="container w-5/6 md:w-2/3 mx-auto my-10">
-          <h2 id="header">Header</h2>
-        </main>
-        <div className="my-20">
-          <h3 className="container w-5/6 md:w-2/3 mx-auto my-10">
-            Header for Web
-          </h3>
-          <HeaderWrapper>
-            <HeaderLogo
-              src="/assets/logo.svg"
-              darkSrc="/assets/logo-dark.svg"
-              alt="Logo"
-              href="/"
-            />
-            <HeaderButton href="#" variant="destructive">
-              Støtt oss <HeartIcon className="hidden sm:block" />
-            </HeaderButton>
-            <HeaderButton
-              href="https://nettbutikk.kreftforeningen.no"
-              className="hidden sm:block"
-              variant="outline"
-            >
-              Nettbutikk <ShoppingBasketIcon />
-            </HeaderButton>
-
-            <HeaderMenu>
-              <HeaderMenuTrigger>
-                <Button
-                  variant="default"
-                  data-slot="header-button"
-                  className="flex items-center gap-2"
-                >
-                  <span className="hidden sm:block">Menu</span> <MenuIcon />
-                </Button>
-              </HeaderMenuTrigger>
-              <HeaderMenuContent>
-                <HeaderSearch />
-                <HeaderMenuList>
-                  <HeaderMenuListItem href="https://nettbutikk.kreftforeningen.no">
-                    <ShoppingBasketIcon /> Nettbutikk
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <UserIcon /> Min side
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <GlobeIcon /> English
-                  </HeaderMenuListItem>
-                </HeaderMenuList>
-                <HeaderMenuList>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Om kreft
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Råd og rettigheter
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Tilbud og aktiviteter
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Forebygge kreft
-                  </HeaderMenuListItem>
-                </HeaderMenuList>
-                <HeaderMenuList>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Støtt kreftsaken
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Engasjer deg
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Kreftforskning
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Om oss
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Kontakt oss
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Aktuelt
-                  </HeaderMenuListItem>
-                </HeaderMenuList>
-                <HeaderMenuFooter className="flex flex-row gap-4 items-center justify-start dark">
-                  <ModeToggle
-                    align="start"
-                    variant="outline"
-                    size="default"
-                  ></ModeToggle>
-                </HeaderMenuFooter>
-              </HeaderMenuContent>
-            </HeaderMenu>
-          </HeaderWrapper>
-        </div>
-        <div className="my-20">
-          <h3 className="container w-5/6 md:w-2/3 mx-auto my-10">
-            Header for App
-          </h3>
-          <HeaderWrapper>
-            <HeaderTitle href="/">App Title</HeaderTitle>
-
-            <HeaderButton
-              href="https://kreftforeningen.no"
-              className="hidden sm:block"
-              variant="outline"
-            >
-              Til Kreftforeningen <ArrowRightIcon />
-            </HeaderButton>
-
-            <HeaderMenu>
-              <HeaderMenuTrigger>
-                <Button
-                  variant="default"
-                  data-slot="header-button"
-                  className="flex items-center gap-2"
-                >
-                  <span className="hidden sm:block">Menu</span> <MenuIcon />
-                </Button>
-              </HeaderMenuTrigger>
-              <HeaderMenuContent>
-                <HeaderSearch />
-                <HeaderMenuList>
-                  <HeaderMenuListItem href="#">
-                    <UserIcon /> Profil
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <Cog /> Konto
-                  </HeaderMenuListItem>
-                </HeaderMenuList>
-                <HeaderMenuList>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Personvern
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Avtaler
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Donasjoner
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ChevronRightIcon />
-                    Grupper
-                  </HeaderMenuListItem>
-                </HeaderMenuList>
-                <HeaderMenuList>
-                  <HeaderMenuListItem href="#">
-                    <HeartIcon />
-                    Støtt oss
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <ShoppingBasketIcon />
-                    Nettbutikk
-                  </HeaderMenuListItem>
-                  <HeaderMenuListItem href="#">
-                    <img
-                      src="/assets/logo-symbol.svg"
-                      alt="Kreftforeningen"
-                      className="h-6 w-6"
-                    />
-                    Kreftforeningen
-                  </HeaderMenuListItem>
-                </HeaderMenuList>
-
-                <HeaderMenuFooter className="flex flex-row gap-4 items-center justify-start dark">
-                  <ModeToggle
-                    align="start"
-                    variant="outline"
-                    size="default"
-                  ></ModeToggle>
-                </HeaderMenuFooter>
-              </HeaderMenuContent>
-            </HeaderMenu>
-          </HeaderWrapper>
-        </div>
-
-        <main className="container w-5/6 md:w-2/3 mx-auto my-10">
-          <h2>Hover Card</h2>
-          <HoverCard>
-            <HoverCardTrigger asChild>
-              <Button variant="link">@nextjs</Button>
-            </HoverCardTrigger>
-            <HoverCardContent className="w-80">
-              <div className="flex justify-between gap-4">
-                <Avatar>
-                  <AvatarImage src="https://github.com/vercel.png" />
-                  <AvatarFallback>VC</AvatarFallback>
-                </Avatar>
-                <div className="space-y-1">
-                  <h4 className="text-sm font-semibold">@nextjs</h4>
-                  <p className="text-sm">
-                    The React Framework – created and maintained by @vercel.
-                  </p>
-                  <div className="text-muted-foreground text-xs">
-                    Joined December 2021
-                  </div>
-                </div>
-              </div>
-            </HoverCardContent>
-          </HoverCard>
-
-          <h2>Infographic</h2>
-          <Infographic>
-            {infographicItems.map((item) => (
-              <InfographicItem key={item.id} color="blue">
-                <InfographicItemIcon>
-                  <ServerIcon className="w-10 h-10" strokeWidth={1} />
-                </InfographicItemIcon>
-                <InfographicItemTitle>
-                  <InfographicItemTitleNumber>
-                    {item.titleNumber}
-                  </InfographicItemTitleNumber>
-                  <InfographicItemTitleText>
-                    {item.titleText}
-                  </InfographicItemTitleText>
-                </InfographicItemTitle>
-                <InfographicItemDescription>
-                  {item.description}
-                </InfographicItemDescription>
-              </InfographicItem>
-            ))}
-          </Infographic>
-
-          <h2>Input + Label</h2>
-          <div className="flex flex-row flex-wrap gap-2">
-            <Label>Input</Label>
-            <Input />
-          </div>
-
-          <h2 id="input-group">Input Group</h2>
-          <div className="grid w-full max-w-sm gap-6">
-            <InputGroup>
-              <InputGroupInput placeholder="Search..." />
-              <InputGroupAddon>
-                <SearchIcon />
-              </InputGroupAddon>
-              <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
-            </InputGroup>
-            <InputGroup>
-              <InputGroupInput placeholder="example.com" className="!pl-1" />
-              <InputGroupAddon>
-                <InputGroupText>https://</InputGroupText>
-              </InputGroupAddon>
-              <InputGroupAddon align="inline-end">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <InputGroupButton className="rounded-full" size="icon-xs">
-                      <InfoIcon />
-                    </InputGroupButton>
-                  </TooltipTrigger>
-                  <TooltipContent>This is content in a tooltip.</TooltipContent>
-                </Tooltip>
-              </InputGroupAddon>
-            </InputGroup>
-            <InputGroup>
-              <InputGroupTextarea placeholder="Ask, Search or Chat..." />
-              <InputGroupAddon align="block-end">
-                <InputGroupButton
-                  variant="outline"
-                  className="rounded-full"
-                  size="icon-xs"
-                >
-                  <PlusIcon />
-                </InputGroupButton>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <InputGroupButton variant="ghost">Auto</InputGroupButton>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    side="top"
-                    align="start"
-                    className="[--radius:0.95rem]"
-                  >
-                    <DropdownMenuItem>Auto</DropdownMenuItem>
-                    <DropdownMenuItem>Agent</DropdownMenuItem>
-                    <DropdownMenuItem>Manual</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-                <InputGroupText className="ml-auto">52% used</InputGroupText>
-                <Separator orientation="vertical" className="h-4" />
-                <InputGroupButton
-                  variant="default"
-                  className="rounded-full"
-                  size="icon-xs"
-                  disabled
-                >
-                  <ArrowUpIcon />
-                  <span className="sr-only">Send</span>
-                </InputGroupButton>
-              </InputGroupAddon>
-            </InputGroup>
-            <InputGroup>
-              <InputGroupInput placeholder="@shadcn" />
-              <InputGroupAddon align="inline-end">
-                <div className="bg-primary text-primary-foreground flex size-4 items-center justify-center rounded-full">
-                  <CheckIcon className="size-3" />
-                </div>
-              </InputGroupAddon>
-            </InputGroup>
-          </div>
-
-          <h2>Input OTP</h2>
-          <InputOTP maxLength={6}>
-            <InputOTPGroup>
-              <InputOTPSlot index={0} />
-              <InputOTPSlot index={1} />
-              <InputOTPSlot index={2} />
-            </InputOTPGroup>
-            <InputOTPSeparator />
-            <InputOTPGroup>
-              <InputOTPSlot index={3} />
-              <InputOTPSlot index={4} />
-              <InputOTPSlot index={5} />
-            </InputOTPGroup>
-          </InputOTP>
-
-          <h2 id="item">Item</h2>
-          <div className="flex w-full max-w-md flex-col gap-6 mb-10">
-            <Item variant="outline">
-              <ItemContent>
-                <ItemTitle>Basic Item</ItemTitle>
-                <ItemDescription>
-                  A simple item with title and description.
-                </ItemDescription>
-              </ItemContent>
-              <ItemActions>
-                <Button variant="outline" size="sm">
-                  Action
-                </Button>
-              </ItemActions>
-            </Item>
-            <Item variant="outline" size="sm" asChild>
-              <a href="#">
-                <ItemMedia>
-                  <BadgeCheckIcon className="size-5" />
-                </ItemMedia>
-                <ItemContent>
-                  <ItemTitle>Your profile has been verified.</ItemTitle>
-                </ItemContent>
-                <ItemActions>
-                  <ChevronRightIcon className="size-4" />
-                </ItemActions>
-              </a>
-            </Item>
-          </div>
-          <div className="flex w-full max-w-md flex-col gap-6">
-            <ItemGroup className="gap-4">
-              {music.map((song) => (
-                <Item
-                  key={song.title}
-                  variant="outline"
-                  asChild
-                  role="listitem"
-                >
-                  <a href="#">
-                    <ItemMedia variant="image">
-                      <img
-                        src={`https://avatar.vercel.sh/${song.title}`}
-                        alt={song.title}
-                        width={32}
-                        height={32}
-                        className="object-cover grayscale"
-                      />
-                    </ItemMedia>
-                    <ItemContent>
-                      <ItemTitle className="line-clamp-1">
-                        {song.title} -{" "}
-                        <span className="text-muted-foreground">
-                          {song.album}
-                        </span>
-                      </ItemTitle>
-                      <ItemDescription>{song.artist}</ItemDescription>
-                    </ItemContent>
-                    <ItemContent className="flex-none text-center">
-                      <ItemDescription>{song.duration}</ItemDescription>
-                    </ItemContent>
-                  </a>
-                </Item>
-              ))}
-            </ItemGroup>
-          </div>
-
-          <h2 id="kbd">Kbd</h2>
-          <div className="flex flex-col items-center gap-4">
-            <KbdGroup>
-              <Kbd>⌘</Kbd>
-              <Kbd>⇧</Kbd>
-              <Kbd>⌥</Kbd>
-              <Kbd>⌃</Kbd>
-            </KbdGroup>
-            <KbdGroup>
-              <Kbd>Ctrl</Kbd>
-              <span>+</span>
-              <Kbd>B</Kbd>
-            </KbdGroup>
-          </div>
-
-          <h2>Link List</h2>
-          <LinkList>
-            {linklistItems.map((item) => (
-              <LinkListItem key={item.id} href={item.url}>
-                <LinkListTitle>{item.title}</LinkListTitle>
-                <LinkListDescription>{item.content}</LinkListDescription>
-              </LinkListItem>
-            ))}
-          </LinkList>
-
-          <h2>Menubar</h2>
-          <Menubar>
-            <MenubarMenu>
-              <MenubarTrigger>File</MenubarTrigger>
-              <MenubarContent>
-                <MenubarItem>
-                  New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-                </MenubarItem>
-                <MenubarItem>
-                  New Window <MenubarShortcut>⌘N</MenubarShortcut>
-                </MenubarItem>
-                <MenubarItem disabled>New Incognito Window</MenubarItem>
-                <MenubarSeparator />
-                <MenubarSub>
-                  <MenubarSubTrigger>Share</MenubarSubTrigger>
-                  <MenubarSubContent>
-                    <MenubarItem>Email link</MenubarItem>
-                    <MenubarItem>Messages</MenubarItem>
-                    <MenubarItem>Notes</MenubarItem>
-                  </MenubarSubContent>
-                </MenubarSub>
-                <MenubarSeparator />
-                <MenubarItem>
-                  Print... <MenubarShortcut>⌘P</MenubarShortcut>
-                </MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-            <MenubarMenu>
-              <MenubarTrigger>Edit</MenubarTrigger>
-              <MenubarContent>
-                <MenubarItem>
-                  Undo <MenubarShortcut>⌘Z</MenubarShortcut>
-                </MenubarItem>
-                <MenubarItem>
-                  Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
-                </MenubarItem>
-                <MenubarSeparator />
-                <MenubarSub>
-                  <MenubarSubTrigger>Find</MenubarSubTrigger>
-                  <MenubarSubContent>
-                    <MenubarItem>Search the web</MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem>Find...</MenubarItem>
-                    <MenubarItem>Find Next</MenubarItem>
-                    <MenubarItem>Find Previous</MenubarItem>
-                  </MenubarSubContent>
-                </MenubarSub>
-                <MenubarSeparator />
-                <MenubarItem>Cut</MenubarItem>
-                <MenubarItem>Copy</MenubarItem>
-                <MenubarItem>Paste</MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-            <MenubarMenu>
-              <MenubarTrigger>View</MenubarTrigger>
-              <MenubarContent>
-                <MenubarItem className="flex items-center gap-3 mb-2">
-                  <Checkbox id="always-show-bookmarks-bar" />
-                  <Label htmlFor="always-show-bookmarks-bar">
-                    Always Show Bookmarks Bar
-                  </Label>
-                </MenubarItem>
-                <MenubarItem className="flex items-center gap-3">
-                  <Checkbox id="always-show-full-urls" checked />
-                  <Label htmlFor="always-show-full-urls">
-                    Always Show Full URLs
-                  </Label>
-                </MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem inset>
-                  Reload <MenubarShortcut>⌘R</MenubarShortcut>
-                </MenubarItem>
-                <MenubarItem disabled inset>
-                  Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
-                </MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem inset>Toggle Fullscreen</MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem inset>Hide Sidebar</MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-            <MenubarMenu>
-              <MenubarTrigger>Profiles</MenubarTrigger>
-              <MenubarContent>
-                <RadioGroup value="benoit" className="gap-2">
-                  <MenubarItem className="flex items-center gap-3 ">
-                    <RadioGroupItem value="andy" />
-                    <Label htmlFor="andy">Andy</Label>
-                  </MenubarItem>
-                  <MenubarItem className="flex items-center gap-3">
-                    <RadioGroupItem value="benoit" />
-                    <Label htmlFor="benoit">Benoit</Label>
-                  </MenubarItem>
-                  <MenubarItem className="flex items-center gap-3">
-                    <RadioGroupItem value="Luis" />
-                    <Label htmlFor="Luis">Luis</Label>
-                  </MenubarItem>
-                </RadioGroup>
-                <MenubarSeparator />
-                <MenubarItem inset>Edit...</MenubarItem>
-                <MenubarSeparator />
-                <MenubarItem inset>Add Profile...</MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-          </Menubar>
-
-          <h2 id="native-select">Native Select</h2>
-          <NativeSelect>
-            <NativeSelectOption value="">Select status</NativeSelectOption>
-            <NativeSelectOption value="todo">Todo</NativeSelectOption>
-            <NativeSelectOption value="in-progress">
-              In Progress
-            </NativeSelectOption>
-            <NativeSelectOption value="done">Done</NativeSelectOption>
-            <NativeSelectOption value="cancelled">Cancelled</NativeSelectOption>
-          </NativeSelect>
-
-          <h2>Navigation Menu (Do not use yet)</h2>
-          <NavigationMenu viewport={false}>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <NavigationMenuLink>Link</NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <a href="#">Link</a>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>With Icon</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[200px] gap-4">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="#" className="flex-row items-center gap-2">
-                          <CircleHelp />
-                          Backlog
-                        </a>
-                      </NavigationMenuLink>
-                      <NavigationMenuLink asChild>
-                        <a href="#" className="flex-row items-center gap-2">
-                          <CircleAlert />
-                          To Do
-                        </a>
-                      </NavigationMenuLink>
-                      <NavigationMenuLink asChild>
-                        <a href="#" className="flex-row items-center gap-2">
-                          <CircleCheck />
-                          Done
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-
-          <h2>Pagination</h2>
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-
-          <h2>Person</h2>
-          <Person>
-            {personItems.map((item) => (
-              <PersonItem key={item.id}>
-                <PersonItemImage
-                  src={item.image}
-                  alt={`${item.firstName} ${item.lastName}`}
-                  fallback={`${item.firstName.charAt(0)}${item.lastName.charAt(
-                    0
-                  )}`}
-                />
-                <PersonItemContent>
-                  <PersonItemName>
-                    {item.firstName} {item.lastName}
-                  </PersonItemName>
-                  <PersonItemTitle>{item.title}</PersonItemTitle>
-                  <PersonItemEmail href={`mailto:${item.email}`}>
-                    {item.email}
-                  </PersonItemEmail>
-                  <PersonItemPhone href={`tel:${item.phone}`}>
-                    {item.phone}
-                  </PersonItemPhone>
-                  <PersonItemDescription>
-                    {item.description}
-                  </PersonItemDescription>
-                </PersonItemContent>
-              </PersonItem>
-            ))}
-          </Person>
-
-          <h2>Popover</h2>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline">Open Popover</Button>
-            </PopoverTrigger>
-            <PopoverContent>Place content for the popover here.</PopoverContent>
-          </Popover>
-
-          <h2>Progress</h2>
-          <Progress value={50} />
-
-          <h2>Radio Group</h2>
-          <RadioGroup defaultValue="option-one">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option-one" id="option-one" />
-              <Label htmlFor="option-one">Option One</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option-two" id="option-two" />
-              <Label htmlFor="option-two">Option Two</Label>
-            </div>
-          </RadioGroup>
-
-          <h2>Resizable</h2>
-          <ResizablePanelGroup
-            direction="vertical"
-            className="min-h-[200px] max-w-md rounded-lg border md:min-w-[450px]"
-          >
-            <ResizablePanel defaultSize={25}>
-              <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold">Header</span>
-              </div>
-            </ResizablePanel>
-            <ResizableHandle />
-            <ResizablePanel defaultSize={75}>
-              <div className="flex h-full items-center justify-center p-6">
-                <span className="font-semibold">Content</span>
-              </div>
-            </ResizablePanel>
-          </ResizablePanelGroup>
-
-          <h2>Scroll Area</h2>
-          <ScrollArea className="h-72 w-48 rounded-md border">
-            <div className="p-4">
-              <h4 className="mb-4 text-base leading-none m-0">Tags</h4>
-              {tags.map((tag) => (
-                <React.Fragment key={tag}>
-                  <div className="text-sm">{tag}</div>
-                  <Separator className="my-2" />
-                </React.Fragment>
-              ))}
-            </div>
-          </ScrollArea>
-
-          <h2>Select</h2>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Select an option" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1">Option 1</SelectItem>
-              <SelectItem value="2">Option 2</SelectItem>
-              <SelectItem value="3">Option 3</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <h2>Separator</h2>
-          <Separator />
-
-          <h2>Sheet</h2>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline">Open</Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Edit profile</SheetTitle>
-                <SheetDescription>
-                  Make changes to your profile here. Click save when you&apos;re
-                  done.
-                </SheetDescription>
-              </SheetHeader>
-              <div className="grid flex-1 auto-rows-min gap-6 px-4">
-                <div className="grid gap-3">
-                  <Label htmlFor="sheet-demo-name">Name</Label>
-                  <Input id="sheet-demo-name" defaultValue="Pedro Duarte" />
-                </div>
-                <div className="grid gap-3">
-                  <Label htmlFor="sheet-demo-username">Username</Label>
-                  <Input id="sheet-demo-username" defaultValue="@peduarte" />
-                </div>
-              </div>
-              <SheetFooter>
-                <Button type="submit">Save changes</Button>
-                <SheetClose asChild>
-                  <Button variant="outline">Close</Button>
-                </SheetClose>
-              </SheetFooter>
-            </SheetContent>
-          </Sheet>
-
-          <h2>Skeleton</h2>
-          <div className="flex items-center space-x-4">
-            <Skeleton className="h-12 w-12 rounded-full" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-
-          <h2>Slider</h2>
-          <Slider defaultValue={[33]} max={100} step={1} />
-
-          <h2>Sonner</h2>
-          <Button
-            variant="outline"
-            onClick={() =>
-              toast.warning("Event has been created", {
-                description: "Sunday, December 03, 2023 at 9:00 AM",
-              })
-            }
-          >
-            Show Toast
-          </Button>
-
-          <h2>Spinner</h2>
-          <div className="flex flex-col items-center gap-6">
-            <Button disabled size="sm">
-              <Spinner className="size-3" />
-              Loading...
-            </Button>
-            <Spinner className="size-4" />
-            <Spinner className="size-6" />
-            <Spinner className="size-8" />
-          </div>
-
-          <h2>Switch</h2>
-          <Switch />
-
-          <h2>Table</h2>
-          <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">Invoice</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Method</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell className="font-medium">INV001</TableCell>
-                <TableCell>Paid</TableCell>
-                <TableCell>Credit Card</TableCell>
-                <TableCell className="text-right">$250.00</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-
-          <h2 id="tabs">Tabs</h2>
-          <Tabs defaultValue="account">
-            <TabsList>
-              <TabsTrigger value="account">Account</TabsTrigger>
-              <TabsTrigger value="password">Password</TabsTrigger>
-              <TabsTrigger value="delete">Delete</TabsTrigger>
-            </TabsList>
-            <TabsContent value="account">
-              Make changes to your account here.
-            </TabsContent>
-            <TabsContent value="password">
-              Change your password here.
-            </TabsContent>
-            <TabsContent value="delete">Delete your account here.</TabsContent>
-          </Tabs>
-
-          <h2>Textarea</h2>
-          <Textarea />
-
-          <h2>Toggle</h2>
-          <Toggle variant="outline">Toggle</Toggle>
-
-          <h2>Toggle Group</h2>
-          <ToggleGroup type="single" variant="outline">
-            <ToggleGroupItem value="a">A</ToggleGroupItem>
-            <ToggleGroupItem value="b">B</ToggleGroupItem>
-            <ToggleGroupItem value="c">C</ToggleGroupItem>
-          </ToggleGroup>
-
-          <h2>Tooltip</h2>
-          <Tooltip>
-            <TooltipTrigger>Hover</TooltipTrigger>
-            <TooltipContent>
-              <p>Add to library</p>
-            </TooltipContent>
-          </Tooltip>
-
-          <h2></h2>
-        </main>
-      </ThemeProvider>
-    </>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 

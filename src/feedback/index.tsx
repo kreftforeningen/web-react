@@ -14,6 +14,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
+import { createGlobalStyle } from "styled-components";
 
 type FeedbackType = "positive" | "negative" | null;
 
@@ -29,6 +30,88 @@ const feedbackContext = React.createContext<{
   setCommentText: () => {},
 });
 
+const FeedbackGlobalStyles = createGlobalStyle`
+  .kf-feedback {
+    font-family: var(--kf-font-sans);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-feedback__header {
+    padding-bottom: 0;
+  }
+
+  .kf-feedback__title {
+    margin-top: 0;
+  }
+
+  .kf-feedback__description {
+    font-size: var(--kf-text-base, 1rem);
+    line-height: var(--kf-text-base--line-height, 1.5);
+    padding-bottom: 0;
+  }
+
+  .kf-feedback__content {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-feedback__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    margin-block: calc(var(--kf-spacing, 0.25rem) * 2);
+  }
+
+  .kf-feedback__choice {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    background: transparent;
+    outline: 1px solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
+  }
+
+  .kf-feedback__choice[data-active="true"] {
+    background: var(--kf-color-blue-700, #1d4ed8);
+    color: var(--kf-color-white, #ffffff);
+    outline-color: transparent;
+  }
+
+  .kf-feedback__comment {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+    align-items: flex-start;
+    animation: kf-feedback-fade-in 200ms var(--kf-ease-out, ease-out) forwards;
+  }
+
+  .kf-feedback__comment-input {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+    width: 100%;
+  }
+
+  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+    .kf-feedback__comment-input {
+      width: 66%;
+    }
+  }
+
+  @keyframes kf-feedback-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(calc(var(--kf-spacing, 0.25rem) * 2));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+
 function Feedback({ children }: React.ComponentProps<"div">) {
   const [feedback, setFeedback] = React.useState<FeedbackType>(null);
   const [commentText, setCommentText] = React.useState<string>("");
@@ -37,23 +120,26 @@ function Feedback({ children }: React.ComponentProps<"div">) {
     <feedbackContext.Provider
       value={{ feedback, setFeedback, commentText, setCommentText }}
     >
-      <Card data-slot="feedback" className="flex flex-col gap-4">
-        {children}
-      </Card>
+      <>
+        <FeedbackGlobalStyles />
+        <Card data-slot="feedback" className="kf-feedback">
+          {children}
+        </Card>
+      </>
     </feedbackContext.Provider>
   );
 }
 
 function FeedbackHeader({ ...props }: React.ComponentProps<"div">) {
-  return <CardHeader {...props} />;
+  return <CardHeader className="kf-feedback__header" {...props} />;
 }
 
 function FeedbackTitle({ ...props }: React.ComponentProps<"h3">) {
-  return <CardTitle className="mt-0" {...props} />;
+  return <CardTitle className="kf-feedback__title" {...props} />;
 }
 
 function FeedbackDescription({ ...props }: React.ComponentProps<"div">) {
-  return <CardDescription className="text-base pb-0" {...props} />;
+  return <CardDescription className="kf-feedback__description" {...props} />;
 }
 
 function FeedbackAction({ ...props }: React.ComponentProps<"div">) {
@@ -62,12 +148,12 @@ function FeedbackAction({ ...props }: React.ComponentProps<"div">) {
 
 function FeedbackButtons({ className, children }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("flex flex-row gap-2 my-2", className)}>{children}</div>
+    <div className={cn("kf-feedback__buttons", className)}>{children}</div>
   );
 }
 
 function FeedbackContent({ ...props }: React.ComponentProps<"div">) {
-  return <CardContent className="flex flex-col gap-4" {...props} />;
+  return <CardContent className="kf-feedback__content" {...props} />;
 }
 
 function FeedbackButtonPositive({
@@ -79,11 +165,9 @@ function FeedbackButtonPositive({
   return (
     <Button
       variant="outline"
-      className={cn(
-        isActive ? "outline bg-blue-700 text-white" : "outline bg-transparent",
-        className
-      )}
+      className={cn("kf-feedback__choice", className)}
       aria-pressed={isActive}
+      data-active={isActive ? "true" : "false"}
       onClick={() => setFeedback("positive")}
     >
       <ThumbsUpIcon />
@@ -100,11 +184,9 @@ function FeedbackButtonNegative({
   return (
     <Button
       variant="outline"
-      className={cn(
-        isActive ? "outline bg-blue-700 text-white" : "outline bg-transparent",
-        className
-      )}
+      className={cn("kf-feedback__choice", className)}
       aria-pressed={isActive}
+      data-active={isActive ? "true" : "false"}
       onClick={() => setFeedback("negative")}
     >
       <ThumbsDownIcon />
@@ -116,11 +198,7 @@ function FeedbackButtonNegative({
 function FeedbackComment({ children }: React.ComponentProps<"div">) {
   const { feedback } = React.useContext(feedbackContext);
   if (feedback === null) return null;
-  return (
-    <div className="flex flex-col gap-4 items-start animate-in fade-in-0 duration-200">
-      {children}
-    </div>
-  );
+  return <div className="kf-feedback__comment">{children}</div>;
 }
 
 function FeedbackCommentInput({
@@ -130,9 +208,7 @@ function FeedbackCommentInput({
 }: React.ComponentProps<"div"> & { label?: string; placeholder?: string }) {
   const { commentText, setCommentText } = React.useContext(feedbackContext);
   return (
-    <div
-      className={cn("text-base flex flex-col gap-4 w-full sm:w-2/3", className)}
-    >
+    <div className={cn("kf-feedback__comment-input", className)}>
       <Label>{label || "Comment"}</Label>
       <Textarea
         placeholder={placeholder || "Enter your comment here"}

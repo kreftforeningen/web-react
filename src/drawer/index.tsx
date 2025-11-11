@@ -1,12 +1,266 @@
 import * as React from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
+import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
+
+const DrawerGlobalStyles = createGlobalStyle`
+  .kf-drawer__overlay {
+    font-family: var(--kf-font-sans);
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: color-mix(in srgb, #000000 50%, transparent);
+  }
+
+  .kf-drawer__overlay[data-state="open"] {
+    animation: kf-drawer-fade-in 160ms var(--kf-ease-out, ease-out) forwards;
+  }
+
+  .kf-drawer__overlay[data-state="closed"] {
+    animation: kf-drawer-fade-out 120ms var(--kf-ease-in, ease-in) forwards;
+  }
+
+  .kf-drawer__content {
+    position: fixed;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    background: var(--kf-color-gray-50, #ffffff);
+    color: var(--kf-color-gray-950, #0f172a);
+    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="bottom"] {
+    inset-inline: 0;
+    bottom: 0;
+    max-height: 80vh;
+    border-top-left-radius: var(--kf-radius-lg, 0.5rem);
+    border-top-right-radius: var(--kf-radius-lg, 0.5rem);
+    border-top-width: var(--kf-border-1, 1px);
+    border-bottom-width: 0;
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="top"] {
+    inset-inline: 0;
+    top: 0;
+    max-height: 80vh;
+    border-bottom-left-radius: var(--kf-radius-lg, 0.5rem);
+    border-bottom-right-radius: var(--kf-radius-lg, 0.5rem);
+    border-bottom-width: var(--kf-border-1, 1px);
+    border-top-width: 0;
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="left"] {
+    inset-block: 0;
+    left: 0;
+    width: 75vw;
+    max-width: 24rem;
+    border-top-right-radius: var(--kf-radius-lg, 0.5rem);
+    border-bottom-right-radius: var(--kf-radius-lg, 0.5rem);
+    border-right-width: var(--kf-border-1, 1px);
+    border-left-width: 0;
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="right"] {
+    inset-block: 0;
+    right: 0;
+    width: 75vw;
+    max-width: 24rem;
+    border-top-left-radius: var(--kf-radius-lg, 0.5rem);
+    border-bottom-left-radius: var(--kf-radius-lg, 0.5rem);
+    border-left-width: var(--kf-border-1, 1px);
+    border-right-width: 0;
+  }
+
+  .kf-drawer__handle {
+    display: none;
+    width: 100px;
+    height: calc(var(--kf-spacing, 0.25rem) * 2);
+    border-radius: var(--kf-radius-full, 9999px);
+    background: var(--kf-color-gray-200, rgba(148, 163, 184, 0.3));
+    margin-inline: auto;
+    margin-top: calc(var(--kf-spacing, 0.25rem) * 4);
+    margin-bottom: calc(var(--kf-spacing, 0.25rem) * 2);
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="bottom"] .kf-drawer__handle {
+    display: block;
+  }
+
+  .kf-drawer__header {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding: calc(var(--kf-spacing, 0.25rem) * 4);
+    text-align: left;
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="bottom"] .kf-drawer__header,
+  .kf-drawer__content[data-vaul-drawer-direction="top"] .kf-drawer__header {
+    text-align: center;
+  }
+
+  @media (min-width: var(--kf-breakpoint-md, 48rem)) {
+    .kf-drawer__content[data-vaul-drawer-direction="bottom"] .kf-drawer__header,
+    .kf-drawer__content[data-vaul-drawer-direction="top"] .kf-drawer__header {
+      text-align: left;
+    }
+  }
+
+  .kf-drawer__footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-drawer__title {
+    font-size: var(--kf-text-lg, 1.125rem);
+    line-height: var(--kf-text-lg--line-height, 1.5555555556);
+    font-weight: 600;
+    color: var(--kf-color-gray-950, #0f172a);
+  }
+
+  .kf-drawer__description {
+    font-size: var(--kf-text-sm, 0.875rem);
+    line-height: var(--kf-text-sm--line-height, 1.4285714286);
+    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.66));
+  }
+
+  @keyframes kf-drawer-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes kf-drawer-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="bottom"][data-state="open"] {
+    animation: kf-drawer-slide-in-bottom 200ms var(--kf-ease-out, ease-out) forwards;
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="bottom"][data-state="closed"] {
+    animation: kf-drawer-slide-out-bottom 160ms var(--kf-ease-in, ease-in) forwards;
+  }
+
+  @keyframes kf-drawer-slide-in-bottom {
+    from {
+      transform: translate3d(0, 100%, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes kf-drawer-slide-out-bottom {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 100%, 0);
+    }
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="top"][data-state="open"] {
+    animation: kf-drawer-slide-in-top 200ms var(--kf-ease-out, ease-out) forwards;
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="top"][data-state="closed"] {
+    animation: kf-drawer-slide-out-top 160ms var(--kf-ease-in, ease-in) forwards;
+  }
+
+  @keyframes kf-drawer-slide-in-top {
+    from {
+      transform: translate3d(0, -100%, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes kf-drawer-slide-out-top {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, -100%, 0);
+    }
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="left"][data-state="open"] {
+    animation: kf-drawer-slide-in-left 200ms var(--kf-ease-out, ease-out) forwards;
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="left"][data-state="closed"] {
+    animation: kf-drawer-slide-out-left 160ms var(--kf-ease-in, ease-in) forwards;
+  }
+
+  @keyframes kf-drawer-slide-in-left {
+    from {
+      transform: translate3d(-100%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes kf-drawer-slide-out-left {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="right"][data-state="open"] {
+    animation: kf-drawer-slide-in-right 200ms var(--kf-ease-out, ease-out) forwards;
+  }
+
+  .kf-drawer__content[data-vaul-drawer-direction="right"][data-state="closed"] {
+    animation: kf-drawer-slide-out-right 160ms var(--kf-ease-in, ease-in) forwards;
+  }
+
+  @keyframes kf-drawer-slide-in-right {
+    from {
+      transform: translate3d(100%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes kf-drawer-slide-out-right {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+`;
 
 function Drawer({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
-  return <DrawerPrimitive.Root data-slot="drawer" {...props} />;
+  return (
+    <>
+      <DrawerGlobalStyles />
+      <DrawerPrimitive.Root data-slot="drawer" {...props} />
+    </>
+  );
 }
 
 function DrawerTrigger({
@@ -34,10 +288,7 @@ function DrawerOverlay({
   return (
     <DrawerPrimitive.Overlay
       data-slot="drawer-overlay"
-      className={cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
-        className
-      )}
+      className={cn("kf-drawer__overlay", className)}
       {...props}
     />
   );
@@ -53,17 +304,10 @@ function DrawerContent({
       <DrawerOverlay />
       <DrawerPrimitive.Content
         data-slot="drawer-content"
-        className={cn(
-          "group/drawer-content bg-background fixed z-50 flex h-auto flex-col",
-          "data-[vaul-drawer-direction=top]:inset-x-0 data-[vaul-drawer-direction=top]:top-0 data-[vaul-drawer-direction=top]:mb-24 data-[vaul-drawer-direction=top]:max-h-[80vh] data-[vaul-drawer-direction=top]:rounded-b-lg data-[vaul-drawer-direction=top]:border-b",
-          "data-[vaul-drawer-direction=bottom]:inset-x-0 data-[vaul-drawer-direction=bottom]:bottom-0 data-[vaul-drawer-direction=bottom]:mt-24 data-[vaul-drawer-direction=bottom]:max-h-[80vh] data-[vaul-drawer-direction=bottom]:rounded-t-lg data-[vaul-drawer-direction=bottom]:border-t",
-          "data-[vaul-drawer-direction=right]:inset-y-0 data-[vaul-drawer-direction=right]:right-0 data-[vaul-drawer-direction=right]:w-3/4 data-[vaul-drawer-direction=right]:border-l data-[vaul-drawer-direction=right]:sm:max-w-sm",
-          "data-[vaul-drawer-direction=left]:inset-y-0 data-[vaul-drawer-direction=left]:left-0 data-[vaul-drawer-direction=left]:w-3/4 data-[vaul-drawer-direction=left]:border-r data-[vaul-drawer-direction=left]:sm:max-w-sm",
-          className
-        )}
+        className={cn("kf-drawer__content", className)}
         {...props}
       >
-        <div className="bg-accent mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+        <div className="kf-drawer__handle" />
         {children}
       </DrawerPrimitive.Content>
     </DrawerPortal>
@@ -74,10 +318,7 @@ function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="drawer-header"
-      className={cn(
-        "flex flex-col gap-0.5 p-4 group-data-[vaul-drawer-direction=bottom]/drawer-content:text-center group-data-[vaul-drawer-direction=top]/drawer-content:text-center md:gap-1.5 md:text-left",
-        className
-      )}
+      className={cn("kf-drawer__header", className)}
       {...props}
     />
   );
@@ -87,7 +328,7 @@ function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="drawer-footer"
-      className={cn("mt-auto flex flex-col gap-2 p-4", className)}
+      className={cn("kf-drawer__footer", className)}
       {...props}
     />
   );
@@ -100,7 +341,7 @@ function DrawerTitle({
   return (
     <DrawerPrimitive.Title
       data-slot="drawer-title"
-      className={cn("text-foreground font-semibold", className)}
+      className={cn("kf-drawer__title", className)}
       {...props}
     />
   );
@@ -113,7 +354,7 @@ function DrawerDescription({
   return (
     <DrawerPrimitive.Description
       data-slot="drawer-description"
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn("kf-drawer__description", className)}
       {...props}
     />
   );

@@ -1,4 +1,5 @@
 import { Moon, Sun } from "lucide-react";
+import { createGlobalStyle } from "styled-components";
 
 import { Button } from "../button";
 import {
@@ -9,6 +10,81 @@ import {
 } from "../dropdown-menu";
 
 import { useTheme } from "@/theme-provider";
+
+const ModeToggleGlobalStyles = createGlobalStyle`
+  .kf-mode-toggle {
+    font-family: var(--kf-font-sans);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    font-size: var(--kf-text-base, 1rem);
+  }
+
+  .kf-mode-toggle__icon-wrapper {
+    position: relative;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .kf-mode-toggle__sun,
+  .kf-mode-toggle__moon {
+    width: 1.2rem;
+    height: 1.2rem;
+    transition:
+      transform 180ms var(--kf-ease-in-out, ease),
+      opacity 180ms var(--kf-ease-in-out, ease),
+      color 120ms var(--kf-ease-in-out, ease);
+    color: var(--kf-color-blue-700, #1d4ed8);
+  }
+
+  .kf-mode-toggle__moon {
+    position: absolute;
+    inset: 0;
+    transform: rotate(90deg) scale(0);
+    opacity: 0;
+  }
+
+  .kf-mode-toggle:hover .kf-mode-toggle__sun,
+  .kf-mode-toggle:focus-visible .kf-mode-toggle__sun,
+  .kf-mode-toggle:hover .kf-mode-toggle__moon,
+  .kf-mode-toggle:focus-visible .kf-mode-toggle__moon {
+    color: currentColor;
+  }
+
+  .dark .kf-mode-toggle__sun {
+    transform: rotate(-90deg) scale(0);
+    opacity: 0;
+    color: var(--kf-color-blue-300, #93c5fd);
+  }
+
+  .dark .kf-mode-toggle__moon {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+    color: var(--kf-color-blue-300, #93c5fd);
+  }
+
+  .kf-mode-toggle[data-size="icon"] .kf-mode-toggle__label {
+    display: none;
+  }
+
+  .kf-mode-toggle__label {
+    font-weight: 500;
+  }
+
+  .kf-mode-toggle_sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+`;
 
 function ModeToggle({
   variant = "outline",
@@ -29,36 +105,55 @@ function ModeToggle({
 }) {
   const { setTheme } = useTheme();
 
+  const renderLabel =
+    children ??
+    (size !== "icon" ? (
+      <span className="kf-mode-toggle__label">Toggle theme</span>
+    ) : null);
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant={variant}
-          shape="square"
-          size={size}
-          className="flex flex-row gap-2 items-center justify-center text-base group"
-        >
-          <div className="relative w-[1.2rem] h-[1.2rem] flex items-center justify-center">
-            <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90 text-blue-700 group-hover:text-current dark:text-blue-300 dark:group-hover:text-current dark:group-focus:text-current group-focus:text-current dark:group-focus-visible:text-current" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0 text-blue-700 group dark:text-blue-300 dark:group-hover:text-current group-hover:text-current group-focus:text-current dark:group-focus:text-current dark:group-focus-visible:text-current" />
-            {size === "icon" && <span className="sr-only">Toggle theme</span>}
-          </div>
-          {children ||
-            (!children && size !== "icon" && <span>Toggle theme</span>)}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align={align}>
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <ModeToggleGlobalStyles />
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant={variant}
+            shape="square"
+            size={size}
+            data-size={size}
+            className="kf-mode-toggle"
+          >
+            <div className="kf-mode-toggle__icon-wrapper">
+              <Sun
+                className="kf-mode-toggle__sun"
+                aria-hidden="true"
+                focusable="false"
+              />
+              <Moon
+                className="kf-mode-toggle__moon"
+                aria-hidden="true"
+                focusable="false"
+              />
+              {size === "icon" && (
+                <span className="kf-mode-toggle__sr-only">Toggle theme</span>
+              )}
+            </div>
+            {renderLabel}
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align={align}>
+          <DropdownMenuItem onClick={() => setTheme("light")}>
+            Light
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme("dark")}>
+            Dark
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme("system")}>
+            System
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 }
 

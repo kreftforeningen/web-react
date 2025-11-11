@@ -1,48 +1,126 @@
 import * as React from "react";
 import { forwardRef } from "react";
+import { createGlobalStyle } from "styled-components";
 
 import { Button } from "@/button";
 
-import { cva, type VariantProps } from "class-variance-authority";
-
 import { cn } from "@/lib/utils";
 
-const bannerVariants = cva(
-  "group grid grid-cols-1 sm:grid-cols-2 rounded-xl sm:min-h-[400px] overflow-hidden",
-  {
-    variants: {
-      variant: {
-        default: "",
-        right: "",
-        full: "",
-      },
-      color: {
-        default: "bg-blue-100 dark:bg-blue-900",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      color: "default",
-    },
+type BannerVariant = "default" | "right" | "full";
+type BannerColor = "default";
+
+const BannerGlobalStyles = createGlobalStyle`
+  .kf-banner {
+    font-family: var(--kf-font-sans);
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: var(--kf-radius-2xl, 1rem);
+    overflow: hidden;
+    min-height: auto;
   }
-);
+
+  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+    .kf-banner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      min-height: 25rem;
+    }
+  }
+
+  .kf-banner[data-color="default"] {
+    background: var(--kf-color-blue-100, #dbeafe);
+  }
+
+  .dark .kf-banner[data-color="default"] {
+    background: var(--kf-color-blue-900, #1d4ed8);
+  }
+
+  .kf-banner__image {
+    order: 1;
+    width: 100%;
+    height: 100%;
+    max-height: 18.75rem;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+    .kf-banner__image {
+      max-height: none;
+    }
+  }
+
+  .kf-banner[data-variant="right"] .kf-banner__image {
+    order: 1;
+  }
+
+  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+    .kf-banner[data-variant="right"] .kf-banner__image {
+      order: 2;
+    }
+  }
+
+  .kf-banner[data-variant="full"] .kf-banner__image {
+    grid-column: 1 / -1;
+  }
+
+  .kf-banner__content {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding: calc(var(--kf-spacing, 0.25rem) * 8);
+  }
+
+  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+    .kf-banner[data-variant="right"] .kf-banner__content {
+      order: 1;
+    }
+  }
+
+  .kf-banner__title {
+    margin: 0;
+    font-size: var(--kf-text-2xl, 1.5rem);
+    line-height: var(--kf-text-2xl--line-height, 1.3333333333);
+    font-weight: 700;
+  }
+
+  .kf-banner__description {
+    font-size: var(--kf-text-sm, 0.875rem);
+    line-height: var(--kf-text-sm--line-height, 1.4285714286);
+    color: var(--kf-color-gray-950, #0f172a);
+  }
+
+  .kf-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    align-items: center;
+  }
+`;
 
 function Banner({
-  variant,
-  color,
+  variant = "default",
+  color = "default",
   className,
   children,
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof bannerVariants>) {
+}: React.ComponentProps<"div"> & {
+  variant?: BannerVariant;
+  color?: BannerColor;
+}) {
   return (
-    <div
-      data-slot="banner"
-      data-variant={variant}
-      className={cn(bannerVariants({ variant, color, className }))}
-      {...props}
-    >
-      {children}
-    </div>
+    <>
+      <BannerGlobalStyles />
+      <div
+        data-slot="banner"
+        data-variant={variant}
+        data-color={color}
+        className={cn("kf-banner", className)}
+        {...props}
+      >
+        {children}
+      </div>
+    </>
   );
 }
 
@@ -53,10 +131,7 @@ function BannerImage({
 }: React.ComponentProps<"img">) {
   return (
     <img
-      className={cn(
-        "order-1 sm:order-none w-full h-full object-cover object-center group-data-[variant=right]:sm:order-2 max-h-[300px] sm:max-h-full",
-        className
-      )}
+      className={cn("kf-banner__image", className)}
       style={style}
       {...props}
     />
@@ -68,10 +143,7 @@ const BannerContent = forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "p-8 flex flex-col gap-2 order-2 sm:order-none group-data-[variant=right]:sm:order-1",
-          className
-        )}
+        className={cn("kf-banner__content", className)}
         {...props}
       />
     );
@@ -80,18 +152,18 @@ const BannerContent = forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
 BannerContent.displayName = "BannerContent";
 
 function BannerTitle({ className, ...props }: React.ComponentProps<"h3">) {
-  return <h3 className={cn("text-2xl font-bold mt-0", className)} {...props} />;
+  return <h3 className={cn("kf-banner__title", className)} {...props} />;
 }
 
 function BannerDescription({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  return <div className={cn("text-sm", className)} {...props} />;
+  return <div className={cn("kf-banner__description", className)} {...props} />;
 }
 
 function BannerButtons({ className, ...props }: React.ComponentProps<"div">) {
-  return <div className={cn("flex gap-2 ", className)} {...props} />;
+  return <div className={cn("kf-banner__actions", className)} {...props} />;
 }
 
 function BannerButtonPrimary({
@@ -104,7 +176,7 @@ function BannerButtonPrimary({
   }
   return (
     <a href={href}>
-      <Button className={cn("", className)} variant="default" {...props} />
+      <Button className={className} variant="default" {...props} />
     </a>
   );
 }
@@ -119,11 +191,7 @@ function BannerButtonSecondary({
   }
   return (
     <a href={href}>
-      <Button
-        className={cn("bg-transparent", className)}
-        variant="outline"
-        {...props}
-      />
+      <Button className={className} variant="outline" {...props} />
     </a>
   );
 }

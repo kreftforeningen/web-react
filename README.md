@@ -1,11 +1,11 @@
-# kf-component-library
+# @kreftforeningen/web-react
 
-A modern, accessible, and customizable React component library built with [Radix UI](https://www.radix-ui.com/), [Tailwind CSS](https://tailwindcss.com/), and [Vite](https://vitejs.dev/). Perfect for building beautiful, production-ready UIs with speed and consistency.
+A modern, accessible, and customizable React component library built with [Radix UI](https://www.radix-ui.com/) and [Vite](https://vitejs.dev/), powered by Kreftforeningen design tokens. Perfect for building beautiful, production-ready UIs with speed and consistency.
 
 ## Features
 
 - **Accessible**: Built on top of Radix UI primitives for accessibility out of the box.
-- **Customizable**: Style with Tailwind CSS and easily override component styles.
+- **Customizable**: Override styles with CSS variables and design tokens.
 - **Comprehensive**: Includes Accordions, Alerts, Badges, Buttons, Cards, Carousels, Dropdowns, Forms, Tables, Tooltips, and more.
 - **Type-safe**: Written in TypeScript with full type definitions.
 - **Fast**: Powered by Vite for instant HMR and fast builds.
@@ -13,7 +13,8 @@ A modern, accessible, and customizable React component library built with [Radix
 ## Installation
 
 ```bash
-pnpm add kf-component-library
+pnpm add @kreftforeningen/web-react
+
 ```
 
 ## Usage
@@ -28,13 +29,13 @@ import {
   Accordion,
   Alert,
   // ...and more
-} from "kf-component-library";
+} from "@kreftforeningen/web-react";
 ```
 
 Example:
 
 ```tsx
-import { Button, Card, Badge } from "kf-component-library";
+import { Button, Card, Badge } from "@kreftforeningen/web-react";
 
 function Example() {
   return (
@@ -55,8 +56,8 @@ See the [source code](./src/lib/main.ts) for a full list of exports.
 
 ## Theming
 
-All components are styled with Tailwind CSS utility classes.  
-You can override styles using the `className` prop or extend Tailwind's config.
+All components rely on CSS custom properties (the `--kf-*` tokens) and authored styles.  
+You can override styles using the `className` prop, extend the provided variables, or supply your own tokens.
 
 ## Development
 

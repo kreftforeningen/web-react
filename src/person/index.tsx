@@ -1,60 +1,189 @@
+import { createGlobalStyle } from "styled-components";
+
 import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const personVariants = cva("", {
-  variants: {
-    variant: {
-      default: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-      list: "grid-cols-1",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
+type PersonVariant = "default" | "list";
+type PersonItemColor = "default" | "blue";
 
-const personItemVariants = cva("", {
-  variants: {
-    color: {
-      default: "bg-gray-100 dark:bg-gray-800",
-      blue: "bg-blue-100 dark:bg-blue-950",
-    },
-  },
-  defaultVariants: {
-    color: "default",
-  },
-});
+const PersonGlobalStyles = createGlobalStyle`
+  .kf-person {
+    font-family: var(--kf-font-sans);
+    display: grid;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
+
+  .kf-person--default {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  @media (min-width: var(--kf-breakpoint-md, 48rem)) {
+    .kf-person--default {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: var(--kf-breakpoint-lg, 64rem)) {
+    .kf-person--default {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .kf-person--list {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .kf-person__item {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
+    padding: calc(var(--kf-spacing, 0.25rem) * 4);
+    border-radius: var(--kf-radius-xl, 0.75rem);
+    background: color-mix(in srgb, var(--kf-color-surface, rgba(15, 23, 42, 0.04)) 60%, transparent);
+  }
+
+  .kf-person__item[data-color="blue"] {
+    background: color-mix(in srgb, var(--kf-color-blue-100, #dbeafe) 80%, transparent);
+  }
+
+  .dark .kf-person__item {
+    background: color-mix(in srgb, var(--kf-color-surface-dark, rgba(148, 163, 184, 0.16)) 70%, transparent);
+  }
+
+  .dark .kf-person__item[data-color="blue"] {
+    background: color-mix(in srgb, var(--kf-color-blue-950, #0b1120) 80%, transparent);
+  }
+
+  .kf-person__image {
+    width: 60px;
+    height: 60px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  .kf-person__image-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--kf-color-gray-700, #374151);
+    color: var(--kf-color-gray-100, #f3f4f6);
+    font-weight: 600;
+  }
+
+  .dark .kf-person__image-fallback {
+    background: var(--kf-color-gray-100, #f3f4f6);
+    color: var(--kf-color-gray-700, #374151);
+  }
+
+  .kf-person__content {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 1.5);
+    overflow: hidden;
+  }
+
+  .kf-person__name {
+    margin: 0;
+    font-size: var(--kf-text-base, 1rem);
+    font-weight: 600;
+  }
+
+  .kf-person__title {
+    margin: 0;
+    font-size: var(--kf-text-sm, 0.875rem);
+    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.66));
+  }
+
+  .dark .kf-person__title {
+    color: color-mix(in srgb, var(--kf-color-gray-200, #e5e7eb) 80%, transparent);
+  }
+
+  .kf-person__link {
+    display: block;
+    font-size: var(--kf-text-sm, 0.875rem);
+    color: var(--kf-color-blue-800, #1d4ed8);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .kf-person__link:hover,
+  .kf-person__link:focus-visible {
+    color: var(--kf-color-blue-900, #1e3a8a);
+    text-decoration: underline;
+  }
+
+  .dark .kf-person__link {
+    color: var(--kf-color-blue-200, #bfdbfe);
+  }
+
+  .dark .kf-person__link:hover,
+  .dark .kf-person__link:focus-visible {
+    color: var(--kf-color-blue-300, #93c5fd);
+  }
+
+  .kf-person__description-trigger {
+    display: block;
+    text-align: left;
+    font-size: var(--kf-text-sm, 0.875rem);
+    color: var(--kf-color-blue-800, #1d4ed8);
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .kf-person__description-trigger:hover,
+  .kf-person__description-trigger:focus-visible {
+    color: var(--kf-color-blue-900, #1e3a8a);
+    text-decoration: underline;
+  }
+
+  .dark .kf-person__description-trigger {
+    color: var(--kf-color-blue-200, #bfdbfe);
+  }
+
+  .dark .kf-person__description-trigger:hover,
+  .dark .kf-person__description-trigger:focus-visible {
+    color: var(--kf-color-blue-300, #93c5fd);
+  }
+`;
 
 function Person({
   className,
-  variant,
+  variant = "default",
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof personVariants>) {
+}: React.ComponentProps<"div"> & { variant?: PersonVariant }) {
   return (
-    <div
-      data-slot="person"
-      className={cn("grid gap-4", personVariants({ variant }), className)}
-      {...props}
-    />
+    <>
+      <PersonGlobalStyles />
+      <div
+        data-slot="person"
+        className={cn("kf-person", `kf-person--${variant}`, className)}
+        {...props}
+      />
+    </>
   );
 }
 
 function PersonItem({
   className,
-  color,
+  color = "default",
   ...props
-}: React.ComponentProps<"article"> & VariantProps<typeof personItemVariants>) {
+}: React.ComponentProps<"article"> & { color?: PersonItemColor }) {
   return (
     <article
       data-slot="person-item"
-      className={cn(
-        "flex flex-row gap-4 rounded-xl p-4 items-center",
-        personItemVariants({ color }),
-        className
-      )}
+      data-color={color}
+      className={cn("kf-person__item", className)}
       {...props}
     />
   );
@@ -68,13 +197,10 @@ function PersonItemImage({
   return (
     <Avatar
       data-slot="person-item-image"
-      className={cn(
-        "w-[60px] h-[60px] rounded-full shrink-0 grow-0",
-        className
-      )}
+      className={cn("kf-person__image", className)}
     >
       <AvatarImage {...props} />
-      <AvatarFallback className="bg-gray-700 dark:bg-gray-100 text-gray-100 dark:text-gray-700">
+      <AvatarFallback className="kf-person__image-fallback">
         {fallback}
       </AvatarFallback>
     </Avatar>
@@ -88,7 +214,7 @@ function PersonItemContent({
   return (
     <div
       data-slot="person-item-content"
-      className={cn("overflow-hidden flex flex-col gap-1", className)}
+      className={cn("kf-person__content", className)}
       {...props}
     />
   );
@@ -98,7 +224,7 @@ function PersonItemName({ className, ...props }: React.ComponentProps<"h3">) {
   return (
     <h3
       data-slot="person-item-name"
-      className={cn("m-0 text-base", className)}
+      className={cn("kf-person__name", className)}
       {...props}
     />
   );
@@ -108,7 +234,7 @@ function PersonItemTitle({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
       data-slot="person-item-title"
-      className={cn("text-sm text-gray-700 dark:text-gray-100", className)}
+      className={cn("kf-person__title", className)}
       {...props}
     />
   );
@@ -118,10 +244,7 @@ function PersonItemEmail({ className, ...props }: React.ComponentProps<"a">) {
   return (
     <a
       data-slot="person-item-email"
-      className={cn(
-        "text-sm truncate text-blue-800 hover:text-blue-900 dark:text-blue-200 dark:hover:text-blue-300 hover:underline hover:cursor-pointer block data-slot='person-item-email'",
-        className
-      )}
+      className={cn("kf-person__link", className)}
       aria-label={`Email ${props.href}`}
       {...props}
     />
@@ -132,10 +255,7 @@ function PersonItemPhone({ className, ...props }: React.ComponentProps<"a">) {
   return (
     <a
       data-slot="person-item-phone"
-      className={cn(
-        "text-sm truncate text-blue-800 hover:text-blue-900 dark:text-blue-200 dark:hover:text-blue-300 block hover:underline hover:cursor-pointer data-slot='person-item-phone'",
-        className
-      )}
+      className={cn("kf-person__link", className)}
       aria-label={`Phone ${props.href}`}
       {...props}
     />
@@ -151,10 +271,7 @@ function PersonItemDescription({
     <Popover data-slot="person-item-description">
       <PopoverTrigger
         data-slot="person-item-description-trigger"
-        className={cn(
-          "text-sm text-blue-800 hover:text-blue-900 dark:text-blue-200 dark:hover:text-blue-300 hover:underline hover:cursor-pointer block text-left",
-          className
-        )}
+        className={cn("kf-person__description-trigger", className)}
         {...props}
       >
         Les mer
