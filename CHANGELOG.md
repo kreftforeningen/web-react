@@ -1,5 +1,11 @@
 # @kreftforeningen/web-react
 
+## 1.0.3
+
+### Patch Changes
+
+- set npm access to public for package
+
 ## 1.0.2
 
 ### Patch Changes
