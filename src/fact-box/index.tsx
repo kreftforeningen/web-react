@@ -18,10 +18,12 @@ const FactBoxGlobalStyles = createGlobalStyle`
 
   .dark .kf-fact-box {
     background: var(--kf-color-blue-950, #172554);
+    color: var(--kf-color-gray-50, #f8fafc);
   }
 
   .kf-fact-box__content {
     padding: calc(var(--kf-spacing, 0.25rem) * 8);
+    padding-bottom: 0;
   }
 
   @media (min-width: var(--kf-breakpoint-md, 48rem)) {
@@ -31,8 +33,9 @@ const FactBoxGlobalStyles = createGlobalStyle`
   }
 
   .kf-fact-box__title {
+    font-family: var(--kf-font-condensed);
     margin-top: 0;
-    margin-bottom: calc(var(--kf-spacing, 0.25rem) * 4);
+    margin-bottom: var(--kf-spacing, 0.25rem);
     font-size: var(--kf-text-2xl, 1.5rem);
     line-height: var(--kf-text-2xl--line-height, 1.3333333333);
     font-weight: 700;
@@ -43,11 +46,21 @@ const FactBoxGlobalStyles = createGlobalStyle`
     font-size: var(--kf-text-base, 1rem);
     line-height: var(--kf-text-base--line-height, 1.5);
     color: var(--kf-color-gray-950, #0f172a);
+    padding-bottom: calc(var(--kf-spacing, 0.25rem) * 4);
+    overflow: hidden;
+    max-height: calc(var(--kf-spacing, 0.25rem) * 80);
+    transition:
+      max-height 220ms var(--kf-ease-in-out, ease),
+      opacity 220ms var(--kf-ease-in-out, ease);
+  }
+  
+  .dark .kf-fact-box__description {
+    color: var(--kf-color-gray-50, #f8fafc);
   }
 
   .kf-fact-box__description[data-expanded="false"] {
-    height: 5rem;
-    overflow: hidden;
+    max-height: calc(var(--kf-spacing, 0.25rem) * 20);
+    opacity: 0.88;
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent);
   }
 
@@ -56,20 +69,26 @@ const FactBoxGlobalStyles = createGlobalStyle`
     justify-content: center;
     padding-bottom: calc(var(--kf-spacing, 0.25rem) * 4);
     position: relative;
+    anchor-name: --kf-fact-box-footer;
   }
 
   .kf-fact-box__toggle {
     position: absolute;
-    bottom: 0;
-    transform: translateY(50%);
+    position-anchor: --kf-fact-box-footer;
+    top: anchor(bottom);
+    left: anchor(center);
+    
     width: calc(var(--kf-spacing, 0.25rem) * 10);
     height: calc(var(--kf-spacing, 0.25rem) * 10);
     border-radius: var(--kf-radius-full, 9999px);
-    transition: transform 200ms var(--kf-ease-in-out, ease);
+    transition:
+      rotate 180ms var(--kf-ease-in-out, ease),
+      background-color 180ms var(--kf-ease-in-out, ease),
+      border-color 180ms var(--kf-ease-in-out, ease);
   }
 
   .kf-fact-box__toggle[data-expanded="true"] {
-    transform: translateY(50%) rotate(180deg);
+    rotate: 180deg;
   }
 
   .kf-fact-box__sr-only {
