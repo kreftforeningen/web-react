@@ -16,8 +16,8 @@ const BadgeGlobalStyles = createGlobalStyle`
     border-width: var(--kf-border-1, 1px);
     border-style: solid;
     border-color: transparent;
-    border-radius: var(--kf-radius-md, 0.375rem);
-    padding: calc(var(--kf-spacing, 0.25rem) * 1) calc(var(--kf-spacing, 0.25rem) * 2);
+    border-radius: var(--kf-radius-lg, 0.5rem);
+    padding: calc(var(--kf-spacing, 0.25rem) * 0.5) calc(var(--kf-spacing, 0.25rem) * 2);
     font-size: var(--kf-text-xs, 0.75rem);
     line-height: var(--kf-text-xs--line-height, 1.3333333333);
     font-weight: 500;
