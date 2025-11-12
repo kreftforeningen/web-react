@@ -1,0 +1,71 @@
+# Component Migration Checklist
+
+- [x] Accentuated Link
+- [x] Accordion
+- [x] Alert
+- [x] Alert Dialog
+- [x] Aspect Ratio
+- [ ] Avatar
+- [x] Badge
+- [ ] Banner
+- [ ] Breadcrumb
+- [ ] Button
+- [ ] Button Group
+- [ ] Calendar
+- [x] Card
+- [ ] Carousel
+- [ ] Chart
+- [ ] Checkbox
+- [ ] Collapsible
+- [ ] Command
+- [ ] Context Menu
+- [ ] Dialog
+- [x] Download
+- [ ] Drawer
+- [ ] Dropdown Menu
+- [ ] Empty
+- [x] Fact Box
+- [x] Feedback
+- [ ] Field
+- [ ] Footer
+- [ ] Header
+- [ ] Hover Card
+- [ ] Infographic
+- [x] Input
+- [ ] Input Group
+- [ ] Input OTP
+- [ ] Item
+- [ ] Kbd
+- [ ] Label
+- [ ] Link List
+- [ ] Menubar
+- [ ] Mode Toggle
+- [ ] Native Select
+- [ ] Navigation Menu
+- [ ] Pagination
+- [ ] Person
+- [ ] Popover
+- [ ] Progress
+- [ ] Radio Group
+- [ ] Resizable
+- [ ] Scroll Area
+- [ ] Select
+- [ ] Separator
+- [ ] Sheet
+- [ ] Sidebar
+- [ ] Skeleton
+- [ ] Slider
+- [ ] Sonner
+- [ ] Spinner
+- [ ] Switch
+- [ ] Table
+- [ ] Tabs
+- [ ] Textarea
+- [ ] Timeline
+- [ ] Toggle
+- [ ] Toggle Group
+- [ ] Tooltip
+- [ ] Mode Toggle
+- [ ] Sonner
+- [ ] Sidebar
+- [ ] Style (Global)

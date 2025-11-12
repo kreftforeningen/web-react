@@ -1,20 +1,26 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-  Link,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import {
   Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
+  HeaderMenuList,
+  HeaderMenuListItem,
+  HeaderMenuFooter,
+  HeaderMenuContent,
+  HeaderMenuTrigger,
+  HeaderMenu,
+  HeaderWrapper,
+  HeaderTitle,
+  HeaderButton,
+  HeaderSearch,
   ModeToggle,
 } from "./lib/main";
 import { Spinner } from "./lib/main";
+
+import { MenuIcon } from "lucide-react";
+import { ChevronRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
+import { BanIcon } from "lucide-react";
 
 const HomeDemo = lazy(() => import("@/demo/home"));
 
@@ -85,16 +91,13 @@ const ToggleGroupDemo = lazy(() => import("@/demo/toggle-group"));
 const TooltipDemo = lazy(() => import("@/demo/tooltip"));
 
 import { ThemeProvider } from "./theme-provider";
+import React from "react";
 
 function RootLayout() {
   return <Outlet />;
 }
 
 const navigationItems = [
-  {
-    label: "Home",
-    to: "/",
-  },
   {
     label: "Accentuated Link",
     to: "/accentuated-link",
@@ -357,40 +360,35 @@ const navigationItems = [
   },
 ];
 
+function useMenuFilter(items: typeof navigationItems) {
+  const [query, setQuery] = React.useState("");
+  const normalizedQuery = query.trim().toLowerCase();
+  const filtered = React.useMemo(() => {
+    if (!normalizedQuery) {
+      return items;
+    }
+    return items.filter((item) =>
+      item.label.toLowerCase().includes(normalizedQuery)
+    );
+  }, [items, normalizedQuery]);
+
+  return { query, setQuery, filtered };
+}
+
 const router = createBrowserRouter([
   {
     element: (
       <>
-        <nav
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <ModeToggle />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button>Menu</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "0.5rem",
-              }}
-            >
-              {navigationItems.map((item) => (
-                <DropdownMenuItem key={item.to}>
-                  <Link to={item.to}>{item.label}</Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </nav>
-        <main className="app-main-section">
-          <RootLayout />
-        </main>
+        <HeaderWrapper>
+          <HeaderTitle href="/">@kreftforeningen/web-react</HeaderTitle>
+
+          <HeaderButton href="https://kreftforeningen.no" variant="outline">
+            Til Kreftforeningen <ArrowRightIcon />
+          </HeaderButton>
+
+          <MenuWithFilter />
+        </HeaderWrapper>
+        <RootLayout />
       </>
     ),
     children: [
@@ -925,6 +923,53 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+function MenuWithFilter() {
+  const { query, setQuery, filtered } = useMenuFilter(navigationItems);
+
+  return (
+    <HeaderMenu>
+      <HeaderMenuTrigger>
+        <Button variant="default" data-slot="header-button">
+          <span className="app-hidden-mobile">Menu</span> <MenuIcon />
+        </Button>
+      </HeaderMenuTrigger>
+      <HeaderMenuContent>
+        <HeaderSearch
+          placeholder="Filter"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+
+        <HeaderMenuList>
+          {filtered.length === 0 ? (
+            <li
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+              }}
+            >
+              <BanIcon />
+              Ingen treff
+            </li>
+          ) : (
+            filtered.map((item) => (
+              <HeaderMenuListItem href={item.to} key={item.to}>
+                <ChevronRightIcon />
+                {item.label}
+              </HeaderMenuListItem>
+            ))
+          )}
+        </HeaderMenuList>
+
+        <HeaderMenuFooter>
+          <ModeToggle align="start" variant="outline" size="default" />
+        </HeaderMenuFooter>
+      </HeaderMenuContent>
+    </HeaderMenu>
+  );
+}
 
 function App() {
   return (

@@ -1,5 +1,5 @@
+import { CardImage } from "@/card";
 import {
-  AspectRatio,
   Badge,
   Card,
   CardAction,
@@ -17,13 +17,15 @@ export default function CardDemo() {
       <h2>Card</h2>
       <div className="app-card-grid">
         <Card>
-          <AspectRatio ratio={16 / 9}>
-            <img
-              src="https://picsum.photos/id/241/1600/900"
-              alt="Card Image"
-              className="app-media-cover"
-            />
-          </AspectRatio>
+          <CardImage
+            ratio={16 / 10}
+            alt="In About Five Minutes I'll Be There"
+            title="In About Five Minutes I'll Be There"
+            sizes="(min-width: 1024px) 310px, (min-width: 768px) 220px, (min-width: 640px) 290px, 100vw"
+            src300="https://picsum.photos/id/241/300/169"
+            src500="https://picsum.photos/id/241/500/281"
+            src780="https://picsum.photos/id/241/780/439"
+          />
           <CardHeader>
             <CardDescription>29.05.2020</CardDescription>
             <CardTitle>– In About Five Minutes I'll Be There</CardTitle>
@@ -63,4 +65,3 @@ export default function CardDemo() {
     </>
   );
 }
-

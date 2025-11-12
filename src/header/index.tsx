@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "@/theme-provider";
 
 import { Button } from "../button";
-import { Input } from "../input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "../input-group";
 
 import { Search as SearchIcon } from "lucide-react";
 import {
@@ -26,8 +26,10 @@ const HeaderGlobalStyles = createGlobalStyle`
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     margin-block: calc(var(--kf-spacing, 0.25rem) * 4);
     padding-inline: calc(var(--kf-spacing, 0.25rem) * 6);
-    width: min(var(--kf-container-7xl, 80rem), 100%);
+    max-width: min(var(--kf-container-7xl, 80rem), 100%);
     margin-inline: auto;
+    container-type: inline-size;
+    container-name: header-container;
   }
 
   .kf-header__logo,
@@ -70,23 +72,29 @@ const HeaderGlobalStyles = createGlobalStyle`
 
   .kf-header__search {
     padding-block: calc(var(--kf-spacing, 0.25rem) * 2);
-  }
-
-  .kf-header__search-field {
-    position: relative;
     width: min(20rem, 100%);
   }
 
-  .kf-header__search-icon {
-    position: absolute;
-    left: calc(var(--kf-spacing, 0.25rem) * 3);
-    top: 50%;
-    transform: translateY(-50%);
+  .kf-header__search .kf-input-group {
+    width: 100%;
+  }
+
+  .kf-header__search-addon {
     color: var(--kf-color-gray-400, #9ca3af);
   }
 
-  .kf-header__search-input {
-    padding-left: calc(var(--kf-spacing, 0.25rem) * 10);
+  .dark .kf-header__search-addon {
+    color: var(--kf-color-gray-300, #d1d5db);
+  }
+
+  .kf-header__button {
+    display: none;
+  }
+
+  @container header-container (min-width: 32rem) {
+  .kf-header__button {
+    display: inline-flex;
+    }
   }
 
   .kf-header__menu-content {
@@ -105,13 +113,17 @@ const HeaderGlobalStyles = createGlobalStyle`
   .kf-header__menu-footer {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
   }
 
   .kf-header__menu-list {
+    font-size: var(--kf-text-xl, 1.25rem);
+    list-style: none;
+    margin-block: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding-left: 0;
     display: flex;
     flex-direction: column;
-    gap: calc(var(--kf-spacing, 0.25rem) * 2);
-    padding-block: calc(var(--kf-spacing, 0.25rem) * 2);
+    gap: var(--kf-spacing, 0.25rem);
   }
 
   .kf-header__menu-link {
@@ -223,18 +235,23 @@ function HeaderNavigation({
   );
 }
 
-function HeaderSearch({ ...props }: React.ComponentProps<"input">) {
+function HeaderSearch({
+  placeholder = "Søk",
+  ...props
+}: React.ComponentProps<"input"> & { placeholder?: string }) {
   return (
     <>
       <div className="kf-header__search">
-        <div className="kf-header__search-field">
-          <SearchIcon className="kf-header__search-icon" size={18} />
-          <Input
-            placeholder="Søk"
-            className="kf-header__search-input"
-            {...props}
-          />
-        </div>
+        <InputGroup>
+          <InputGroupAddon
+            align="inline-start"
+            className="kf-header__search-addon"
+          >
+            <SearchIcon size={18} aria-hidden="true" focusable="false" />
+            <span className="kf-header__sr-only">Søk</span>
+          </InputGroupAddon>
+          <InputGroupInput placeholder={placeholder} {...props} />
+        </InputGroup>
       </div>
     </>
   );
@@ -251,12 +268,8 @@ function HeaderButton({
 }) {
   if (!children) return null;
   return (
-    <a href={href} className={className}>
-      <Button
-        variant={variant}
-        data-slot="header-button"
-        className="flex items-center gap-2"
-      >
+    <a href={href} className={cn("kf-header__button", className)}>
+      <Button variant={variant} data-slot="header-button">
         {children}
       </Button>
     </a>
@@ -275,7 +288,7 @@ function HeaderMenuTrigger({ children }: React.ComponentProps<"div">) {
 function HeaderMenuContent({ children }: React.ComponentProps<"div">) {
   return (
     <>
-      <SheetContent className="kf-header__menu-content">
+      <SheetContent className="dark kf-header__menu-content">
         <SheetHeader className="kf-header__sr-only">
           <SheetTitle>Menu</SheetTitle>
           <SheetDescription>Menu.</SheetDescription>

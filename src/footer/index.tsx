@@ -12,10 +12,11 @@ const FooterGlobalStyles = createGlobalStyle`
     padding-block: calc(var(--kf-spacing, 0.25rem) * 10);
     background: var(--kf-color-gray-800, #1f2937);
     color: var(--kf-color-gray-100, #f3f4f6);
+    container-type: inline-size;
+    container-name: footer-container;
   }
 
   .kf-footer__section {
-    width: min(var(--kf-container-7xl, 80rem), 100%);
     margin-inline: auto;
   }
 
@@ -23,6 +24,7 @@ const FooterGlobalStyles = createGlobalStyle`
   .kf-footer__social {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     align-items: center;
   }
@@ -30,18 +32,26 @@ const FooterGlobalStyles = createGlobalStyle`
   .kf-footer__nav {
     display: grid;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
     padding-block: calc(var(--kf-spacing, 0.25rem) * 10);
+    padding-inline: 0;
+    margin: 0;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
-  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+  @container footer-container (min-width: 32rem) {
+    .kf-footer__nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @container footer-container (min-width: 40rem) {
     .kf-footer__nav {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
-  @media (min-width: var(--kf-breakpoint-md, 48rem)) {
+  @container footer-container (min-width: 64rem) {
     .kf-footer__nav {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
@@ -68,17 +78,11 @@ const FooterGlobalStyles = createGlobalStyle`
 
   .kf-footer__contact {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     gap: calc(var(--kf-spacing, 0.25rem) * 4);
-    padding-block: calc(var(--kf-spacing, 0.25rem) * 10);
-  }
-
-  @media (min-width: var(--kf-breakpoint-md, 48rem)) {
-    .kf-footer__contact {
-      flex-direction: row;
-      align-items: center;
-      gap: calc(var(--kf-spacing, 0.25rem) * 10);
-    }
+    padding-block: calc(var(--kf-spacing, 0.25rem) * 14);
   }
 
   .kf-footer__contact-link {
@@ -120,7 +124,7 @@ function FooterWrapper({
       <FooterGlobalStyles />
       <footer
         data-slot="footer"
-        className={cn("kf-footer", className)}
+        className={cn("dark kf-footer", className)}
         {...props}
       >
         {children}

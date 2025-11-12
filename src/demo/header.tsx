@@ -29,7 +29,7 @@ export default function HeaderDemo() {
     <>
       <h2>Header</h2>
       <div className="app-vertical-spacing">
-        <h3 className="app-main-section">Header for Web</h3>
+        <h3>Header for Web</h3>
         <HeaderWrapper>
           <HeaderLogo
             src="/assets/logo.svg"
@@ -108,7 +108,8 @@ export default function HeaderDemo() {
           <HeaderTitle href="/">App Title</HeaderTitle>
 
           <HeaderButton href="https://kreftforeningen.no" variant="outline">
-            Til Kreftforeningen <ArrowRightIcon />
+            <span className="app-hidden-mobile">Til Kreftforeningen</span>
+            <ArrowRightIcon />
           </HeaderButton>
 
           <HeaderMenu>
