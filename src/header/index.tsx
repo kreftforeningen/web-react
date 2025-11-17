@@ -46,6 +46,10 @@ const HeaderGlobalStyles = createGlobalStyle`
 
   .kf-header__title-span {
     font-size: var(--kf-text-xl, 1.25rem);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
 
   .kf-header__title-link {
