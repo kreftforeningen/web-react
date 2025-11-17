@@ -27,7 +27,7 @@
 - [x] Fact Box
 - [x] Feedback
 - [ ] Field
-- [ ] Footer
+- [x] Footer
 - [ ] Header
 - [ ] Hover Card
 - [ ] Infographic

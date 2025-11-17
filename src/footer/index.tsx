@@ -82,7 +82,7 @@ const FooterGlobalStyles = createGlobalStyle`
     flex-wrap: wrap;
     align-items: center;
     gap: calc(var(--kf-spacing, 0.25rem) * 4);
-    padding-block: calc(var(--kf-spacing, 0.25rem) * 14);
+    padding-block: calc(var(--kf-spacing, 0.25rem) * 10);
   }
 
   .kf-footer__contact-link {

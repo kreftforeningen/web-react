@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 import { createGlobalStyle } from "styled-components";
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "./variants";
 
 const ButtonGlobalStyles = createGlobalStyle`
   .kf-btn {
@@ -31,6 +32,8 @@ const ButtonGlobalStyles = createGlobalStyle`
     --kf-ring-width: 2px;
     --kf-ring-offset-width: 2px;
     transition: background-color 120ms var(--kf-ease-in-out, ease), border-color 120ms var(--kf-ease-in-out, ease), color 120ms var(--kf-ease-in-out, ease), box-shadow 120ms var(--kf-ease-in-out, ease);
+    text-decoration: none;
+    color: inherit;
   }
   .kf-btn[disabled] {
     cursor: not-allowed;
@@ -39,6 +42,10 @@ const ButtonGlobalStyles = createGlobalStyle`
   .kf-btn svg {
     pointer-events: none;
     flex-shrink: 0;
+  }
+  .kf-btn button {
+    text-decoration: none!important;
+    color: inherit!important;
   }
   .kf-btn svg:not([class*="size-"]) {
     width: var(--kf-btn-icon-size, var(--kf-btn-icon-size-md, 1rem));
@@ -141,7 +148,12 @@ const ButtonGlobalStyles = createGlobalStyle`
     --kf-ring-offset-color: var(--kf-color-white, #ffffff);
   }
 
+  .dark .kf-btn--destructive {
+    color: var(--kf-color-red-50, #fef2f2);
+  }
+
   .kf-btn--destructive:hover {
+    color: var(--kf-color-red-50, #fef2f2);
     background: var(--kf-color-red-800, #991b1b);
     border-color: var(--kf-color-red-800, #991b1b);
   }
@@ -154,6 +166,7 @@ const ButtonGlobalStyles = createGlobalStyle`
   .dark .kf-btn--destructive:hover,
   .dark .kf-btn--destructive:focus,
   .dark .kf-btn--destructive:focus-visible {
+  color: var(--kf-color-red-50, #fef2f2);
     background: var(--kf-color-red-800, #991b1b);
     border-color: var(--kf-color-red-800, #991b1b);
     --kf-ring-color: var(--kf-color-red-800, #991b1b);
@@ -273,56 +286,29 @@ const ButtonGlobalStyles = createGlobalStyle`
   }
 `;
 
-const buttonVariants = cva("kf-btn", {
-  variants: {
-    variant: {
-      default: "kf-btn--default",
-      destructive: "kf-btn--destructive",
-      outline: "kf-btn--outline",
-      secondary: "kf-btn--secondary",
-      ghost: "kf-btn--ghost",
-      link: "kf-btn--link",
-    },
-    size: {
-      default: "kf-btn--size-default",
-      sm: "kf-btn--size-sm",
-      lg: "kf-btn--size-lg",
-      icon: "kf-btn--size-icon",
-    },
-    shape: {
-      default: "kf-btn--shape-default",
-      square: "kf-btn--shape-square",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "default",
-  },
-});
-
-function Button({
-  className,
-  variant,
-  size,
-  shape,
-  asChild = false,
-  ...props
-}: React.ComponentProps<"button"> &
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
-  }) {
-  const Comp = asChild ? Slot : "button";
+  };
 
-  return (
-    <>
-      <ButtonGlobalStyles />
-      <Comp
-        data-slot="button"
-        className={cn(buttonVariants({ variant, size, shape, className }))}
-        {...props}
-      />
-    </>
-  );
-}
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, shape, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
 
-export { Button, buttonVariants };
+    return (
+      <>
+        <ButtonGlobalStyles />
+        <Comp
+          ref={ref}
+          data-slot="button"
+          className={cn(buttonVariants({ variant, size, shape, className }))}
+          {...props}
+        />
+      </>
+    );
+  }
+);
+
+Button.displayName = "Button";
+
+export { Button };
