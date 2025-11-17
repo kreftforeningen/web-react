@@ -112,6 +112,10 @@ const FooterGlobalStyles = createGlobalStyle`
     color: var(--kf-color-blue-100, #dbeafe);
     text-decoration: underline;
   }
+
+  .kf-footer__copyright-separator {
+    margin-block: calc(var(--kf-spacing, 0.25rem) * 4);
+  }
 `;
 
 function FooterWrapper({
@@ -189,7 +193,7 @@ function FooterContactItem({
 function FooterCopyright({ children }: { children?: React.ReactNode }) {
   return (
     <div className="kf-footer__section kf-footer__copyright">
-      <Separator className="my-10" />
+      <Separator className="kf-footer__copyright-separator" />
       {children}
     </div>
   );
