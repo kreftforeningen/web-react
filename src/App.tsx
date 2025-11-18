@@ -34,6 +34,7 @@ const AspectRatioDemo = lazy(() => import("@/demo/aspect-ratio"));
 const AvatarDemo = lazy(() => import("@/demo/avatar"));
 const BadgeDemo = lazy(() => import("@/demo/badge"));
 const BannerDemo = lazy(() => import("@/demo/banner"));
+const BoxDemo = lazy(() => import("@/demo/box"));
 const BreadcrumbDemo = lazy(() => import("@/demo/breadcrumb"));
 const ButtonDemo = lazy(() => import("@/demo/button"));
 const ButtonGroupDemo = lazy(() => import("@/demo/button-group"));
@@ -134,6 +135,10 @@ const navigationItems = [
   {
     label: "Banner",
     to: "/banner",
+  },
+  {
+    label: "Box",
+    to: "/box",
   },
   {
     label: "Breadcrumb",
@@ -468,6 +473,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <BannerDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/box",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <BoxDemo />
           </Suspense>
         ),
       },

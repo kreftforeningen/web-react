@@ -110,7 +110,17 @@ Lockfile policy:
 - Lockfile conflicts are avoided via `.gitattributes` (`pnpm-lock.yaml merge=ours`) which keeps `develop`’s lockfile.
 - If your change updates `package.json`, do not hand-merge the lockfile in the PR; let `develop` win and regenerate on `develop` later.
 
-4. Prepare release on develop (after features are merged)
+4. Sync `main` back into `develop` before every release cycle
+
+```bash
+git checkout develop
+git pull origin develop
+git pull origin main --ff-only
+```
+
+This ensures `develop` already contains whatever `main` emitted during the last release, so `package.json` / `CHANGELOG.md` stay in sync and avoid conflicts.
+
+5. Prepare release on develop (after features are merged and branches are in sync)
 
 ```bash
 git checkout develop
@@ -119,24 +129,38 @@ git pull origin develop
 # Bump versions with Changesets
 pnpm changeset
 pnpm changeset version
+
+# Stage the generated changelog + version bump
+git add .changeset/ package.json CHANGELOG.md
 ```
 
-5. Regenerate lockfile deterministically
+6. Regenerate lockfile deterministically
 
 ```bash
 rm -f pnpm-lock.yaml
 pnpm install --lockfile-only --ignore-scripts
 
-git add .changeset/ package.json pnpm-lock.yaml
+git add pnpm-lock.yaml
 git commit -m "chore: version and lockfile"
 git push origin develop
 ```
 
-6. Release PR: develop → main
+7. Release PR: develop → main
 
 - Open PR from `develop` into `main`.
-- If `package.json` conflicts, keep `develop` (it already contains the version bumped above).
-- Merge to `main` to release.
+- Keep the versions/changelog from `develop` (those are the canonical ones generated in step 5).
+- Merge to `main` to release. The GitHub Actions release workflow runs `pnpm changeset publish` only—**do not run `changeset version` again on `main`.**
+
+8. After the release workflow finishes, fast-forward `main` back into `develop`:
+
+```bash
+git checkout develop
+git pull origin develop
+git pull origin main --ff-only
+git push origin develop
+```
+
+This final sync keeps both branches aligned for the next cycle.
 
 Notes:
 
