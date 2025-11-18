@@ -32,10 +32,8 @@ const feedbackContext = React.createContext<{
 
 const FeedbackGlobalStyles = createGlobalStyle`
   .kf-feedback {
-    font-family: var(--kf-font-sans);
     display: flex;
     flex-direction: column;
-    gap: calc(var(--kf-spacing, 0.25rem) * 4);
   }
 
   .kf-feedback__header {
@@ -47,7 +45,6 @@ const FeedbackGlobalStyles = createGlobalStyle`
   }
 
   .kf-feedback__description {
-    font-size: var(--kf-text-base, 1rem);
     line-height: var(--kf-text-base--line-height, 1.5);
     padding-bottom: 0;
   }

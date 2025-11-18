@@ -21,11 +21,17 @@ const TextareaGlobalStyles = createGlobalStyle`
   }
 
   .dark .kf-textarea {
-    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 80%, transparent);
+    background: color-mix(in srgb, var(--kf-color-gray-800, #111827) 90%, transparent);
+    border-color: color-mix(in srgb, var(--kf-color-gray-400, #374151) 80%, transparent);
+    color: var(--kf-color-gray-50, #f8fafc);
   }
 
   .kf-textarea::placeholder {
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+  }
+
+  .dark .kf-textarea::placeholder {
+    color: var(--kf-color-gray-400, rgba(203, 213, 225, 0.65));
   }
 
   .kf-textarea:focus-visible {
@@ -50,17 +56,24 @@ const TextareaGlobalStyles = createGlobalStyle`
   }
 `;
 
-function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
-  return (
-    <>
-      <TextareaGlobalStyles />
-      <textarea
-        data-slot="textarea"
-        className={cn("kf-textarea", className)}
-        {...props}
-      />
-    </>
-  );
-}
+type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <>
+        <TextareaGlobalStyles />
+        <textarea
+          ref={ref}
+          data-slot="textarea"
+          className={cn("kf-textarea", className)}
+          {...props}
+        />
+      </>
+    );
+  }
+);
+
+Textarea.displayName = "Textarea";
 
 export { Textarea };

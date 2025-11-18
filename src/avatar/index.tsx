@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 
 const AvatarGlobalStyles = createGlobalStyle`
   .kf-avatar {
-    font-family: var(--kf-font-sans);
     position: relative;
     display: inline-flex;
     width: calc(var(--kf-spacing, 0.25rem) * 8);

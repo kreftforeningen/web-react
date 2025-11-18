@@ -6,6 +6,7 @@ import {
   InfographicItemTitle,
   InfographicItemTitleNumber,
   InfographicItemTitleText,
+  Page,
 } from "@/lib/main";
 import { ServerIcon } from "lucide-react";
 
@@ -32,13 +33,13 @@ const infographicItems = [
 
 export default function InfographicDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Infographic</h2>
       <Infographic>
         {infographicItems.map((item) => (
           <InfographicItem key={item.id} color="blue">
             <InfographicItemIcon>
-              <ServerIcon strokeWidth={1} />
+              <ServerIcon strokeWidth={2} size={48} />
             </InfographicItemIcon>
             <InfographicItemTitle>
               <InfographicItemTitleNumber>
@@ -54,7 +55,6 @@ export default function InfographicDemo() {
           </InfographicItem>
         ))}
       </Infographic>
-    </>
+    </Page.Block>
   );
 }
-

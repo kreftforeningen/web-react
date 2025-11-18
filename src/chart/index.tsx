@@ -88,7 +88,7 @@ ${colorConfig
     const color =
       itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
       itemConfig.color;
-    return color ? `  --color-${key}: ${color};` : null;
+    return color ? `  --kf-color-${key}: ${color};` : null;
   })
   .join("\n")}
 }
@@ -227,7 +227,7 @@ function ChartTooltipContent({
                     !hideIndicator && (
                       <div
                         className={cn(
-                          "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                          "shrink-0 rounded-[2px] border-(--kf-color-gray-300) bg-(--kf-color-gray-50)",
                           {
                             "h-2.5 w-2.5": indicator === "dot",
                             "w-1": indicator === "line",
@@ -238,8 +238,8 @@ function ChartTooltipContent({
                         )}
                         style={
                           {
-                            "--color-bg": indicatorColor,
-                            "--color-border": indicatorColor,
+                            "--kf-color-gray-50": indicatorColor,
+                            "--kf-color-gray-300": indicatorColor,
                           } as React.CSSProperties
                         }
                       />

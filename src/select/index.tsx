@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 const SelectGlobalStyles = createGlobalStyle`
   .kf-select__trigger {
-    font-family: var(--kf-font-sans);
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -28,7 +27,13 @@ const SelectGlobalStyles = createGlobalStyle`
       box-shadow 120ms var(--kf-ease-in-out, ease),
       border-color 120ms var(--kf-ease-in-out, ease);
   }
-
+  
+  .dark .kf-select__trigger {
+    background: color-mix(in srgb, var(--kf-color-gray-800, #111827) 90%, transparent);
+    border-color: color-mix(in srgb, var(--kf-color-gray-400, #374151) 80%, transparent);
+    color: var(--kf-color-gray-50, #f8fafc);
+  }
+    
   .kf-select__trigger[data-placeholder] {
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
   }
@@ -43,12 +48,16 @@ const SelectGlobalStyles = createGlobalStyle`
   }
 
   .kf-select__trigger svg:not([class*="text-"]) {
-    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+    color: var(--kf-color-gray-700, rgba(15, 23, 42, 0.6));
+  }
+  
+  .dark .kf-select__trigger svg:not([class*="text-"]) {
+    color: var(--kf-color-gray-300, rgba(203, 213, 225, 0.65));
   }
 
   .kf-select__trigger svg {
     pointer-events: none;
-    flex-shrink: 0;
+    flex-shrink: 0;00, rgba(15, 23, 42, 0.6));
   }
 
   .kf-select__trigger:focus-visible {
@@ -72,10 +81,6 @@ const SelectGlobalStyles = createGlobalStyle`
     opacity: 0.5;
   }
 
-  .dark .kf-select__trigger {
-    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 80%, transparent);
-  }
-
   .kf-select__icon {
     width: calc(var(--kf-spacing, 0.25rem) * 4);
     height: calc(var(--kf-spacing, 0.25rem) * 4);
@@ -96,12 +101,15 @@ const SelectGlobalStyles = createGlobalStyle`
     min-width: 8rem;
     max-height: var(--radix-select-content-available-height);
     border-radius: var(--kf-radius-md, 0.375rem);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
-    background: var(--kf-color-gray-50, #ffffff);
+    background: var(--kf-color-gray-100, #f3f4f6);
     color: var(--kf-color-gray-950, #0f172a);
     box-shadow: var(--kf-shadow-md, 0 4px 6px -1px rgb(15 23 42 / 0.1), 0 2px 4px -2px rgb(15 23 42 / 0.08));
     overflow-x: hidden;
     overflow-y: auto;
+  }
+  .dark .kf-select__content {
+    background: var(--kf-color-gray-900, #1f2937);
+    color: var(--kf-color-gray-50, #f3f4f6);
   }
 
   .kf-select__content[data-state="open"] {
@@ -190,12 +198,15 @@ const SelectGlobalStyles = createGlobalStyle`
 
   .kf-select__item svg:not([class*="text-"]) {
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+    height: calc(var(--kf-spacing, 0.25rem) * 4);
+    width: calc(var(--kf-spacing, 0.25rem) * 4);
   }
 
   .kf-select__item:hover,
   .kf-select__item:focus-visible {
-    background: var(--kf-color-gray-200, rgba(148, 163, 184, 0.16));
+    background: var(--kf-color-gray-300, rgba(148, 163, 184, 0.16));
     color: var(--kf-color-gray-900, #0f172a);
+    border-radius: var(--kf-radius-md, 0.375rem);
   }
 
   .kf-select__item[data-disabled="true"] {

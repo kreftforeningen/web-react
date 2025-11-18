@@ -11,12 +11,13 @@ import {
   FeedbackHeader,
   FeedbackSubmit,
   FeedbackTitle,
+  Page,
 } from "@/lib/main";
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 
 export default function FeedbackDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Feedback</h2>
       <Feedback>
         <FeedbackHeader>
@@ -40,7 +41,6 @@ export default function FeedbackDemo() {
           </FeedbackComment>
         </FeedbackContent>
       </Feedback>
-    </>
+    </Page.Block>
   );
 }
-

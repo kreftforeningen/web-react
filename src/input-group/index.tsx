@@ -2,7 +2,7 @@ import * as React from "react";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
-import { Button } from "../button";
+import { Button } from "@/button";
 import { Input } from "../input";
 import { Textarea } from "../textarea";
 
@@ -24,57 +24,63 @@ const InputGroupGlobalStyles = createGlobalStyle`
     align-items: center;
     border-radius: var(--kf-radius-md, 0.375rem);
     border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
-    background: var(--kf-color-gray-50, rgba(15, 23, 42, 0.08));
-    transition: box-shadow 120ms var(--kf-ease-in-out, ease);
+    background: var(--kf-color-gray-50, rgba(148, 163, 184, 0.12));
+    min-height: calc(var(--kf-spacing, 0.25rem) * 9);
+    transition:
+      color 160ms var(--kf-ease-in-out, ease),
+      border-color 160ms var(--kf-ease-in-out, ease),
+      box-shadow 160ms var(--kf-ease-in-out, ease),
+      background-color 160ms var(--kf-ease-in-out, ease);
   }
 
   .dark .kf-input-group {
-    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.1)) 90%, transparent);
+    background: color-mix(in srgb, var(--kf-color-gray-800, #111827) 90%, transparent);
+    border-color: color-mix(in srgb, var(--kf-color-gray-400, #64748b) 80%, transparent);
+    color: var(--kf-color-gray-100, #f3f4f6);
   }
 
   .kf-input-group[data-disabled="true"] {
     opacity: 0.5;
+    pointer-events: none;
   }
 
   .kf-input-group:has([data-slot="input-group-control"]:focus-visible) {
-    border-color: var(--kf-color-blue-400, rgba(59, 130, 246, 0.6));
+    --kf-ring-color: color-mix(in srgb, var(--kf-color-blue-500, #3b82f6) 50%, transparent);
+    --kf-ring-offset-color: var(--kf-color-gray-50, #ffffff);
+    --kf-ring-width: 3px;
+    --kf-ring-offset-width: 2px;
+    border-color: var(--kf-color-blue-500, #3b82f6);
     box-shadow:
-      0 0 0 2px var(--kf-color-blue-400, rgba(59, 130, 246, 0.2)),
-      0 0 0 4px color-mix(in srgb, var(--kf-color-blue-400, rgba(59, 130, 246, 0.2)) 65%, transparent);
+      0 0 0 var(--kf-ring-offset-width) var(--kf-ring-offset-color),
+      0 0 0 calc(var(--kf-ring-offset-width) + var(--kf-ring-width)) var(--kf-ring-color);
   }
 
-  .kf-input-group[data-invalid="true"] {
-    border-color: var(--kf-color-red-700, #b91c1c);
-    box-shadow:
-      0 0 0 2px color-mix(in srgb, var(--kf-color-red-700, #b91c1c) 20%, transparent);
+  .dark .kf-input-group:has([data-slot="input-group-control"]:focus-visible) {
+    --kf-ring-offset-color: var(--kf-color-gray-900, #0f172a);
+    border-color: var(--kf-color-blue-400, #60a5fa);
   }
 
-  .kf-input-group--inline-start input {
-    padding-left: calc(var(--kf-spacing, 0.25rem) * 2);
+  .kf-input-group[data-invalid="true"],
+  .kf-input-group:has([data-slot][aria-invalid="true"]) {
+    border-color: var(--kf-color-red-600, #dc2626);
   }
 
-  .kf-input-group--inline-end input {
-    padding-right: calc(var(--kf-spacing, 0.25rem) * 2);
+  .kf-input-group[data-invalid="true"]:has([data-slot="input-group-control"]:focus-visible),
+  .kf-input-group:has([data-slot][aria-invalid="true"]:focus-visible) {
+    --kf-ring-color: color-mix(in srgb, var(--kf-color-red-600, #dc2626) 40%, transparent);
+    --kf-ring-offset-color: var(--kf-color-red-50, #fef2f2);
   }
 
-  .kf-input-group--block-start {
+  .dark .kf-input-group[data-invalid="true"] {
+    border-color: var(--kf-color-red-500, #ef4444);
+  }
+
+  .kf-input-group:has(.kf-input-group-addon--block-start),
+  .kf-input-group:has(.kf-input-group-addon--block-end),
+  .kf-input-group:has(> textarea) {
     flex-direction: column;
     align-items: stretch;
     height: auto;
-  }
-
-  .kf-input-group--block-start input {
-    padding-bottom: calc(var(--kf-spacing, 0.25rem) * 3);
-  }
-
-  .kf-input-group--block-end {
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
-  }
-
-  .kf-input-group--block-end input {
-    padding-top: calc(var(--kf-spacing, 0.25rem) * 3);
   }
 
   .kf-input-group-addon {
@@ -82,12 +88,17 @@ const InputGroupGlobalStyles = createGlobalStyle`
     align-items: center;
     justify-content: center;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    padding-block: calc(var(--kf-spacing, 0.25rem) * 1.5);
     font-size: var(--kf-text-sm, 0.875rem);
     font-weight: 500;
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
-    padding-block: calc(var(--kf-spacing, 0.25rem) * 1.5);
     cursor: text;
     user-select: none;
+    transition: color 160ms var(--kf-ease-in-out, ease);
+  }
+
+  .dark .kf-input-group-addon {
+    color: var(--kf-color-gray-300, rgba(226, 232, 240, 0.8));
   }
 
   .kf-input-group[data-disabled="true"] .kf-input-group-addon {
@@ -105,7 +116,7 @@ const InputGroupGlobalStyles = createGlobalStyle`
 
   .kf-input-group-addon--inline-start {
     order: -1;
-    padding-left: calc(var(--kf-spacing, 0.25rem) * 3);
+    padding-inline-start: calc(var(--kf-spacing, 0.25rem) * 3);
   }
 
   .kf-input-group-addon--inline-start:has(> button) {
@@ -118,7 +129,7 @@ const InputGroupGlobalStyles = createGlobalStyle`
 
   .kf-input-group-addon--inline-end {
     order: 1;
-    padding-right: calc(var(--kf-spacing, 0.25rem) * 3);
+    padding-inline-end: calc(var(--kf-spacing, 0.25rem) * 3);
   }
 
   .kf-input-group-addon--inline-end:has(> button) {
@@ -145,18 +156,34 @@ const InputGroupGlobalStyles = createGlobalStyle`
     padding-bottom: calc(var(--kf-spacing, 0.25rem) * 3);
   }
 
+  .kf-input-group:has(.kf-input-group-addon--inline-start) > .kf-input-group-control:first-of-type {
+    padding-left: calc(var(--kf-spacing, 0.25rem) * 3);
+  }
+
+  .kf-input-group:has(.kf-input-group-addon--inline-end) > .kf-input-group-control:last-of-type {
+    padding-right: calc(var(--kf-spacing, 0.25rem) * 3);
+  }
+
+  .kf-input-group:has(.kf-input-group-addon--block-start) > .kf-input-group-control {
+    padding-top: calc(var(--kf-spacing, 0.25rem) * 2.5);
+  }
+
+  .kf-input-group:has(.kf-input-group-addon--block-end) > .kf-input-group-control {
+    padding-bottom: calc(var(--kf-spacing, 0.25rem) * 2.5);
+  }
+
   .kf-input-group-button {
     display: inline-flex;
-    gap: calc(var(--kf-spacing, 0.25rem) * 2);
     align-items: center;
-    box-shadow: none;
+    gap: calc(var(--kf-spacing, 0.25rem) * 2);
     font-size: var(--kf-text-sm, 0.875rem);
+    box-shadow: none;
   }
 
   .kf-input-group-button[data-size="xs"] {
     height: calc(var(--kf-spacing, 0.25rem) * 6);
-    gap: calc(var(--kf-spacing, 0.25rem) * 1);
     padding-inline: calc(var(--kf-spacing, 0.25rem) * 2);
+    gap: calc(var(--kf-spacing, 0.25rem) * 1);
     border-radius: calc(var(--kf-radius-md, 0.375rem) - 5px);
   }
 
@@ -166,8 +193,8 @@ const InputGroupGlobalStyles = createGlobalStyle`
 
   .kf-input-group-button[data-size="sm"] {
     height: calc(var(--kf-spacing, 0.25rem) * 8);
-    gap: calc(var(--kf-spacing, 0.25rem) * 1.5);
     padding-inline: calc(var(--kf-spacing, 0.25rem) * 2.5);
+    gap: calc(var(--kf-spacing, 0.25rem) * 1.5);
     border-radius: var(--kf-radius-md, 0.375rem);
   }
 
@@ -193,6 +220,10 @@ const InputGroupGlobalStyles = createGlobalStyle`
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
   }
 
+  .dark .kf-input-group-text {
+    color: var(--kf-color-gray-300, rgba(226, 232, 240, 0.8));
+  }
+
   .kf-input-group-text svg {
     pointer-events: none;
   }
@@ -205,16 +236,22 @@ const InputGroupGlobalStyles = createGlobalStyle`
   .kf-input-group-control {
     flex: 1 1 auto;
     border: 0;
-    border-radius: 0;
+    border-radius: inherit;
     background: transparent;
     box-shadow: none;
+    padding-block: calc(var(--kf-spacing, 0.25rem) * 0.75);
+    padding-inline: calc(var(--kf-spacing, 0.25rem) * 3);
+    color: inherit;
+    font-size: var(--kf-text-base, 1rem);
+    line-height: var(--kf-text-base--line-height, 1.5);
+    min-width: 0;
   }
 
   .kf-input-group-control:focus-visible {
     box-shadow: none;
   }
 
-  .kf-input-group textarea.kf-input-group-control {
+  textarea.kf-input-group-control {
     resize: none;
     padding-block: calc(var(--kf-spacing, 0.25rem) * 3);
   }

@@ -25,7 +25,6 @@ const AlertDialogGlobalStyles = createGlobalStyle`
   }
 
   .kf-alert-dialog__content {
-    font-family: var(--kf-font-sans);
     position: fixed;
     top: 50%;
     left: 50%;
@@ -204,31 +203,33 @@ function AlertDialogContent({
   );
 }
 
-function AlertDialogHeader({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-dialog-header"
-      className={cn("kf-alert-dialog__header", className)}
-      {...props}
-    />
-  );
-}
+const AlertDialogHeader = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentPropsWithoutRef<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="alert-dialog-header"
+    className={cn("kf-alert-dialog__header", className)}
+    {...props}
+  />
+));
 
-function AlertDialogFooter({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-dialog-footer"
-      className={cn("kf-alert-dialog__footer", className)}
-      {...props}
-    />
-  );
-}
+AlertDialogHeader.displayName = "AlertDialogHeader";
+
+const AlertDialogFooter = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentPropsWithoutRef<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="alert-dialog-footer"
+    className={cn("kf-alert-dialog__footer", className)}
+    {...props}
+  />
+));
+
+AlertDialogFooter.displayName = "AlertDialogFooter";
 
 function AlertDialogTitle({
   className,

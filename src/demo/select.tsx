@@ -1,4 +1,5 @@
 import {
+  Page,
   Select,
   SelectContent,
   SelectItem,
@@ -8,7 +9,7 @@ import {
 
 export default function SelectDemo() {
   return (
-    <>
+    <Page.Block width="xl" gutters>
       <h2>Select</h2>
       <Select>
         <SelectTrigger>
@@ -20,7 +21,6 @@ export default function SelectDemo() {
           <SelectItem value="3">Option 3</SelectItem>
         </SelectContent>
       </Select>
-    </>
+    </Page.Block>
   );
 }
-

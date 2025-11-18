@@ -271,6 +271,7 @@ import {
   KbdGroup,
   NativeSelect,
   NativeSelectOption,
+  Page,
   BannerButtonPrimary,
   BannerButtonSecondary,
   ModeToggle,
@@ -479,8 +480,8 @@ export default function AllDemo() {
   );
 
   return (
-    <>
-      <main className="app-main-section">
+    <Page.Block width="3xl" gutters>
+      <main>
         <Toaster position="top-center" richColors closeButton />
         <div className="app-mode-toggle-anchor">
           <ModeToggle variant="outline" size="default">
@@ -1340,11 +1341,11 @@ export default function AllDemo() {
           <a href="https://ncu.nu/">NCU</a>.
         </FooterCopyright>
       </FooterWrapper>
-      <main className="app-main-section">
+      <main>
         <h2 id="header">Header</h2>
       </main>
       <div className="app-vertical-spacing">
-        <h3 className="app-main-section">Header for Web</h3>
+        <h3>Header for Web</h3>
         <HeaderWrapper>
           <HeaderLogo
             src="/assets/logo.svg"
@@ -1437,7 +1438,7 @@ export default function AllDemo() {
         </HeaderWrapper>
       </div>
       <div className="app-vertical-spacing">
-        <h3 className="app-main-section">Header for App</h3>
+        <h3>Header for App</h3>
         <HeaderWrapper>
           <HeaderTitle href="/">App Title</HeaderTitle>
 
@@ -1510,7 +1511,7 @@ export default function AllDemo() {
         </HeaderWrapper>
       </div>
 
-      <main className="app-main-section">
+      <main>
         <h2 id="hover-card">Hover Card</h2>
         <HoverCard>
           <HoverCardTrigger asChild>
@@ -2120,6 +2121,6 @@ export default function AllDemo() {
           </TooltipContent>
         </Tooltip>
       </main>
-    </>
+    </Page.Block>
   );
 }
