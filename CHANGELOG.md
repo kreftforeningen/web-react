@@ -1,5 +1,11 @@
 # @kreftforeningen/web-react
 
+## 1.0.6
+
+### Patch Changes
+
+- fix
+
 ## 1.0.5
 
 ### Patch Changes
