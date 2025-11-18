@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 const DialogGlobalStyles = createGlobalStyle`
   .kf-dialog__overlay {
-    font-family: var(--kf-font-sans);
     position: fixed;
     inset: 0;
     z-index: 50;
@@ -40,6 +39,12 @@ const DialogGlobalStyles = createGlobalStyle`
     background-clip: padding-box;
   }
 
+  .dark .kf-dialog__content {
+    background: var(--kf-color-gray-950, oklch(0.039 0.01 240));
+    color: var(--kf-color-gray-50, oklch(0.98 0 0));
+    border-color: var(--kf-color-gray-500, oklch(0.72 0.016 240));
+  }
+
   .kf-dialog__content[data-state="open"] {
     animation:
       kf-dialog-fade-in 160ms var(--kf-ease-out, ease-out) forwards,
@@ -55,14 +60,7 @@ const DialogGlobalStyles = createGlobalStyle`
   .kf-dialog__header {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--kf-spacing, 0.25rem) * 2);
-    text-align: center;
-  }
-
-  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
-    .kf-dialog__header {
-      text-align: left;
-    }
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
   }
 
   .kf-dialog__footer {
@@ -80,7 +78,7 @@ const DialogGlobalStyles = createGlobalStyle`
 
   .kf-dialog__title {
     margin: 0;
-    font-size: var(--kf-text-xl, 1.25rem);
+    font-size: var(--kf-text-lg, 1.125rem);
     line-height: var(--kf-text-xl--line-height, 1.4);
     font-weight: 600;
   }
@@ -90,6 +88,10 @@ const DialogGlobalStyles = createGlobalStyle`
     font-size: var(--kf-text-sm, 0.875rem);
     line-height: var(--kf-text-sm--line-height, 1.4285714286);
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.64));
+  }
+
+  .dark .kf-dialog__description {
+    color: var(--kf-color-gray-300, oklch(0.72 0.016 240));
   }
 
   .kf-dialog__close {

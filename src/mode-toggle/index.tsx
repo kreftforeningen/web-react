@@ -1,7 +1,7 @@
 import { Moon, Sun } from "lucide-react";
 import { createGlobalStyle } from "styled-components";
 
-import { Button } from "../button";
+import { Button } from "@/button";
 import {
   DropdownMenu,
   DropdownMenuContent,

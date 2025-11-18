@@ -126,28 +126,30 @@ function InputOTP({
   );
 }
 
-function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="input-otp-group"
-      className={cn("kf-input-otp__group", className)}
-      {...props}
-    />
-  );
-}
+const InputOTPGroup = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="input-otp-group"
+    className={cn("kf-input-otp__group", className)}
+    {...props}
+  />
+));
 
-function InputOTPSlot({
-  index,
-  className,
-  ...props
-}: React.ComponentProps<"div"> & {
-  index: number;
-}) {
+InputOTPGroup.displayName = "InputOTPGroup";
+
+const InputOTPSlot = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<"div"> & { index: number }
+>(({ index, className, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext);
   const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {};
 
   return (
     <div
+      ref={ref}
       data-slot="input-otp-slot"
       data-active={isActive}
       className={cn("kf-input-otp__slot", className)}
@@ -161,11 +163,17 @@ function InputOTPSlot({
       )}
     </div>
   );
-}
+});
 
-function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
+InputOTPSlot.displayName = "InputOTPSlot";
+
+const InputOTPSeparator = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<"div">
+>(({ ...props }, ref) => {
   return (
     <div
+      ref={ref}
       data-slot="input-otp-separator"
       role="separator"
       className="kf-input-otp__separator"
@@ -174,6 +182,8 @@ function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
       <MinusIcon />
     </div>
   );
-}
+});
+
+InputOTPSeparator.displayName = "InputOTPSeparator";
 
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };

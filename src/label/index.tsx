@@ -6,13 +6,12 @@ import { cn } from "@/lib/utils";
 
 const LabelGlobalStyles = createGlobalStyle`
   .kf-label {
-    font-family: var(--kf-font-sans);
     display: inline-flex;
     align-items: center;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     font-size: var(--kf-text-base, 1rem);
     line-height: var(--kf-text-base--line-height, 1.5);
-    font-weight: 500;
+    font-weight: var(--kf-font-weight-medium, 500);
     user-select: none;
   }
 

@@ -4,7 +4,7 @@ import { XIcon } from "lucide-react";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
-import { Button } from "../button";
+import { Button } from "@/button";
 
 const SheetGlobalStyles = createGlobalStyle`
   .kf-sheet__overlay {
@@ -24,13 +24,16 @@ const SheetGlobalStyles = createGlobalStyle`
   }
 
   .kf-sheet__content {
+    font-family: var(--kf-font-sans);
     position: fixed;
+    overflow-y: auto;
+    max-height: 100vh;
     z-index: 50;
     display: flex;
     flex-direction: column;
     gap: calc(var(--kf-spacing, 0.25rem) * 4);
-    background: var(--kf-color-gray-50, #ffffff);
-    color: var(--kf-color-gray-950, #0f172a);
+    background: var(--kf-color-gray-950, #ffffff);
+    color: var(--kf-color-gray-50, #0f172a);
     box-shadow: var(--kf-shadow-lg, 0 10px 15px -3px rgb(15 23 42 / 0.1), 0 4px 6px -4px rgb(15 23 42 / 0.08));
     transition: transform 300ms var(--kf-ease-in-out, ease), opacity 300ms var(--kf-ease-in-out, ease);
   }
@@ -47,7 +50,6 @@ const SheetGlobalStyles = createGlobalStyle`
     inset: 0;
     inset-inline-start: auto;
     width: min(75vw, 24rem);
-    border-left: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
     transform: translateX(100%);
   }
 
@@ -55,7 +57,6 @@ const SheetGlobalStyles = createGlobalStyle`
     inset: 0;
     inset-inline-end: auto;
     width: min(75vw, 24rem);
-    border-right: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
     transform: translateX(-100%);
   }
 
@@ -63,7 +64,6 @@ const SheetGlobalStyles = createGlobalStyle`
     inset-inline: 0;
     inset-block-start: 0;
     width: 100%;
-    border-bottom: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
     transform: translateY(-100%);
   }
 
@@ -71,7 +71,6 @@ const SheetGlobalStyles = createGlobalStyle`
     inset-inline: 0;
     inset-block-end: 0;
     width: 100%;
-    border-top: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
     transform: translateY(100%);
   }
 
@@ -135,6 +134,18 @@ const SheetGlobalStyles = createGlobalStyle`
   .kf-sheet__close-icon {
     width: calc(var(--kf-spacing, 0.25rem) * 6);
     height: calc(var(--kf-spacing, 0.25rem) * 6);
+  }
+
+  .kf-sheet__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   @keyframes kf-sheet-fade-in {
@@ -223,7 +234,7 @@ function SheetContent({
               aria-hidden="true"
               focusable="false"
             />
-            <span className="sr-only">Close</span>
+            <span className="kf-sheet__sr-only">Close</span>
           </Button>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>

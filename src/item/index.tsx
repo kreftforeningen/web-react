@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
-import { Separator } from "../separator";
+import { Separator } from "@/separator";
 
 type ItemVariant = "default" | "outline" | "muted";
 type ItemSize = "default" | "sm";

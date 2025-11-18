@@ -1,4 +1,5 @@
 import {
+  Page,
   Person,
   PersonItem,
   PersonItemContent,
@@ -37,7 +38,7 @@ const people = [
 
 export default function PersonDemo() {
   return (
-    <>
+    <Page.Block width="xl" gutters>
       <h2>Person</h2>
       <Person>
         {people.map((item) => (
@@ -58,14 +59,11 @@ export default function PersonDemo() {
               <PersonItemPhone href={`tel:${item.phone}`}>
                 {item.phone}
               </PersonItemPhone>
-              <PersonItemDescription>
-                {item.description}
-              </PersonItemDescription>
+              <PersonItemDescription>{item.description}</PersonItemDescription>
             </PersonItemContent>
           </PersonItem>
         ))}
       </Person>
-    </>
+    </Page.Block>
   );
 }
-

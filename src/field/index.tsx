@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
 import { Label } from "../label";
-import { Separator } from "../separator";
+import { Separator } from "@/separator";
 
 type FieldOrientation = "vertical" | "horizontal" | "responsive";
 

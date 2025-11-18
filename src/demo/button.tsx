@@ -1,8 +1,8 @@
-import { Button } from "@/lib/main";
+import { Button, Page } from "@/lib/main";
 
 export default function ButtonDemo() {
   return (
-    <>
+    <Page.Block width="xl" gutters>
       <h2>Button</h2>
       <div className="app-button-row">
         <Button variant="default">Default</Button>
@@ -18,7 +18,6 @@ export default function ButtonDemo() {
         </Button>
         <Button variant="link">Link</Button>
       </div>
-    </>
+    </Page.Block>
   );
 }
-

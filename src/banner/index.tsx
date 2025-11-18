@@ -11,7 +11,6 @@ type BannerColor = "default";
 
 const BannerGlobalStyles = createGlobalStyle`
   .kf-banner {
-    font-family: var(--kf-font-sans);
     display: grid;
     grid-template-columns: 1fr;
     border-radius: var(--kf-radius-2xl, 1rem);
@@ -98,20 +97,20 @@ const BannerGlobalStyles = createGlobalStyle`
   }
 `;
 
-function Banner({
-  variant = "default",
-  color = "default",
-  className,
-  children,
-  ...props
-}: React.ComponentProps<"div"> & {
+type BannerProps = React.ComponentPropsWithoutRef<"div"> & {
   variant?: BannerVariant;
   color?: BannerColor;
-}) {
-  return (
+};
+
+const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
+  (
+    { variant = "default", color = "default", className, children, ...props },
+    ref
+  ) => (
     <>
       <BannerGlobalStyles />
       <div
+        ref={ref}
         data-slot="banner"
         data-variant={variant}
         data-color={color}
@@ -121,22 +120,24 @@ function Banner({
         {children}
       </div>
     </>
-  );
-}
+  )
+);
 
-function BannerImage({
-  className,
-  style,
-  ...props
-}: React.ComponentProps<"img">) {
-  return (
-    <img
-      className={cn("kf-banner__image", className)}
-      style={style}
-      {...props}
-    />
-  );
-}
+Banner.displayName = "Banner";
+
+const BannerImage = React.forwardRef<
+  HTMLImageElement,
+  React.ComponentPropsWithoutRef<"img">
+>(({ className, style, ...props }, ref) => (
+  <img
+    ref={ref}
+    className={cn("kf-banner__image", className)}
+    style={style}
+    {...props}
+  />
+));
+
+BannerImage.displayName = "BannerImage";
 
 const BannerContent = forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
   ({ className, ...props }, ref) => {
@@ -151,20 +152,36 @@ const BannerContent = forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
 );
 BannerContent.displayName = "BannerContent";
 
-function BannerTitle({ className, ...props }: React.ComponentProps<"h3">) {
-  return <h3 className={cn("kf-banner__title", className)} {...props} />;
-}
+const BannerTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.ComponentPropsWithoutRef<"h3">
+>(({ className, ...props }, ref) => (
+  <h3 ref={ref} className={cn("kf-banner__title", className)} {...props} />
+));
 
-function BannerDescription({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return <div className={cn("kf-banner__description", className)} {...props} />;
-}
+BannerTitle.displayName = "BannerTitle";
 
-function BannerButtons({ className, ...props }: React.ComponentProps<"div">) {
-  return <div className={cn("kf-banner__actions", className)} {...props} />;
-}
+const BannerDescription = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentPropsWithoutRef<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("kf-banner__description", className)}
+    {...props}
+  />
+));
+
+BannerDescription.displayName = "BannerDescription";
+
+const BannerButtons = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentPropsWithoutRef<"div">
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("kf-banner__actions", className)} {...props} />
+));
+
+BannerButtons.displayName = "BannerButtons";
 
 function BannerButtonPrimary({
   className,

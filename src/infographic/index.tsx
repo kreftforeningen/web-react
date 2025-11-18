@@ -1,30 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
+import { HGrid } from "@/lib/main";
+
 import { cn } from "@/lib/utils";
 
-type InfographicVariant = "default" | "list";
-
 const InfographicGlobalStyles = createGlobalStyle`
-  .kf-infographic {
-    font-family: var(--kf-font-sans);
-    display: grid;
-    gap: calc(var(--kf-spacing, 0.25rem) * 8);
-  }
-
-  .kf-infographic--default {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  @media (min-width: var(--kf-breakpoint-md, 48rem)) {
-    .kf-infographic--default {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  .kf-infographic--list {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
   .kf-infographic__item {
     padding: calc(var(--kf-spacing, 0.25rem) * 10);
     border-radius: var(--kf-radius-2xl, 1rem);
@@ -41,6 +21,7 @@ const InfographicGlobalStyles = createGlobalStyle`
     font-size: var(--kf-text-lg, 1.125rem);
     font-weight: 700;
     margin: 0;
+    margin-bottom: calc(var(--kf-spacing, 0.25rem) * 2);
   }
 
   .kf-infographic__number {
@@ -64,22 +45,17 @@ const InfographicGlobalStyles = createGlobalStyle`
   }
 `;
 
-const variantClasses: Record<InfographicVariant, string> = {
-  default: "kf-infographic--default",
-  list: "kf-infographic--list",
-};
-
 function Infographic({
   className,
-  variant = "default",
   ...props
-}: React.ComponentProps<"div"> & { variant?: InfographicVariant }) {
+}: React.ComponentProps<typeof HGrid>) {
   return (
     <>
       <InfographicGlobalStyles />
-      <div
+      <HGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 3 }}
         data-slot="infographic"
-        className={cn("kf-infographic", variantClasses[variant], className)}
+        className={cn("kf-infographic", className)}
         {...props}
       />
     </>

@@ -1,0 +1,76 @@
+# Component Migration Checklist
+
+- [x] Accentuated Link
+- [x] Accordion
+- [x] Alert
+- [x] Alert Dialog
+- [x] Aspect Ratio
+- [ ] Avatar
+- [x] Badge
+- [ ] Banner
+- [ ] Box
+- [ ] Breadcrumb
+- [ ] Button
+- [ ] Button Group
+- [ ] Calendar
+- [x] Card
+- [ ] Carousel
+- [ ] Chart
+- [ ] Checkbox
+- [ ] Collapsible
+- [ ] Command
+- [ ] Context Menu
+- [x] Dialog
+- [x] Download
+- [ ] Drawer
+- [x] Dropdown Menu
+- [ ] Empty
+- [x] Fact Box
+- [x] Feedback
+- [ ] Field
+- [x] Footer
+- [x] Header
+- [x] HGrid
+- [ ] Hover Card
+- [ ] HStack
+- [x] Infographic
+- [x] Input
+- [ ] Input Group
+- [ ] Input OTP
+- [ ] Item
+- [ ] Kbd
+- [ ] Label
+- [ ] Link List
+- [ ] Menubar
+- [ ] Mode Toggle
+- [ ] Native Select
+- [ ] Navigation Menu
+- [x] Page
+- [ ] Pagination
+- [ ] Person
+- [ ] Popover
+- [ ] Progress
+- [ ] Radio Group
+- [ ] Resizable
+- [ ] Scroll Area
+- [x] Select
+- [ ] Separator
+- [ ] Sheet
+- [ ] Sidebar
+- [ ] Skeleton
+- [x] Slider
+- [ ] Sonner
+- [ ] Spinner
+- [ ] Switch
+- [ ] Table
+- [ ] Tabs
+- [ ] Textarea
+- [ ] Timeline
+- [ ] Toggle
+- [ ] Toggle Group
+- [x] Tooltip
+- [ ] Mode Toggle
+- [ ] Sonner
+- [ ] Sidebar
+- [ ] Style (Global)
+- [x] VStack

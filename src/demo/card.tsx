@@ -1,5 +1,5 @@
+import { CardImage } from "@/card";
 import {
-  AspectRatio,
   Badge,
   Card,
   CardAction,
@@ -8,22 +8,26 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  HGrid,
+  Page,
 } from "@/lib/main";
 import { ArrowRight } from "lucide-react";
 
 export default function CardDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Card</h2>
-      <div className="app-card-grid">
+      <HGrid columns={{ sm: 1, md: 2, lg: 3, xl: 3 }}>
         <Card>
-          <AspectRatio ratio={16 / 9}>
-            <img
-              src="https://picsum.photos/id/241/1600/900"
-              alt="Card Image"
-              className="app-media-cover"
-            />
-          </AspectRatio>
+          <CardImage
+            ratio={16 / 10}
+            alt="In About Five Minutes I'll Be There"
+            title="In About Five Minutes I'll Be There"
+            sizes="(min-width: 1024px) 310px, (min-width: 768px) 220px, (min-width: 640px) 290px, 100vw"
+            src300="https://picsum.photos/id/241/300/169"
+            src500="https://picsum.photos/id/241/500/281"
+            src780="https://picsum.photos/id/241/780/439"
+          />
           <CardHeader>
             <CardDescription>29.05.2020</CardDescription>
             <CardTitle>– In About Five Minutes I'll Be There</CardTitle>
@@ -59,8 +63,7 @@ export default function CardDemo() {
             <p>Card Footer</p>
           </CardFooter>
         </Card>
-      </div>
-    </>
+      </HGrid>
+    </Page.Block>
   );
 }
-
