@@ -1,5 +1,11 @@
 # @kreftforeningen/web-react
 
+## 1.0.4
+
+### Patch Changes
+
+- new components, vanilla css-ify
+
 ## 1.0.3
 
 ### Patch Changes
