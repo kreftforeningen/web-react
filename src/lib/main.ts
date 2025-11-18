@@ -247,6 +247,7 @@ export {
   InfographicItemTitleText,
   InfographicItemDescription,
 } from "../infographic";
+export { HStack } from "../hstack";
 export { Input } from "../input";
 export {
   InputGroup,
