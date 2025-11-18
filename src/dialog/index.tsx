@@ -253,25 +253,33 @@ function DialogContent({
   );
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+type DialogSectionProps = React.ComponentPropsWithoutRef<"div">;
+
+const DialogHeader = React.forwardRef<HTMLDivElement, DialogSectionProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       data-slot="dialog-header"
       className={cn("kf-dialog__header", className)}
       {...props}
     />
-  );
-}
+  )
+);
 
-function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+DialogHeader.displayName = "DialogHeader";
+
+const DialogFooter = React.forwardRef<HTMLDivElement, DialogSectionProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       data-slot="dialog-footer"
       className={cn("kf-dialog__footer", className)}
       {...props}
     />
-  );
-}
+  )
+);
+
+DialogFooter.displayName = "DialogFooter";
 
 function DialogTitle({
   className,
