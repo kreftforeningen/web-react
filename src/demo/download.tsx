@@ -8,11 +8,12 @@ import {
   DownloadMain,
   DownloadOrderUrl,
   DownloadTitle,
+  Page,
 } from "@/lib/main";
 
 export default function DownloadDemo() {
   return (
-    <>
+    <Page.Block width="xl" gutters>
       <h2>Download</h2>
       <Download>
         <DownloadContent>
@@ -36,6 +37,6 @@ export default function DownloadDemo() {
           </DownloadOrderUrl>
         </DownloadFooter>
       </Download>
-    </>
+    </Page.Block>
   );
 }

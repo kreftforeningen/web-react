@@ -7,7 +7,6 @@ type AlertVariant = "default" | "destructive" | "success";
 
 const AlertGlobalStyles = createGlobalStyle`
   .kf-alert {
-    font-family: var(--kf-font-sans);
     position: relative;
     display: grid;
     grid-template-columns: 0 1fr;
@@ -134,48 +133,57 @@ const variantClasses: Record<AlertVariant, string> = {
   success: "kf-alert--success",
 };
 
-function Alert({
-  className,
-  variant = "default",
-  children,
-  ...props
-}: React.ComponentProps<"div"> & { variant?: AlertVariant }) {
-  return (
-    <>
-      <AlertGlobalStyles />
-      <div
-        data-slot="alert"
-        role="alert"
-        className={cn("kf-alert", variantClasses[variant], className)}
-        {...props}
-      >
-        {children}
-      </div>
-    </>
-  );
-}
+type AlertProps = React.ComponentPropsWithoutRef<"div"> & {
+  variant?: AlertVariant;
+};
 
-function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-title"
-      className={cn("kf-alert__title", className)}
-      {...props}
-    />
-  );
-}
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+  ({ className, variant = "default", children, ...props }, ref) => {
+    return (
+      <>
+        <AlertGlobalStyles />
+        <div
+          ref={ref}
+          data-slot="alert"
+          role="alert"
+          className={cn("kf-alert", variantClasses[variant], className)}
+          {...props}
+        >
+          {children}
+        </div>
+      </>
+    );
+  }
+);
 
-function AlertDescription({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="alert-description"
-      className={cn("kf-alert__description", className)}
-      {...props}
-    />
-  );
-}
+Alert.displayName = "Alert";
+
+const AlertTitle = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentPropsWithoutRef<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="alert-title"
+    className={cn("kf-alert__title", className)}
+    {...props}
+  />
+));
+
+AlertTitle.displayName = "AlertTitle";
+
+const AlertDescription = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentPropsWithoutRef<"div">
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="alert-description"
+    className={cn("kf-alert__description", className)}
+    {...props}
+  />
+));
+
+AlertDescription.displayName = "AlertDescription";
 
 export { Alert, AlertDescription, AlertTitle };

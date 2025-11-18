@@ -5,11 +5,12 @@ import {
   FactBoxContent,
   FactBoxDescription,
   FactBoxTitle,
+  Page,
 } from "@/lib/main";
 
 export default function FactBoxDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Fact Box</h2>
       <FactBox>
         <FactBoxContent>
@@ -34,6 +35,6 @@ export default function FactBoxDemo() {
           </FactBoxAction>
         </FactBoxContent>
       </FactBox>
-    </>
+    </Page.Block>
   );
 }

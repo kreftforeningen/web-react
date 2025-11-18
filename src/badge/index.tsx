@@ -8,7 +8,6 @@ type BadgeVariant = "default" | "secondary" | "destructive" | "outline";
 
 const BadgeGlobalStyles = createGlobalStyle`
   .kf-badge {
-    font-family: var(--kf-font-sans);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -103,27 +102,29 @@ const variantClassName: Record<BadgeVariant, string> = {
   outline: "kf-badge--outline",
 };
 
-function Badge({
-  className,
-  variant = "default",
-  asChild = false,
-  ...props
-}: React.ComponentProps<"span"> & {
+type BadgeProps = React.ComponentPropsWithoutRef<"span"> & {
   variant?: BadgeVariant;
   asChild?: boolean;
-}) {
-  const Comp = asChild ? Slot : "span";
+};
 
-  return (
-    <>
-      <BadgeGlobalStyles />
-      <Comp
-        data-slot="badge"
-        className={cn("kf-badge", variantClassName[variant], className)}
-        {...props}
-      />
-    </>
-  );
-}
+const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ className, variant = "default", asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "span";
+
+    return (
+      <>
+        <BadgeGlobalStyles />
+        <Comp
+          ref={ref}
+          data-slot="badge"
+          className={cn("kf-badge", variantClassName[variant], className)}
+          {...props}
+        />
+      </>
+    );
+  }
+);
+
+Badge.displayName = "Badge";
 
 export { Badge };

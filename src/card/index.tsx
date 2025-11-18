@@ -6,7 +6,6 @@ import { AspectRatio } from "../aspect-ratio";
 
 const CardGlobalStyles = createGlobalStyle`
   .kf-card {
-    font-family: var(--kf-font-sans);
     display: flex;
     flex-direction: column;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
@@ -104,74 +103,101 @@ const CardGlobalStyles = createGlobalStyle`
   }
 `;
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+type CardDivProps = React.ComponentPropsWithoutRef<"div">;
+
+const Card = React.forwardRef<HTMLDivElement, CardDivProps>(
+  ({ className, ...props }, ref) => (
     <>
       <CardGlobalStyles />
-      <div data-slot="card" className={cn("kf-card", className)} {...props} />
+      <div
+        ref={ref}
+        data-slot="card"
+        className={cn("kf-card", className)}
+        {...props}
+      />
     </>
-  );
-}
+  )
+);
 
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+Card.displayName = "Card";
+
+const CardHeader = React.forwardRef<HTMLDivElement, CardDivProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       data-slot="card-header"
       className={cn("kf-card__header", className)}
       {...props}
     />
-  );
-}
+  )
+);
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+CardHeader.displayName = "CardHeader";
+
+const CardTitle = React.forwardRef<HTMLDivElement, CardDivProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       data-slot="card-title"
       className={cn("kf-card__title", className)}
       {...props}
     />
-  );
-}
+  )
+);
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+CardTitle.displayName = "CardTitle";
+
+const CardDescription = React.forwardRef<HTMLDivElement, CardDivProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       data-slot="card-description"
       className={cn("kf-card__description", className)}
       {...props}
     />
-  );
-}
+  )
+);
 
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+CardDescription.displayName = "CardDescription";
+
+const CardAction = React.forwardRef<HTMLDivElement, CardDivProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       data-slot="card-action"
       className={cn("kf-card__action", className)}
       {...props}
     />
-  );
-}
+  )
+);
 
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+CardAction.displayName = "CardAction";
+
+const CardContent = React.forwardRef<HTMLDivElement, CardDivProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       data-slot="card-content"
       className={cn("kf-card__content", className)}
       {...props}
     />
-  );
-}
+  )
+);
 
-function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return (
+CardContent.displayName = "CardContent";
+
+const CardFooter = React.forwardRef<HTMLDivElement, CardDivProps>(
+  ({ className, ...props }, ref) => (
     <div
+      ref={ref}
       data-slot="card-footer"
       className={cn("kf-card__footer", className)}
       {...props}
     />
-  );
-}
+  )
+);
+
+CardFooter.displayName = "CardFooter";
 
 type AspectRatioProps = React.ComponentProps<typeof AspectRatio>;
 

@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 const AccordionGlobalStyles = createGlobalStyle`
   .kf-accordion {
-    font-family: var(--kf-font-sans);
     display: flex;
     flex-direction: column;
     gap: 0;

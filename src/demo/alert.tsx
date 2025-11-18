@@ -1,11 +1,11 @@
-import { Alert, AlertDescription, AlertTitle } from "@/lib/main";
+import { Alert, AlertDescription, AlertTitle, Page, VStack } from "@/lib/main";
 import { CircleAlert, CircleCheck } from "lucide-react";
 
 export default function AlertDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Alert</h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <VStack>
         <Alert>
           <AlertTitle>Heads up!</AlertTitle>
           <AlertDescription>
@@ -28,7 +28,7 @@ export default function AlertDemo() {
             You can add components and dependencies to your app using the CLI.
           </AlertDescription>
         </Alert>
-      </div>
-    </>
+      </VStack>
+    </Page.Block>
   );
 }

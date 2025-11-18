@@ -8,14 +8,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  HGrid,
+  Page,
 } from "@/lib/main";
 import { ArrowRight } from "lucide-react";
 
 export default function CardDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Card</h2>
-      <div className="app-card-grid">
+      <HGrid columns={{ sm: 1, md: 2, lg: 3, xl: 3 }}>
         <Card>
           <CardImage
             ratio={16 / 10}
@@ -61,7 +63,7 @@ export default function CardDemo() {
             <p>Card Footer</p>
           </CardFooter>
         </Card>
-      </div>
-    </>
+      </HGrid>
+    </Page.Block>
   );
 }

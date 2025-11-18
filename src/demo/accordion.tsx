@@ -3,11 +3,12 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  Page,
 } from "@/lib/main";
 
 export default function AccordionDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2 id="accordion">Accordion</h2>
       <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1">
@@ -29,6 +30,6 @@ export default function AccordionDemo() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </>
+    </Page.Block>
   );
 }

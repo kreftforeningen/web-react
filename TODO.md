@@ -8,6 +8,7 @@
 - [ ] Avatar
 - [x] Badge
 - [ ] Banner
+- [ ] Box
 - [ ] Breadcrumb
 - [ ] Button
 - [ ] Button Group
@@ -19,18 +20,20 @@
 - [ ] Collapsible
 - [ ] Command
 - [ ] Context Menu
-- [ ] Dialog
+- [x] Dialog
 - [x] Download
 - [ ] Drawer
-- [ ] Dropdown Menu
+- [x] Dropdown Menu
 - [ ] Empty
 - [x] Fact Box
 - [x] Feedback
 - [ ] Field
 - [x] Footer
-- [ ] Header
+- [x] Header
+- [x] HGrid
 - [ ] Hover Card
-- [ ] Infographic
+- [ ] HStack
+- [x] Infographic
 - [x] Input
 - [ ] Input Group
 - [ ] Input OTP
@@ -42,6 +45,7 @@
 - [ ] Mode Toggle
 - [ ] Native Select
 - [ ] Navigation Menu
+- [x] Page
 - [ ] Pagination
 - [ ] Person
 - [ ] Popover
@@ -49,12 +53,12 @@
 - [ ] Radio Group
 - [ ] Resizable
 - [ ] Scroll Area
-- [ ] Select
+- [x] Select
 - [ ] Separator
 - [ ] Sheet
 - [ ] Sidebar
 - [ ] Skeleton
-- [ ] Slider
+- [x] Slider
 - [ ] Sonner
 - [ ] Spinner
 - [ ] Switch
@@ -64,8 +68,9 @@
 - [ ] Timeline
 - [ ] Toggle
 - [ ] Toggle Group
-- [ ] Tooltip
+- [x] Tooltip
 - [ ] Mode Toggle
 - [ ] Sonner
 - [ ] Sidebar
 - [ ] Style (Global)
+- [x] VStack

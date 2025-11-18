@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 
 const SliderGlobalStyles = createGlobalStyle`
   .kf-slider {
-    font-family: var(--kf-font-sans);
     position: relative;
     display: flex;
     width: 100%;

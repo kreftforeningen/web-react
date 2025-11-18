@@ -1,14 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
-import { Separator } from "../separator";
+import { Separator } from "@/separator";
 import { ChevronRight } from "lucide-react";
 
 const FooterGlobalStyles = createGlobalStyle`
   .kf-footer {
-    font-family: var(--kf-font-sans);
     margin-top: calc(var(--kf-spacing, 0.25rem) * 4);
-    padding-inline: calc(var(--kf-spacing, 0.25rem) * 6);
     padding-block: calc(var(--kf-spacing, 0.25rem) * 10);
     background: var(--kf-color-gray-800, #1f2937);
     color: var(--kf-color-gray-100, #f3f4f6);

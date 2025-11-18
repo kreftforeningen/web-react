@@ -1,14 +1,14 @@
 import { ExternalLink } from "lucide-react";
-import React, { createContext, useContext } from "react";
+import * as React from "react";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
 
 const AccentuatedLinkGlobalStyles = createGlobalStyle`
   .kf-accentuated-link {
-    font-family: var(--kf-font-sans);
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     border-left-width: var(--kf-border-2, var(--kf-border-width, 2px));
     border-left-style: solid;
@@ -92,36 +92,47 @@ function extractDomain(url: string): string {
   }
 }
 
-const AccentuatedLinkContext = createContext<{ href?: string }>({});
+const AccentuatedLinkContext = React.createContext<{ href?: string }>({});
 
-function AccentuatedLink({
-  className,
-  href,
-  children,
-  ...props
-}: React.ComponentProps<"article"> & { href?: string }) {
-  return (
-    <AccentuatedLinkContext.Provider value={{ href }}>
-      <>
-        <AccentuatedLinkGlobalStyles />
-        <article className={cn("kf-accentuated-link", className)} {...props}>
-          {children}
-        </article>
-      </>
-    </AccentuatedLinkContext.Provider>
-  );
-}
+type AccentuatedLinkProps = React.ComponentPropsWithoutRef<"article"> & {
+  href?: string;
+};
 
-function AccentuatedLinkTitle({
-  className,
-  children,
-  href: propHref,
-  ...props
-}: React.ComponentProps<"a">) {
-  const context = useContext(AccentuatedLinkContext);
+const AccentuatedLink = React.forwardRef<HTMLElement, AccentuatedLinkProps>(
+  ({ className, href, children, ...props }, ref) => {
+    return (
+      <AccentuatedLinkContext.Provider value={{ href }}>
+        <>
+          <AccentuatedLinkGlobalStyles />
+          <article
+            ref={ref}
+            className={cn("kf-accentuated-link", className)}
+            {...props}
+          >
+            {children}
+          </article>
+        </>
+      </AccentuatedLinkContext.Provider>
+    );
+  }
+);
+
+AccentuatedLink.displayName = "AccentuatedLink";
+
+type AccentuatedLinkTitleProps = React.ComponentPropsWithoutRef<"a"> & {
+  href?: string;
+};
+
+const AccentuatedLinkTitle = React.forwardRef<
+  HTMLAnchorElement,
+  AccentuatedLinkTitleProps
+>(({ className, children, href: propHref, ...props }, ref) => {
+  const context = React.useContext(AccentuatedLinkContext);
   const href = propHref ?? context.href;
+
   return (
     <a
+      ref={ref}
       className={cn("kf-accentuated-link__title", className)}
       href={href}
       {...props}
@@ -137,15 +148,25 @@ function AccentuatedLinkTitle({
       </div>
     </a>
   );
-}
+});
 
-function AccentuatedLinkSubtitle({
-  className,
-  ...props
-}: React.ComponentProps<"p">) {
+AccentuatedLinkTitle.displayName = "AccentuatedLinkTitle";
+
+type AccentuatedLinkSubtitleProps = React.ComponentPropsWithoutRef<"p">;
+
+const AccentuatedLinkSubtitle = React.forwardRef<
+  HTMLParagraphElement,
+  AccentuatedLinkSubtitleProps
+>(({ className, ...props }, ref) => {
   return (
-    <p className={cn("kf-accentuated-link__subtitle", className)} {...props} />
+    <p
+      ref={ref}
+      className={cn("kf-accentuated-link__subtitle", className)}
+      {...props}
+    />
   );
-}
+});
+
+AccentuatedLinkSubtitle.displayName = "AccentuatedLinkSubtitle";
 
 export { AccentuatedLink, AccentuatedLinkSubtitle, AccentuatedLinkTitle };

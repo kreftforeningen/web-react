@@ -6,11 +6,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  Page,
 } from "@/lib/main";
 
 export default function DialogDemo() {
   return (
-    <>
+    <Page.Block width="xl" gutters>
       <h2>Dialog</h2>
       <Dialog>
         <DialogTrigger asChild>
@@ -26,7 +27,6 @@ export default function DialogDemo() {
           </DialogHeader>
         </DialogContent>
       </Dialog>
-    </>
+    </Page.Block>
   );
 }
-

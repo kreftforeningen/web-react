@@ -2,7 +2,7 @@ import * as React from "react";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
-import { Button } from "../button";
+import { Button } from "@/button";
 import { Input } from "../input";
 import { Textarea } from "../textarea";
 

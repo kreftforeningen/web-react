@@ -43,10 +43,6 @@ const ButtonGlobalStyles = createGlobalStyle`
     pointer-events: none;
     flex-shrink: 0;
   }
-  .kf-btn button {
-    text-decoration: none!important;
-    color: inherit!important;
-  }
   .kf-btn svg:not([class*="size-"]) {
     width: var(--kf-btn-icon-size, var(--kf-btn-icon-size-md, 1rem));
     height: var(--kf-btn-icon-size, var(--kf-btn-icon-size-md, 1rem));

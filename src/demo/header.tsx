@@ -12,6 +12,7 @@ import {
   HeaderTitle,
   HeaderWrapper,
   ModeToggle,
+  Page,
 } from "@/lib/main";
 import {
   ArrowRightIcon,
@@ -26,7 +27,7 @@ import {
 
 export default function HeaderDemo() {
   return (
-    <>
+    <Page.Block width="full" gutters>
       <h2>Header</h2>
       <div className="app-vertical-spacing">
         <h3>Header for Web</h3>
@@ -103,7 +104,7 @@ export default function HeaderDemo() {
       </div>
 
       <div className="app-vertical-spacing">
-        <h3 className="app-main-section">Header for App</h3>
+        <h3>Header for App</h3>
         <HeaderWrapper>
           <HeaderTitle href="/">App Title</HeaderTitle>
 
@@ -164,6 +165,6 @@ export default function HeaderDemo() {
           </HeaderMenu>
         </HeaderWrapper>
       </div>
-    </>
+    </Page.Block>
   );
 }

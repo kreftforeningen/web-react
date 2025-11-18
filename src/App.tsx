@@ -1,3 +1,4 @@
+import * as React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
@@ -14,6 +15,7 @@ import {
   HeaderButton,
   HeaderSearch,
   ModeToggle,
+  Page,
 } from "./lib/main";
 import { Spinner } from "./lib/main";
 
@@ -91,10 +93,13 @@ const ToggleGroupDemo = lazy(() => import("@/demo/toggle-group"));
 const TooltipDemo = lazy(() => import("@/demo/tooltip"));
 
 import { ThemeProvider } from "./theme-provider";
-import React from "react";
 
 function RootLayout() {
-  return <Outlet />;
+  return (
+    <Page footer={<FooterDemo />}>
+      <Outlet />
+    </Page>
+  );
 }
 
 const navigationItems = [
@@ -379,15 +384,17 @@ const router = createBrowserRouter([
   {
     element: (
       <>
-        <HeaderWrapper>
-          <HeaderTitle href="/">@kreftforeningen/web-react</HeaderTitle>
+        <Page.Block width="3xl" gutters>
+          <HeaderWrapper>
+            <HeaderTitle href="/">@kreftforeningen/web-react</HeaderTitle>
 
-          <HeaderButton href="https://kreftforeningen.no" variant="outline">
-            Til Kreftforeningen <ArrowRightIcon />
-          </HeaderButton>
+            <HeaderButton href="https://kreftforeningen.no" variant="outline">
+              Til Kreftforeningen <ArrowRightIcon />
+            </HeaderButton>
 
-          <MenuWithFilter />
-        </HeaderWrapper>
+            <MenuWithFilter />
+          </HeaderWrapper>
+        </Page.Block>
         <RootLayout />
       </>
     ),

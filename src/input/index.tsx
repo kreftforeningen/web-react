@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 
 const InputGlobalStyles = createGlobalStyle`
   .kf-input {
-    font-family: var(--kf-font-sans);
     display: inline-flex;
     align-items: center;
     width: 100%;
@@ -106,18 +105,25 @@ const InputGlobalStyles = createGlobalStyle`
   }
 `;
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
-  return (
-    <>
-      <InputGlobalStyles />
-      <input
-        type={type}
-        data-slot="input"
-        className={cn("kf-input", className)}
-        {...props}
-      />
-    </>
-  );
-}
+type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <>
+        <InputGlobalStyles />
+        <input
+          ref={ref}
+          type={type}
+          data-slot="input"
+          className={cn("kf-input", className)}
+          {...props}
+        />
+      </>
+    );
+  }
+);
+
+Input.displayName = "Input";
 
 export { Input };

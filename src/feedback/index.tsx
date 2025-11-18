@@ -32,7 +32,6 @@ const feedbackContext = React.createContext<{
 
 const FeedbackGlobalStyles = createGlobalStyle`
   .kf-feedback {
-    font-family: var(--kf-font-sans);
     display: flex;
     flex-direction: column;
   }

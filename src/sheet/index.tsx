@@ -4,7 +4,7 @@ import { XIcon } from "lucide-react";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
-import { Button } from "../button";
+import { Button } from "@/button";
 
 const SheetGlobalStyles = createGlobalStyle`
   .kf-sheet__overlay {

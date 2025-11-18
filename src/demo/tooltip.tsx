@@ -1,4 +1,5 @@
 import {
+  Page,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -7,7 +8,7 @@ import {
 
 export default function TooltipDemo() {
   return (
-    <>
+    <Page.Block width="xl" gutters>
       <h2>Tooltip</h2>
       <TooltipProvider delayDuration={0}>
         <Tooltip>
@@ -17,6 +18,6 @@ export default function TooltipDemo() {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-    </>
+    </Page.Block>
   );
 }

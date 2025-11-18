@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/theme-provider";
 
-import { Button } from "../button";
+import { Button } from "@/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../input-group";
 
 import { Search as SearchIcon } from "lucide-react";
@@ -19,14 +19,11 @@ import {
 
 const HeaderGlobalStyles = createGlobalStyle`
   .kf-header {
-    font-family: var(--kf-font-sans);
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     margin-block: calc(var(--kf-spacing, 0.25rem) * 4);
-    padding-inline: calc(var(--kf-spacing, 0.25rem) * 6);
-    max-width: min(var(--kf-container-7xl, 80rem), 100%);
     margin-inline: auto;
     container-type: inline-size;
     container-name: header-container;
@@ -50,6 +47,7 @@ const HeaderGlobalStyles = createGlobalStyle`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+    display: inline-flex;
   }
 
   .kf-header__title-link {
@@ -93,6 +91,7 @@ const HeaderGlobalStyles = createGlobalStyle`
 
   .kf-header__button {
     display: none;
+    text-decoration: none;
   }
 
   @container header-container (min-width: 32rem) {
