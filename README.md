@@ -110,17 +110,7 @@ Lockfile policy:
 - Lockfile conflicts are avoided via `.gitattributes` (`pnpm-lock.yaml merge=ours`) which keeps `develop`’s lockfile.
 - If your change updates `package.json`, do not hand-merge the lockfile in the PR; let `develop` win and regenerate on `develop` later.
 
-4. Sync `main` back into `develop` before every release cycle
-
-```bash
-git checkout develop
-git pull origin develop
-git pull origin main --ff-only
-```
-
-This ensures `develop` already contains whatever `main` emitted during the last release, so `package.json` / `CHANGELOG.md` stay in sync and avoid conflicts.
-
-5. Prepare release on develop (after features are merged and branches are in sync)
+4. Prepare release on develop (after features are merged and branches are in sync)
 
 ```bash
 git checkout develop
@@ -134,34 +124,26 @@ pnpm changeset version
 git add .changeset/ package.json CHANGELOG.md
 ```
 
-6. Regenerate lockfile deterministically
+5. Update lockfile only when dependencies changed
+
+- If `package.json` dependency fields changed during `pnpm changeset version`, regenerate:
 
 ```bash
-rm -f pnpm-lock.yaml
 pnpm install --lockfile-only --ignore-scripts
 
-git add pnpm-lock.yaml
-git commit -m "chore: version and lockfile"
+git add package.json CHANGELOG.md .changeset/ pnpm-lock.yaml
+git commit -m "chore: release vX.Y.Z"
 git push origin develop
 ```
 
-7. Release PR: develop → main
+- If dependencies didn’t change, skip the lockfile regeneration and commit only the version/changelog updates.
+- You can still delete/rebuild the lockfile manually if it ever becomes inconsistent, but it’s not part of the normal release flow.
+
+6. PR: develop → main
 
 - Open PR from `develop` into `main`.
-- Keep the versions/changelog from `develop` (those are the canonical ones generated in step 5).
-- Merge to `main` to release. The GitHub Actions release workflow runs `pnpm changeset publish` only—**do not run `changeset version` again on `main`.**
-
-8. After the release workflow finishes, fast-forward `main` back into `develop`:
-
-```bash
-git checkout develop
-git pull origin develop        # keep your local branch current
-git fetch origin               # make sure you have the latest main
-git merge --no-ff origin/main  # or git merge origin/main if you don’t care about --no-ff
-git push origin develop
-```
-
-This final sync keeps both branches aligned for the next cycle.
+- Merge to `main` to release. GitHub Actions on `main` runs `pnpm changeset publish`—**do not run `changeset version` on `main`.**
+- After the merge, `main` and `develop` are already in sync; no follow-up steps required.
 
 Notes:
 
