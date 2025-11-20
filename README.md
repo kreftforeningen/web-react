@@ -155,8 +155,9 @@ git push origin develop
 
 ```bash
 git checkout develop
-git pull origin develop
-git pull origin main --ff-only
+git pull origin develop        # keep your local branch current
+git fetch origin               # make sure you have the latest main
+git merge --no-ff origin/main  # or git merge origin/main if you don’t care about --no-ff
 git push origin develop
 ```
 
