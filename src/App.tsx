@@ -14,6 +14,7 @@ import {
   HeaderTitle,
   HeaderButton,
   HeaderSearch,
+  Hide,
   ModeToggle,
   Page,
 } from "./lib/main";
@@ -951,7 +952,7 @@ function MenuWithFilter() {
     <HeaderMenu>
       <HeaderMenuTrigger>
         <Button variant="default" data-slot="header-button">
-          <span className="app-hidden-mobile">Menu</span> <MenuIcon />
+          <Hide below="md">Menu</Hide> <MenuIcon />
         </Button>
       </HeaderMenuTrigger>
       <HeaderMenuContent>
