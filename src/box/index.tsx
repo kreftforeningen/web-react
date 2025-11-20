@@ -22,8 +22,6 @@ type ResponsiveValue<T> = T | ResponsiveObject<T>;
 
 const propertyConfig = {
   padding: { css: "padding", fallback: "0" },
-  "padding-inline": { css: "padding-inline", fallback: "0" },
-  "padding-block": { css: "padding-block", fallback: "0" },
   margin: { css: "margin", fallback: "0" },
   "margin-inline": { css: "margin-inline", fallback: "0" },
   "margin-block": { css: "margin-block", fallback: "0" },
@@ -38,11 +36,6 @@ const propertyConfig = {
   right: { css: "right", fallback: "auto" },
   bottom: { css: "bottom", fallback: "auto" },
   left: { css: "left", fallback: "auto" },
-  background: { css: "background-color", fallback: "transparent" },
-  border: { css: "border-width", fallback: "0" },
-  "border-color": { css: "border-color", fallback: "transparent" },
-  "border-radius": { css: "border-radius", fallback: "0" },
-  shadow: { css: "box-shadow", fallback: "none" },
   "flex-basis": { css: "flex-basis", fallback: "auto" },
   "flex-grow": { css: "flex-grow", fallback: "0" },
   "flex-shrink": { css: "flex-shrink", fallback: "1" },
@@ -78,11 +71,101 @@ ${Object.entries(propertyConfig)
   )
   .join("\n");
 
+const boxColors = {
+  gray: {
+    light: {
+      background: "var(--kf-color-gray-100)",
+      text: "var(--kf-color-gray-900)",
+    },
+    dark: {
+      background: "var(--kf-color-gray-900)",
+      text: "var(--kf-color-gray-100)",
+    },
+  },
+  blue: {
+    light: {
+      background: "var(--kf-color-blue-100)",
+      text: "var(--kf-color-blue-900)",
+    },
+    dark: {
+      background: "var(--kf-color-blue-900)",
+      text: "var(--kf-color-blue-100)",
+    },
+  },
+  green: {
+    light: {
+      background: "var(--kf-color-green-100)",
+      text: "var(--kf-color-green-900)",
+    },
+    dark: {
+      background: "var(--kf-color-green-900)",
+      text: "var(--kf-color-green-100)",
+    },
+  },
+  orange: {
+    light: {
+      background: "var(--kf-color-orange-100)",
+      text: "var(--kf-color-orange-900)",
+    },
+    dark: {
+      background: "var(--kf-color-orange-900)",
+      text: "var(--kf-color-orange-100)",
+    },
+  },
+  pink: {
+    light: {
+      background: "var(--kf-color-pink-100)",
+      text: "var(--kf-color-pink-900)",
+    },
+    dark: {
+      background: "var(--kf-color-pink-900)",
+      text: "var(--kf-color-pink-100)",
+    },
+  },
+  purple: {
+    light: {
+      background: "var(--kf-color-purple-100)",
+      text: "var(--kf-color-purple-900)",
+    },
+    dark: {
+      background: "var(--kf-color-purple-900)",
+      text: "var(--kf-color-purple-100)",
+    },
+  },
+  red: {
+    light: {
+      background: "var(--kf-color-red-100)",
+      text: "var(--kf-color-red-900)",
+    },
+    dark: {
+      background: "var(--kf-color-red-900)",
+      text: "var(--kf-color-red-100)",
+    },
+  },
+} as const;
+
+const colorPadding = {
+  base: "calc(var(--kf-spacing, 0.25rem) * 3.5)",
+  sm: "calc(var(--kf-spacing, 0.25rem) * 4)",
+  md: "calc(var(--kf-spacing, 0.25rem) * 4.5)",
+  lg: "calc(var(--kf-spacing, 0.25rem) * 5)",
+  xl: "calc(var(--kf-spacing, 0.25rem) * 5)",
+} as const;
+
+type BoxColor = keyof typeof boxColors;
+
 const BoxGlobalStyles = createGlobalStyle`
   .kf-box {
     font-family: var(--kf-font-sans);
     display: block;
+    background-color: var(--kf-box-bg-light, transparent);
+    color: var(--kf-box-text-light, inherit);
     ${responsiveBaseStyles}
+  }
+
+  .dark .kf-box {
+    background-color: var(--kf-box-bg-dark, var(--kf-box-bg-light, transparent));
+    color: var(--kf-box-text-dark, var(--kf-box-text-light, inherit));
   }
 
   ${responsiveBreakpointStyles}
@@ -142,9 +225,7 @@ type LengthValue = string | number;
 type BoxProps<T extends React.ElementType = "div"> = {
   as?: T;
   asChild?: boolean;
-  padding?: ResponsiveValue<LengthValue>;
-  paddingInline?: ResponsiveValue<LengthValue>;
-  paddingBlock?: ResponsiveValue<LengthValue>;
+  color?: BoxColor;
   margin?: ResponsiveValue<LengthValue>;
   marginInline?: ResponsiveValue<LengthValue>;
   marginBlock?: ResponsiveValue<LengthValue>;
@@ -159,11 +240,6 @@ type BoxProps<T extends React.ElementType = "div"> = {
   right?: ResponsiveValue<LengthValue>;
   bottom?: ResponsiveValue<LengthValue>;
   left?: ResponsiveValue<LengthValue>;
-  background?: ResponsiveValue<string>;
-  borderColor?: ResponsiveValue<string>;
-  borderWidth?: ResponsiveValue<string | number>;
-  borderRadius?: ResponsiveValue<string | number>;
-  shadow?: ResponsiveValue<string>;
   position?: ResponsiveValue<
     "static" | "relative" | "absolute" | "fixed" | "sticky"
   >;
@@ -188,6 +264,7 @@ type BoxProps<T extends React.ElementType = "div"> = {
   | "children"
   | "className"
   | "padding"
+  | "color"
   | "margin"
   | "width"
   | "height"
@@ -196,9 +273,7 @@ type BoxProps<T extends React.ElementType = "div"> = {
 function Box<T extends React.ElementType = "div">({
   as,
   asChild = false,
-  padding,
-  paddingInline,
-  paddingBlock,
+  color,
   margin,
   marginInline,
   marginBlock,
@@ -213,11 +288,6 @@ function Box<T extends React.ElementType = "div">({
   right,
   bottom,
   left,
-  background,
-  borderColor,
-  borderWidth,
-  borderRadius,
-  shadow,
   position,
   overflow,
   overflowX,
@@ -233,14 +303,7 @@ function Box<T extends React.ElementType = "div">({
 }: BoxProps<T>) {
   const Comp = asChild ? Slot : as ?? "div";
 
-  const styleVars: React.CSSProperties = {
-    ...assignResponsiveVars(padding, formatSpacingValue, "padding"),
-    ...assignResponsiveVars(
-      paddingInline,
-      formatSpacingValue,
-      "padding-inline"
-    ),
-    ...assignResponsiveVars(paddingBlock, formatSpacingValue, "padding-block"),
+  const baseStyleVars: React.CSSProperties = {
     ...assignResponsiveVars(margin, formatSpacingValue, "margin"),
     ...assignResponsiveVars(marginInline, formatSpacingValue, "margin-inline"),
     ...assignResponsiveVars(marginBlock, formatSpacingValue, "margin-block"),
@@ -255,11 +318,6 @@ function Box<T extends React.ElementType = "div">({
     ...assignResponsiveVars(right, formatLengthValue, "right"),
     ...assignResponsiveVars(bottom, formatLengthValue, "bottom"),
     ...assignResponsiveVars(left, formatLengthValue, "left"),
-    ...assignResponsiveVars(background, formatTokenValue, "background"),
-    ...assignResponsiveVars(borderColor, formatTokenValue, "border-color"),
-    ...assignResponsiveVars(borderWidth, formatTokenValue, "border"),
-    ...assignResponsiveVars(borderRadius, formatTokenValue, "border-radius"),
-    ...assignResponsiveVars(shadow, formatTokenValue, "shadow"),
     ...assignResponsiveVars(position, formatTokenValue, "position"),
     ...assignResponsiveVars(overflow, formatTokenValue, "overflow"),
     ...assignResponsiveVars(overflowX, formatTokenValue, "overflow-x"),
@@ -268,6 +326,40 @@ function Box<T extends React.ElementType = "div">({
     ...assignResponsiveVars(flexGrow, formatTokenValue, "flex-grow"),
     ...assignResponsiveVars(flexShrink, formatTokenValue, "flex-shrink"),
     ...assignResponsiveVars(gridColumn, formatTokenValue, "grid-column"),
+  };
+
+  const colorScheme = color ? boxColors[color] : null;
+
+  const colorVars: React.CSSProperties = colorScheme
+    ? ({
+        "--kf-box-bg-light": colorScheme.light.background,
+        "--kf-box-text-light": colorScheme.light.text,
+        "--kf-box-bg-dark": colorScheme.dark.background,
+        "--kf-box-text-dark": colorScheme.dark.text,
+      } as React.CSSProperties)
+    : {};
+
+  const paddingVars: React.CSSProperties = color
+    ? ({
+        "--kf-box-padding-base": colorPadding.base,
+        "--kf-box-padding-sm": colorPadding.sm,
+        "--kf-box-padding-md": colorPadding.md,
+        "--kf-box-padding-lg": colorPadding.lg,
+        "--kf-box-padding-xl": colorPadding.xl,
+      } as React.CSSProperties)
+    : {};
+
+  const borderVars: React.CSSProperties = color
+    ? ({
+        borderRadius: "var(--kf-radius-xl)",
+      } as React.CSSProperties)
+    : {};
+
+  const styleVars: React.CSSProperties = {
+    ...baseStyleVars,
+    ...colorVars,
+    ...paddingVars,
+    ...borderVars,
   };
 
   return (
