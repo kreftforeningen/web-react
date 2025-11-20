@@ -1,5 +1,11 @@
 # @kreftforeningen/web-react
 
+## 1.0.7
+
+### Patch Changes
+
+- add hide, bleed, show, update box
+
 ## 1.0.6
 
 ### Patch Changes

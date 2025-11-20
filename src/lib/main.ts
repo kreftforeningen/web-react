@@ -38,6 +38,7 @@ export {
   BannerButtonPrimary,
   BannerButtonSecondary,
 } from "../banner";
+export { Bleed } from "../bleed";
 export { Box } from "../box";
 export {
   Breadcrumb,
@@ -237,6 +238,7 @@ export {
   HeaderTitle,
 } from "../header";
 export { HGrid } from "../hgrid";
+export { Hide } from "../hide";
 export { HoverCard, HoverCardContent, HoverCardTrigger } from "../hover-card";
 export {
   Infographic,
@@ -375,6 +377,7 @@ export {
   SheetTitle,
   SheetDescription,
 } from "../sheet";
+export { Show } from "../show";
 export {
   Sidebar,
   SidebarContent,
