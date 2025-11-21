@@ -148,8 +148,8 @@ importers:
         specifier: ^9.39.1
         version: 9.39.1
       '@kreftforeningen/web-css':
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: ^1.0.11
+        version: 1.0.11
       '@types/node':
         specifier: ^24.10.1
         version: 24.10.1
@@ -629,8 +629,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@kreftforeningen/web-css@1.0.10':
-    resolution: {integrity: sha512-2i4PJHAo7bNksslHgkLr9zK3yDjIJmg0kg+SpLT3F+41j7q62iODT0qkDdnGgFvLInyOWGygbZkp8ihAaP6kyg==}
+  '@kreftforeningen/web-css@1.0.11':
+    resolution: {integrity: sha512-yZdLXBs1mMGwpK+mJre2tgV8dnvUuZuE0AxSsS23V3TGY27UpLfOHLd/mNQAyql/ULzHPk+qf0sxP0+M78ZBZQ==}
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -3458,7 +3458,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@kreftforeningen/web-css@1.0.10': {}
+  '@kreftforeningen/web-css@1.0.11': {}
 
   '@manypkg/find-root@1.1.0':
     dependencies:
