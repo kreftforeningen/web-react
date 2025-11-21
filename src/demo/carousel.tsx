@@ -8,11 +8,12 @@ import {
   CarouselItemDescription,
   CarouselNext,
   CarouselPrevious,
+  Page,
 } from "@/lib/main";
 
 export default function CarouselDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Carousel</h2>
       <Carousel>
         <CarouselContentWrapper>
@@ -61,6 +62,6 @@ export default function CarouselDemo() {
         </CarouselContentWrapper>
         <CarouselDots />
       </Carousel>
-    </>
+    </Page.Block>
   );
 }

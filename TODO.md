@@ -5,18 +5,18 @@
 - [x] Alert
 - [x] Alert Dialog
 - [x] Aspect Ratio
-- [ ] Avatar
+- [x] Avatar
 - [x] Badge
 - [ ] Banner
 - [ ] Box
-- [ ] Breadcrumb
+- [x] Breadcrumb
 - [ ] Button
 - [ ] Button Group
 - [ ] Calendar
 - [x] Card
-- [ ] Carousel
+- [x] Carousel
 - [ ] Chart
-- [ ] Checkbox
+- [x] Checkbox
 - [ ] Collapsible
 - [ ] Command
 - [ ] Context Menu

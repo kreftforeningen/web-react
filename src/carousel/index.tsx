@@ -35,7 +35,6 @@ const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
 const CarouselGlobalStyles = createGlobalStyle`
   .kf-carousel {
-    font-family: var(--kf-font-sans);
     position: relative;
     width: 100%;
   }
@@ -60,7 +59,6 @@ const CarouselGlobalStyles = createGlobalStyle`
 
   .kf-carousel[data-orientation="horizontal"] .kf-carousel__track {
     flex-direction: row;
-    margin-left: calc(var(--kf-spacing, 0.25rem) * -4);
   }
 
   .kf-carousel[data-orientation="vertical"] .kf-carousel__track {
@@ -73,10 +71,6 @@ const CarouselGlobalStyles = createGlobalStyle`
     min-width: 0;
     flex: 0 0 100%;
     overflow: hidden;
-  }
-
-  .kf-carousel[data-orientation="horizontal"] .kf-carousel__item {
-    padding-left: calc(var(--kf-spacing, 0.25rem) * 4);
   }
 
   .kf-carousel[data-orientation="vertical"] .kf-carousel__item {

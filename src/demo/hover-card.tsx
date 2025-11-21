@@ -22,8 +22,8 @@ export default function HoverCardDemo() {
               <AvatarImage src="https://github.com/vercel.png" />
               <AvatarFallback>VC</AvatarFallback>
             </Avatar>
-            <div className="app-column-gap-xs">
-              <h4 className="app-text-semibold">@nextjs</h4>
+            <div>
+              <h4>@nextjs</h4>
               <p className="app-text-sm">
                 The React Framework – created and maintained by @vercel.
               </p>
@@ -35,4 +35,3 @@ export default function HoverCardDemo() {
     </>
   );
 }
-

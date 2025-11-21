@@ -16,6 +16,10 @@ const AvatarGlobalStyles = createGlobalStyle`
     background: var(--kf-color-gray-50, rgba(148, 163, 184, 0.2));
   }
 
+  .dark .kf-avatar {
+    background: var(--kf-color-gray-900, #0f172a);
+  }
+
   .kf-avatar__image {
     width: 100%;
     height: 100%;
@@ -31,10 +35,15 @@ const AvatarGlobalStyles = createGlobalStyle`
     width: 100%;
     height: 100%;
     border-radius: inherit;
-    background: var(--kf-color-gray-50, rgba(148, 163, 184, 0.2));
-    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.7));
-    font-size: var(--kf-text-sm, 0.875rem);
-    font-weight: 500;
+    background: var(--kf-color-gray-100, rgba(148, 163, 184, 0.2));
+    color: var(--kf-color-gray-600, rgba(15, 23, 42, 0.7));
+    font-size: var(--kf-text-base, 1rem);
+    font-weight: var(--kf-font-weight-light, 300);
+  }
+
+  .dark .kf-avatar__fallback {
+    background: var(--kf-color-gray-900, #0f172a);  
+    color: var(--kf-color-gray-400, rgba(15, 23, 42, 0.7));
   }
 `;
 

@@ -11,12 +11,17 @@ const HoverCardGlobalStyles = createGlobalStyle`
     width: 16rem;
     border-radius: var(--kf-radius-md, 0.375rem);
     border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
-    background: var(--kf-color-gray-50, #ffffff);
-    color: var(--kf-color-gray-950, #0f172a);
+    background: var(--kf-color-gray-50, oklch(0.98 0 0));
+    color: var(--kf-color-gray-950, oklch(0.039 0.01 240));
     padding: calc(var(--kf-spacing, 0.25rem) * 4);
     box-shadow: var(--kf-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
     outline: none;
     transform-origin: var(--radix-hover-card-content-transform-origin, center);
+  }
+
+  .dark .kf-hover-card__content {
+    background: var(--kf-color-gray-900, oklch(0.039 0.01 240));
+    color: var(--kf-color-gray-50, oklch(0.98 0 0));
   }
 
   .kf-hover-card__content[data-state="open"] {
@@ -157,16 +162,18 @@ function HoverCardContent({
   ...props
 }: React.ComponentProps<typeof HoverCardPrimitive.Content>) {
   return (
-    <HoverCardPrimitive.Portal data-slot="hover-card-portal">
+    <>
       <HoverCardGlobalStyles />
-      <HoverCardPrimitive.Content
-        data-slot="hover-card-content"
-        align={align}
-        sideOffset={sideOffset}
-        className={cn("kf-hover-card__content", className)}
-        {...props}
-      />
-    </HoverCardPrimitive.Portal>
+      <HoverCardPrimitive.Portal data-slot="hover-card-portal">
+        <HoverCardPrimitive.Content
+          data-slot="hover-card-content"
+          align={align}
+          sideOffset={sideOffset}
+          className={cn("kf-hover-card__content", className)}
+          {...props}
+        />
+      </HoverCardPrimitive.Portal>
+    </>
   );
 }
 
