@@ -60,12 +60,12 @@
 - [ ] Skeleton
 - [x] Slider
 - [ ] Sonner
-- [ ] Spinner
+- [x] Spinner
 - [ ] Switch
 - [ ] Table
 - [ ] Tabs
 - [ ] Textarea
-- [ ] Timeline
+- [x] Timeline
 - [ ] Toggle
 - [ ] Toggle Group
 - [x] Tooltip

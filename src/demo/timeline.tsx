@@ -1,4 +1,5 @@
 import {
+  Page,
   Timeline,
   TimelineItem,
   TimelineItemDescription,
@@ -22,17 +23,18 @@ const events = [
 
 export default function TimelineDemo() {
   return (
-    <>
-      <h2>Timeline</h2>
+    <Page.Block width="3xl" gutters>
+      <h2 className="margin">Timeline</h2>
       <Timeline>
         {events.map((event, index) => (
           <TimelineItem key={event.title} isLast={index === events.length - 1}>
             <TimelineItemTitle>{event.title}</TimelineItemTitle>
-            <TimelineItemDescription>{event.description}</TimelineItemDescription>
+            <TimelineItemDescription>
+              {event.description}
+            </TimelineItemDescription>
           </TimelineItem>
         ))}
       </Timeline>
-    </>
+    </Page.Block>
   );
 }
-

@@ -146,10 +146,10 @@ const NavigationMenuGlobalStyles = createGlobalStyle`
   }
 
   .kf-navigation-menu__viewport {
-    position: relative;
-    margin-top: calc(var(--kf-spacing, 0.25rem) * 1.5);
+    position: absolute;
+    top: calc(var(--kf-spacing, 0.25rem) * 1.5);
     height: var(--radix-navigation-menu-viewport-height);
-    width: var(--radix-navigation-menu-viewport-width, auto);
+    width: auto;
     min-width: max-content;
     overflow: hidden;
     border-radius: var(--kf-radius-md, 0.375rem);
