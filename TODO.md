@@ -31,7 +31,7 @@
 - [x] Footer
 - [x] Header
 - [x] HGrid
-- [ ] Hover Card
+- [x] Hover Card
 - [ ] HStack
 - [x] Infographic
 - [x] Input
@@ -39,7 +39,7 @@
 - [ ] Input OTP
 - [ ] Item
 - [ ] Kbd
-- [ ] Label
+- [x] Label
 - [ ] Link List
 - [ ] Menubar
 - [ ] Mode Toggle

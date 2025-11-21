@@ -22,6 +22,7 @@ const HoverCardGlobalStyles = createGlobalStyle`
   .dark .kf-hover-card__content {
     background: var(--kf-color-gray-900, oklch(0.039 0.01 240));
     color: var(--kf-color-gray-50, oklch(0.98 0 0));
+    border-color: var(--kf-color-gray-800, oklch(0.08 0.01 240));
   }
 
   .kf-hover-card__content[data-state="open"] {

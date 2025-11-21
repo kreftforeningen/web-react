@@ -23,11 +23,9 @@ export default function HoverCardDemo() {
               <AvatarFallback>VC</AvatarFallback>
             </Avatar>
             <div>
-              <h4>@nextjs</h4>
-              <p className="app-text-sm">
-                The React Framework – created and maintained by @vercel.
-              </p>
-              <div className="app-muted-text-xs">Joined December 2021</div>
+              <h4>nextjs</h4>
+              <p>The React Framework – created and maintained by @vercel.</p>
+              <div>Joined December 2021</div>
             </div>
           </div>
         </HoverCardContent>
