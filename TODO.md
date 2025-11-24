@@ -10,7 +10,7 @@
 - [ ] Banner
 - [ ] Box
 - [x] Breadcrumb
-- [ ] Button
+- [x] Button
 - [ ] Button Group
 - [ ] Calendar
 - [x] Card
@@ -40,7 +40,7 @@
 - [ ] Item
 - [ ] Kbd
 - [x] Label
-- [ ] Link List
+- [x] Link List
 - [ ] Menubar
 - [ ] Mode Toggle
 - [ ] Native Select
@@ -49,21 +49,21 @@
 - [ ] Pagination
 - [ ] Person
 - [ ] Popover
-- [ ] Progress
+- [x] Progress
 - [ ] Radio Group
 - [ ] Resizable
 - [ ] Scroll Area
 - [x] Select
-- [ ] Separator
+- [x] Separator
 - [ ] Sheet
 - [ ] Sidebar
-- [ ] Skeleton
+- [x] Skeleton
 - [x] Slider
 - [ ] Sonner
 - [x] Spinner
-- [ ] Switch
+- [x] Switch
 - [ ] Table
-- [ ] Tabs
+- [x] Tabs
 - [ ] Textarea
 - [x] Timeline
 - [ ] Toggle

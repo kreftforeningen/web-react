@@ -3,6 +3,7 @@ import {
   LinkListDescription,
   LinkListItem,
   LinkListTitle,
+  Page,
 } from "@/lib/main";
 
 const linkItems = [
@@ -28,8 +29,8 @@ const linkItems = [
 
 export default function LinkListDemo() {
   return (
-    <>
-      <h2>Link List</h2>
+    <Page.Block width="3xl" gutters>
+      <h2 className="margin">Link List</h2>
       <LinkList>
         {linkItems.map((item) => (
           <LinkListItem key={item.id} href={item.url}>
@@ -38,6 +39,6 @@ export default function LinkListDemo() {
           </LinkListItem>
         ))}
       </LinkList>
-    </>
+    </Page.Block>
   );
 }

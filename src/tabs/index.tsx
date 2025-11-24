@@ -23,12 +23,11 @@ const TabsGlobalStyles = createGlobalStyle`
     padding: 3px;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .kf-tabs__list {
+  .dark .kf-tabs__list {
       background: var(--kf-color-gray-800, oklch(0.3 0.01 240));
       color: var(--kf-color-gray-400, oklch(0.55 0.01 240));
     }
-  }
+  
 
   .kf-tabs__trigger {
     display: inline-flex;
@@ -63,7 +62,7 @@ const TabsGlobalStyles = createGlobalStyle`
   .kf-tabs__trigger[data-state="active"] {
     background: var(--kf-color-white, oklch(0.97 0 0));
     color: var(--kf-color-gray-950, oklch(0.18 0 0));
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: var(--kf-shadow-xs, 0 1px 2px 0 rgb(15 23 42 / 0.05));
   }
 
   .kf-tabs__trigger:focus-visible {
@@ -83,16 +82,14 @@ const TabsGlobalStyles = createGlobalStyle`
     opacity: 0.5;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .kf-tabs__trigger {
-      color: var(--kf-color-gray-400, oklch(0.55 0.01 240));
-    }
+  .dark .kf-tabs__trigger {
+    color: var(--kf-color-gray-400, oklch(0.55 0.01 240));
+  }
 
-    .kf-tabs__trigger[data-state="active"] {
-      background: color-mix(in srgb, var(--kf-color-gray-800, oklch(0.3 0.01 240)) 30%, transparent);
-      color: var(--kf-color-gray-100, oklch(0.95 0.01 240));
-      border-color: var(--kf-color-gray-700, oklch(0.4 0.01 240));
-    }
+  .dark .kf-tabs__trigger[data-state="active"] {
+    background: color-mix(in srgb, var(--kf-color-gray-800, oklch(0.3 0.01 240)) 30%, transparent);
+    color: var(--kf-color-gray-100, oklch(0.95 0.01 240));
+    border-color: var(--kf-color-gray-700, oklch(0.4 0.01 240));
   }
 
   .kf-tabs__content {

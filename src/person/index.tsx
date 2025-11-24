@@ -5,61 +5,24 @@ import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 
 import { cn } from "@/lib/utils";
 
-type PersonVariant = "default" | "list";
-type PersonItemColor = "default" | "blue";
-
 const PersonGlobalStyles = createGlobalStyle`
   .kf-person {
-    font-family: var(--kf-font-sans);
-    display: grid;
-    gap: calc(var(--kf-spacing, 0.25rem) * 4);
-  }
-
-  .kf-person--default {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  @media (min-width: var(--kf-breakpoint-md, 48rem)) {
-    .kf-person--default {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: var(--kf-breakpoint-lg, 64rem)) {
-    .kf-person--default {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  .kf-person--list {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-
-  .kf-person__item {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: calc(var(--kf-spacing, 0.25rem) * 4);
     padding: calc(var(--kf-spacing, 0.25rem) * 4);
     border-radius: var(--kf-radius-xl, 0.75rem);
-    background: color-mix(in srgb, var(--kf-color-surface, rgba(15, 23, 42, 0.04)) 60%, transparent);
+    background: var(--kf-color-gray-100, #f3f4f6);
   }
 
-  .kf-person__item[data-color="blue"] {
-    background: color-mix(in srgb, var(--kf-color-blue-100, #dbeafe) 80%, transparent);
-  }
-
-  .dark .kf-person__item {
-    background: color-mix(in srgb, var(--kf-color-surface-dark, rgba(148, 163, 184, 0.16)) 70%, transparent);
-  }
-
-  .dark .kf-person__item[data-color="blue"] {
-    background: color-mix(in srgb, var(--kf-color-blue-950, #0b1120) 80%, transparent);
+  .dark .kf-person {
+    background: var(--kf-color-gray-900, #111827);
   }
 
   .kf-person__image {
     width: 60px;
     height: 60px;
-    border-radius: 9999px;
+    border-radius: var(--kf-radius-full, 9999px);
     flex-shrink: 0;
     flex-grow: 0;
   }
@@ -157,48 +120,30 @@ const PersonGlobalStyles = createGlobalStyle`
   }
 `;
 
-function Person({
-  className,
-  variant = "default",
-  ...props
-}: React.ComponentProps<"div"> & { variant?: PersonVariant }) {
+function Person({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <>
       <PersonGlobalStyles />
       <div
         data-slot="person"
-        className={cn("kf-person", `kf-person--${variant}`, className)}
+        className={cn("kf-person", className)}
         {...props}
       />
     </>
   );
 }
 
-function PersonItem({
-  className,
-  color = "default",
-  ...props
-}: React.ComponentProps<"article"> & { color?: PersonItemColor }) {
-  return (
-    <article
-      data-slot="person-item"
-      data-color={color}
-      className={cn("kf-person__item", className)}
-      {...props}
-    />
-  );
-}
-
-function PersonItemImage({
+function PersonImage({
   className,
   fallback,
   ...props
-}: React.ComponentProps<"img"> & { fallback?: string }) {
+}: React.ComponentPropsWithoutRef<"img"> & { fallback?: string }) {
   return (
     <Avatar
-      data-slot="person-item-image"
+      data-slot="person-image"
       className={cn("kf-person__image", className)}
     >
+      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <AvatarImage {...props} />
       <AvatarFallback className="kf-person__image-fallback">
         {fallback}
@@ -207,43 +152,40 @@ function PersonItemImage({
   );
 }
 
-function PersonItemContent({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+function PersonContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="person-item-content"
+      data-slot="person-content"
       className={cn("kf-person__content", className)}
       {...props}
     />
   );
 }
 
-function PersonItemName({ className, ...props }: React.ComponentProps<"h3">) {
+function PersonName({ className, ...props }: React.ComponentProps<"h3">) {
   return (
     <h3
-      data-slot="person-item-name"
+      data-slot="person-name"
       className={cn("kf-person__name", className)}
       {...props}
     />
   );
 }
 
-function PersonItemTitle({ className, ...props }: React.ComponentProps<"p">) {
+function PersonTitle({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
-      data-slot="person-item-title"
+      data-slot="person-title"
       className={cn("kf-person__title", className)}
       {...props}
     />
   );
 }
 
-function PersonItemEmail({ className, ...props }: React.ComponentProps<"a">) {
+function PersonEmail({ className, ...props }: React.ComponentProps<"a">) {
   return (
     <a
-      data-slot="person-item-email"
+      data-slot="person-email"
       className={cn("kf-person__link", className)}
       aria-label={`Email ${props.href}`}
       {...props}
@@ -251,10 +193,10 @@ function PersonItemEmail({ className, ...props }: React.ComponentProps<"a">) {
   );
 }
 
-function PersonItemPhone({ className, ...props }: React.ComponentProps<"a">) {
+function PersonPhone({ className, ...props }: React.ComponentProps<"a">) {
   return (
     <a
-      data-slot="person-item-phone"
+      data-slot="person-phone"
       className={cn("kf-person__link", className)}
       aria-label={`Phone ${props.href}`}
       {...props}
@@ -262,21 +204,22 @@ function PersonItemPhone({ className, ...props }: React.ComponentProps<"a">) {
   );
 }
 
-function PersonItemDescription({
+function PersonDescription({
   className,
   children,
   ...props
-}: React.ComponentProps<"button">) {
+}: React.ComponentPropsWithoutRef<"button">) {
   return (
-    <Popover data-slot="person-item-description">
+    <Popover data-slot="person-description">
+      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <PopoverTrigger
-        data-slot="person-item-description-trigger"
+        data-slot="person-description-trigger"
         className={cn("kf-person__description-trigger", className)}
         {...props}
       >
         Les mer
       </PopoverTrigger>
-      <PopoverContent data-slot="person-item-description-content">
+      <PopoverContent data-slot="person-description-content">
         {children}
       </PopoverContent>
     </Popover>
@@ -285,12 +228,11 @@ function PersonItemDescription({
 
 export {
   Person,
-  PersonItem,
-  PersonItemImage,
-  PersonItemContent,
-  PersonItemName,
-  PersonItemTitle,
-  PersonItemEmail,
-  PersonItemPhone,
-  PersonItemDescription,
+  PersonImage,
+  PersonContent,
+  PersonName,
+  PersonTitle,
+  PersonEmail,
+  PersonPhone,
+  PersonDescription,
 };

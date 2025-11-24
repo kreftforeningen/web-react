@@ -114,16 +114,18 @@ function PopoverContent({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Content>) {
   return (
-    <PopoverPrimitive.Portal>
+    <>
       <PopoverGlobalStyles />
-      <PopoverPrimitive.Content
-        data-slot="popover-content"
-        align={align}
-        sideOffset={sideOffset}
-        className={cn("kf-popover__content", className)}
-        {...props}
-      />
-    </PopoverPrimitive.Portal>
+      <PopoverPrimitive.Portal>
+        <PopoverPrimitive.Content
+          data-slot="popover-content"
+          align={align}
+          sideOffset={sideOffset}
+          className={cn("kf-popover__content", className)}
+          {...props}
+        />
+      </PopoverPrimitive.Portal>
+    </>
   );
 }
 

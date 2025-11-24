@@ -7,7 +7,6 @@ type LinkListVariant = "default" | "list";
 
 const LinkListGlobalStyles = createGlobalStyle`
   .kf-link-list {
-    font-family: var(--kf-font-sans);
     display: grid;
     gap: calc(var(--kf-spacing, 0.25rem) * 8);
   }
@@ -36,6 +35,7 @@ const LinkListGlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    text-decoration: none;
   }
 
   .kf-link-list__title {
@@ -44,17 +44,15 @@ const LinkListGlobalStyles = createGlobalStyle`
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     color: var(--kf-color-blue-800, #1d4ed8);
     cursor: pointer;
-    text-decoration: none;
-    font-weight: 600;
+  }
+
+  .dark .kf-link-list__title {
+    color: var(--kf-color-blue-200, #bfdbfe);
   }
 
   .kf-link-list__title:hover {
     color: var(--kf-color-blue-900, #1e3a8a);
     text-decoration: underline;
-  }
-
-  .dark .kf-link-list__title {
-    color: var(--kf-color-blue-200, #bfdbfe);
   }
 
   .dark .kf-link-list__title:hover {
@@ -64,6 +62,7 @@ const LinkListGlobalStyles = createGlobalStyle`
   .kf-link-list__title h3 {
     margin: 0;
     font-size: var(--kf-text-lg, 1.125rem);
+    font-weight: var(--kf-font-weight-normal, 400);
   }
 
   .kf-link-list__title svg {
@@ -76,6 +75,10 @@ const LinkListGlobalStyles = createGlobalStyle`
     font-size: var(--kf-text-sm, 0.875rem);
     line-height: var(--kf-text-sm--line-height, 1.4285714286);
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.66));
+  }
+
+  .dark .kf-link-list__description {
+    color: var(--kf-color-gray-100, #f3f4f6);
   }
 `;
 

@@ -1,16 +1,16 @@
-import { Skeleton } from "@/lib/main";
+import { HStack, Page, Skeleton, VStack } from "@/lib/main";
 
 export default function SkeletonDemo() {
   return (
-    <>
-      <h2>Skeleton</h2>
-      <div className="app-inline-space-lg">
-        <Skeleton />
-        <div className="app-column-gap-sm">
-          <Skeleton />
-          <Skeleton />
-        </div>
-      </div>
-    </>
+    <Page.Block width="3xl" gutters>
+      <h2 className="margin">Skeleton</h2>
+      <VStack>
+        <Skeleton style={{ width: "100%", height: "100px" }} />
+        <HStack>
+          <Skeleton style={{ width: "100px", height: "100px" }} />
+          <Skeleton style={{ width: "100px", height: "100px" }} />
+        </HStack>
+      </VStack>
+    </Page.Block>
   );
 }
