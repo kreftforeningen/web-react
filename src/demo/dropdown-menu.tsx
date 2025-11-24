@@ -12,7 +12,7 @@ import {
 export default function DropdownMenuDemo() {
   return (
     <Page.Block width="3xl" gutters>
-      <h2>Dropdown Menu</h2>
+      <h2 className="margin">Dropdown Menu</h2>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" shape="square">

@@ -39,7 +39,7 @@ const people = [
 export default function PersonDemo() {
   return (
     <Page.Block width="xl" gutters>
-      <h2>Person</h2>
+      <h2 className="margin">Person</h2>
       <HGrid columns={{ sm: 1, md: 2, lg: 3, xl: 3 }}>
         {people.map((item) => (
           <Person key={item.id}>

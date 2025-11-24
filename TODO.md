@@ -8,7 +8,7 @@
 - [x] Avatar
 - [x] Badge
 - [ ] Banner
-- [ ] Box
+- [x] Box
 - [x] Breadcrumb
 - [x] Button
 - [ ] Button Group
@@ -32,12 +32,12 @@
 - [x] Header
 - [x] HGrid
 - [x] Hover Card
-- [ ] HStack
+- [x] HStack
 - [x] Infographic
 - [x] Input
 - [ ] Input Group
 - [ ] Input OTP
-- [ ] Item
+- [x] Item
 - [ ] Kbd
 - [x] Label
 - [x] Link List
@@ -46,9 +46,9 @@
 - [ ] Native Select
 - [ ] Navigation Menu
 - [x] Page
-- [ ] Pagination
-- [ ] Person
-- [ ] Popover
+- [x] Pagination
+- [x] Person
+- [x] Popover
 - [x] Progress
 - [ ] Radio Group
 - [ ] Resizable
@@ -64,12 +64,12 @@
 - [x] Switch
 - [ ] Table
 - [x] Tabs
-- [ ] Textarea
+- [x] Textarea
 - [x] Timeline
-- [ ] Toggle
+- [x] Toggle
 - [ ] Toggle Group
 - [x] Tooltip
-- [ ] Mode Toggle
+- [x] Mode Toggle
 - [ ] Sonner
 - [ ] Sidebar
 - [ ] Style (Global)

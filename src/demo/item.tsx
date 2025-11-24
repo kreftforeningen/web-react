@@ -8,7 +8,6 @@ import {
   ItemMedia,
   ItemTitle,
   Page,
-  Separator,
   VStack,
 } from "@/lib/main";
 import { BadgeCheckIcon, ChevronRightIcon } from "lucide-react";
@@ -78,13 +77,11 @@ export default function ItemDemo() {
                       alt={song.title}
                       width={32}
                       height={32}
-                      className="app-media-muted"
                     />
                   </ItemMedia>
                   <ItemContent>
                     <ItemTitle>
-                      {song.title} -{" "}
-                      <span className="app-muted-text">{song.album}</span>
+                      {song.title} - <span>{song.album}</span>
                     </ItemTitle>
                     <ItemDescription>{song.artist}</ItemDescription>
                   </ItemContent>

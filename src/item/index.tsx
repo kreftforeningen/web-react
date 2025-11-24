@@ -115,12 +115,17 @@ const ItemGlobalStyles = createGlobalStyle`
   .kf-item-description {
     font-size: var(--kf-text-sm, 0.875rem);
     line-height: var(--kf-text-sm--line-height, 1.4285714286);
-    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+    color: var(--kf-color-gray-600, oklch(0.4 0 0));
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-wrap: balance;
+    margin-block: 0
+  }
+
+  .dark .kf-item-description {
+    color: var(--kf-color-gray-300, oklch(0.7 0 0));
   }
 
   .kf-item-description a {
@@ -129,7 +134,7 @@ const ItemGlobalStyles = createGlobalStyle`
   }
 
   .kf-item-description a:hover {
-    color: var(--kf-color-blue-600, #0f172a);
+    color: var(--kf-color-blue-600, oklch(0.4 0 0));
   }
 
   .kf-item-actions {
@@ -155,7 +160,6 @@ function ItemGroup({
   return (
     <>
       <ItemGlobalStyles />
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <div
         role="list"
         data-slot="item-group"
@@ -195,7 +199,6 @@ function Item({
   return (
     <>
       <ItemGlobalStyles />
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <Comp
         data-slot="item"
         data-variant={variant}
@@ -215,15 +218,12 @@ function ItemMedia({
   variant?: ItemMediaVariant;
 }) {
   return (
-    <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
-      <div
-        data-slot="item-media"
-        data-variant={variant}
-        className={cn("kf-item-media", className)}
-        {...props}
-      />
-    </>
+    <div
+      data-slot="item-media"
+      data-variant={variant}
+      className={cn("kf-item-media", className)}
+      {...props}
+    />
   );
 }
 
@@ -232,14 +232,11 @@ function ItemContent({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
-      <div
-        data-slot="item-content"
-        className={cn("kf-item-content", className)}
-        {...props}
-      />
-    </>
+    <div
+      data-slot="item-content"
+      className={cn("kf-item-content", className)}
+      {...props}
+    />
   );
 }
 
@@ -248,14 +245,11 @@ function ItemTitle({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
-      <div
-        data-slot="item-title"
-        className={cn("kf-item-title", className)}
-        {...props}
-      />
-    </>
+    <div
+      data-slot="item-title"
+      className={cn("kf-item-title", className)}
+      {...props}
+    />
   );
 }
 
@@ -264,14 +258,11 @@ function ItemDescription({
   ...props
 }: React.ComponentPropsWithoutRef<"p">) {
   return (
-    <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
-      <p
-        data-slot="item-description"
-        className={cn("kf-item-description", className)}
-        {...props}
-      />
-    </>
+    <p
+      data-slot="item-description"
+      className={cn("kf-item-description", className)}
+      {...props}
+    />
   );
 }
 
@@ -280,14 +271,11 @@ function ItemActions({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
-      <div
-        data-slot="item-actions"
-        className={cn("kf-item-actions", className)}
-        {...props}
-      />
-    </>
+    <div
+      data-slot="item-actions"
+      className={cn("kf-item-actions", className)}
+      {...props}
+    />
   );
 }
 
@@ -296,14 +284,11 @@ function ItemHeader({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
-      <div
-        data-slot="item-header"
-        className={cn("kf-item-header", className)}
-        {...props}
-      />
-    </>
+    <div
+      data-slot="item-header"
+      className={cn("kf-item-header", className)}
+      {...props}
+    />
   );
 }
 
@@ -312,14 +297,11 @@ function ItemFooter({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
-      <div
-        data-slot="item-footer"
-        className={cn("kf-item-footer", className)}
-        {...props}
-      />
-    </>
+    <div
+      data-slot="item-footer"
+      className={cn("kf-item-footer", className)}
+      {...props}
+    />
   );
 }
 
