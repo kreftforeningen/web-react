@@ -105,7 +105,6 @@ function Timeline({
   return (
     <>
       <TimelineGlobalStyles />
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <div
         data-slot="timeline"
         data-variant={variant}
@@ -127,7 +126,6 @@ function TimelineItem({
 }: TimelineItemProps) {
   return (
     <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <div
         data-slot="timeline-item"
         data-variant={variant}
@@ -156,7 +154,6 @@ function TimelineItemTitle({
 }: React.ComponentPropsWithoutRef<"h3">) {
   return (
     <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <h3
         data-slot="timeline-item-title"
         className={cn("kf-timeline__title", className)}
@@ -172,7 +169,6 @@ function TimelineItemDescription({
 }: React.ComponentPropsWithoutRef<"p">) {
   return (
     <>
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <p
         data-slot="timeline-item-description"
         className={cn("kf-timeline__description", className)}

@@ -143,7 +143,6 @@ function PersonImage({
       data-slot="person-image"
       className={cn("kf-person__image", className)}
     >
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <AvatarImage {...props} />
       <AvatarFallback className="kf-person__image-fallback">
         {fallback}
@@ -211,7 +210,6 @@ function PersonDescription({
 }: React.ComponentPropsWithoutRef<"button">) {
   return (
     <Popover data-slot="person-description">
-      {/* @ts-expect-error - Type incompatibility between React type versions */}
       <PopoverTrigger
         data-slot="person-description-trigger"
         className={cn("kf-person__description-trigger", className)}
