@@ -143,7 +143,17 @@ git push origin develop
 
 - Open PR from `develop` into `main`.
 - Merge to `main` to release. GitHub Actions on `main` runs `pnpm changeset publish`—**do not run `changeset version` on `main`.**
-- After the merge, `main` and `develop` are already in sync; no follow-up steps required.
+
+7. Immediately sync `main` back into `develop`
+
+```bash
+git checkout develop
+git pull origin develop
+git pull --ff-only origin main
+git push origin develop
+```
+
+This keeps the version/changelog commit that landed on `main` in sync on `develop`, preventing future `package.json`/`CHANGELOG.md` conflicts.
 
 Notes:
 
