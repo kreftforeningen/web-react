@@ -1,5 +1,11 @@
 # @kreftforeningen/web-react
 
+## 1.0.8
+
+### Patch Changes
+
+- vanillafy
+
 ## 1.0.7
 
 ### Patch Changes
