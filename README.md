@@ -76,84 +76,54 @@ You can override styles using the `className` prop, extend the provided variable
 
 ## Daily Development
 
-This project follows a **feature branch workflow** with automated releases using [Changesets](https://github.com/changesets/changesets).
+This project uses a straightforward feature-branch workflow. Branch off `main`, do the work, and merge back into `main`. Every push to `main` runs the release workflow and publishes to npm.
 
 ### Development Workflow
 
-1. Start from develop
+1. Start from `main`
 
-```bash
-git checkout develop
-git pull origin develop
-```
+   ```bash
+   git checkout main
+   git pull origin main
+   ```
 
-2. Create a branch
+2. Create a branch for your work
 
-```bash
-git checkout -b feature/new-component
-# or: git checkout -b fix/button-styling
-```
+   ```bash
+   git checkout -b feature/new-component
+   # or: git checkout -b fix/button-styling
+   ```
 
 3. Implement changes and push
 
-```bash
-# edit files...
-git add .
-git commit -m "Implement feature"
-git push -u origin HEAD
-```
+   ```bash
+   # edit files...
+   git add .
+   git commit -m "Implement feature"
+   git push -u origin HEAD
+   ```
 
-Open a PR: feature/fix → develop. Merge after review.
+4. Merge the branch locally (no PR workflow):
 
-Lockfile policy:
+   ```bash
+   git checkout main
+   git pull origin main
+   git merge feature/new-component   # or your branch name
+   ```
 
-- Lockfile conflicts are avoided via `.gitattributes` (`pnpm-lock.yaml merge=ours`) which keeps `develop`’s lockfile.
-- If your change updates `package.json`, do not hand-merge the lockfile in the PR; let `develop` win and regenerate on `develop` later.
+5. Prepare the release commit on `main` (manual version bump):
 
-4. Prepare release on develop (after features are merged and branches are in sync)
+   ```bash
+   git checkout main
+   git pull origin main
+   # update package.json version by hand
+   pnpm install --lockfile-only --ignore-scripts
+   git add package.json pnpm-lock.yaml
+   git commit -m "chore: release vX.Y.Z"
+   git push origin main
+   ```
 
-```bash
-git checkout develop
-git pull origin develop
-
-# Bump versions with Changesets
-pnpm changeset
-pnpm changeset version
-
-# Stage the generated changelog + version bump
-git add .changeset/ package.json CHANGELOG.md
-```
-
-5. Update lockfile only when dependencies changed
-
-- If `package.json` dependency fields changed during `pnpm changeset version`, regenerate:
-
-```bash
-pnpm install --lockfile-only --ignore-scripts
-
-git add package.json CHANGELOG.md .changeset/ pnpm-lock.yaml
-git commit -m "chore: release vX.Y.Z"
-git push origin develop
-```
-
-- If dependencies didn’t change, skip the lockfile regeneration and commit only the version/changelog updates.
-- You can still delete/rebuild the lockfile manually if it ever becomes inconsistent, but it’s not part of the normal release flow.
-
-6. PR: develop → main
-
-- Open PR from `develop` into `main`.
-- Merge to `main` to release. GitHub Actions on `main` runs `pnpm changeset publish`—**do not run `changeset version` on `main`.**
-
-7. Immediately sync `main` back into `develop`
-
-```bash
-git checkout develop
-git pull origin develop
-git pull --ff-only origin main
-git push origin develop
-```
-
-This keeps the version/changelog commit that landed on `main` in sync on `develop`, preventing future `package.json`/`CHANGELOG.md` conflicts.
+6. The `Release` GitHub Action runs automatically on every push to `main` and publishes the package to npm.
 
 Notes:
 
@@ -162,8 +132,7 @@ Notes:
 
 ### Branch Strategy
 
-- **`main`** - Production releases, triggers automatic npm publishing
-- **`develop`** - Integration branch for features
+- **`main`** - Source of truth & release branch
 - **`feature/*`** - Feature development branches
 - **`fix/*`** - Bug fix branches
 - **`docs/*`** - Documentation update branches
