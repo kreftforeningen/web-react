@@ -1,10 +1,10 @@
-import { Button, Spinner } from "@/lib/main";
+import { Button, Page, Spinner, VStack } from "@/lib/main";
 
 export default function SpinnerDemo() {
   return (
-    <>
-      <h2>Spinner</h2>
-      <div className="app-centered-column-lg">
+    <Page.Block width="3xl" gutters>
+      <h2 className="margin">Spinner</h2>
+      <VStack align="start" gap={8}>
         <Button disabled size="sm">
           <Spinner />
           Loading...
@@ -12,7 +12,7 @@ export default function SpinnerDemo() {
         <Spinner />
         <Spinner />
         <Spinner />
-      </div>
-    </>
+      </VStack>
+    </Page.Block>
   );
 }

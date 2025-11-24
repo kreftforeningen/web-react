@@ -1,4 +1,5 @@
 import {
+  Page,
   Pagination,
   PaginationContent,
   PaginationEllipsis,
@@ -10,8 +11,8 @@ import {
 
 export default function PaginationDemo() {
   return (
-    <>
-      <h2>Pagination</h2>
+    <Page.Block width="3xl" gutters>
+      <h2 className="margin">Pagination</h2>
       <Pagination>
         <PaginationContent>
           <PaginationItem>
@@ -36,6 +37,6 @@ export default function PaginationDemo() {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-    </>
+    </Page.Block>
   );
 }

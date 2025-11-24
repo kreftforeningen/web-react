@@ -9,7 +9,6 @@ type ToggleSize = "default" | "sm" | "lg";
 
 const ToggleGlobalStyles = createGlobalStyle`
   .kf-toggle {
-    font-family: var(--kf-font-sans);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -39,6 +38,7 @@ const ToggleGlobalStyles = createGlobalStyle`
 
   .kf-toggle[data-variant="default"] {
     background: transparent;
+    border: 0;
   }
 
   .kf-toggle[data-variant="outline"] {
@@ -52,8 +52,7 @@ const ToggleGlobalStyles = createGlobalStyle`
   }
 
   .kf-toggle[data-variant="default"]:hover {
-    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 80%, transparent);
-    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.66));
+    background: var(--kf-color-gray-100, rgba(148, 163, 184, 0.16));
   }
 
   .kf-toggle[data-variant="default"][data-state="on"],

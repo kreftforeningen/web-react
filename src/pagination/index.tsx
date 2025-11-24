@@ -107,6 +107,18 @@ const PaginationGlobalStyles = createGlobalStyle`
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
   }
 
+  .kf-pagination__ellipsis > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .kf-pagination__ellipsis-icon {
     width: calc(var(--kf-spacing, 0.25rem) * 4);
     height: calc(var(--kf-spacing, 0.25rem) * 4);
@@ -234,7 +246,7 @@ function PaginationEllipsis({
         aria-hidden="true"
         focusable="false"
       />
-      <span className="sr-only">More pages</span>
+      <span>More pages</span>
     </span>
   );
 }

@@ -1,8 +1,8 @@
-import { AspectRatio } from "@/lib/main";
+import { AspectRatio, Page } from "@/lib/main";
 
 export default function AspectRatioDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Aspect Ratio</h2>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
@@ -32,6 +32,6 @@ export default function AspectRatioDemo() {
           </AspectRatio>
         </div>
       </div>
-    </>
+    </Page.Block>
   );
 }

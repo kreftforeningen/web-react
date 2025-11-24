@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 
 const NavigationMenuGlobalStyles = createGlobalStyle`
   .kf-navigation-menu {
-    font-family: var(--kf-font-sans);
     position: relative;
     display: flex;
     flex: 1 1 auto;
@@ -40,6 +39,7 @@ const NavigationMenuGlobalStyles = createGlobalStyle`
     padding-inline: calc(var(--kf-spacing, 0.25rem) * 4);
     padding-block: calc(var(--kf-spacing, 0.25rem) * 2);
     border-radius: var(--kf-radius-md, 0.375rem);
+    border: 0;
     background: var(--kf-color-gray-50, #ffffff);
     color: var(--kf-color-gray-950, #0f172a);
     font-size: var(--kf-text-base, 1rem);
@@ -99,7 +99,6 @@ const NavigationMenuGlobalStyles = createGlobalStyle`
   .kf-navigation-menu[data-viewport="false"] .kf-navigation-menu__content {
     background: var(--kf-color-gray-50, #ffffff);
     color: var(--kf-color-gray-950, #0f172a);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
     box-shadow: var(--kf-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
     margin-top: calc(var(--kf-spacing, 0.25rem) * 1.5);
     overflow: hidden;
@@ -141,31 +140,23 @@ const NavigationMenuGlobalStyles = createGlobalStyle`
     position: absolute;
     top: 100%;
     left: 0;
+    right: 0;
     z-index: 50;
-    display: flex;
-    justify-content: center;
-    width: 100%;
     isolation: isolate;
   }
 
   .kf-navigation-menu__viewport {
-    position: relative;
-    margin-top: calc(var(--kf-spacing, 0.25rem) * 1.5);
+    position: absolute;
+    top: calc(var(--kf-spacing, 0.25rem) * 1.5);
     height: var(--radix-navigation-menu-viewport-height);
-    width: 100%;
+    width: auto;
+    min-width: max-content;
     overflow: hidden;
     border-radius: var(--kf-radius-md, 0.375rem);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
     background: var(--kf-color-gray-50, #ffffff);
     color: var(--kf-color-gray-950, #0f172a);
     box-shadow: var(--kf-shadow-lg, 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1));
     transform-origin: var(--radix-navigation-menu-viewport-transform-origin, top center);
-  }
-
-  @media (min-width: var(--kf-breakpoint-md, 48rem)) {
-    .kf-navigation-menu__viewport {
-      width: var(--radix-navigation-menu-viewport-width);
-    }
   }
 
   .kf-navigation-menu__viewport[data-state="open"] {
@@ -189,6 +180,8 @@ const NavigationMenuGlobalStyles = createGlobalStyle`
     font-size: var(--kf-text-base, 1rem);
     transition: background 120ms var(--kf-ease-in-out, ease), color 120ms var(--kf-ease-in-out, ease);
     outline: none;
+    text-decoration: none;
+    color: var(--kf-color-gray-950, oklch(0.039 0.01 240));
   }
 
   .kf-navigation-menu__link svg:not([class*="size-"]) {

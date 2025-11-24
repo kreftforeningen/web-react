@@ -11,9 +11,9 @@ type ItemMediaVariant = "default" | "icon" | "image";
 
 const ItemGlobalStyles = createGlobalStyle`
   .kf-item-group {
-    font-family: var(--kf-font-sans);
     display: flex;
     flex-direction: column;
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
   }
 
   .kf-item {
@@ -115,12 +115,17 @@ const ItemGlobalStyles = createGlobalStyle`
   .kf-item-description {
     font-size: var(--kf-text-sm, 0.875rem);
     line-height: var(--kf-text-sm--line-height, 1.4285714286);
-    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+    color: var(--kf-color-gray-600, oklch(0.4 0 0));
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-wrap: balance;
+    margin-block: 0
+  }
+
+  .dark .kf-item-description {
+    color: var(--kf-color-gray-300, oklch(0.7 0 0));
   }
 
   .kf-item-description a {
@@ -129,7 +134,7 @@ const ItemGlobalStyles = createGlobalStyle`
   }
 
   .kf-item-description a:hover {
-    color: var(--kf-color-blue-600, #0f172a);
+    color: var(--kf-color-blue-600, oklch(0.4 0 0));
   }
 
   .kf-item-actions {
@@ -148,7 +153,10 @@ const ItemGlobalStyles = createGlobalStyle`
   }
 `;
 
-function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
+function ItemGroup({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <>
       <ItemGlobalStyles />
@@ -182,7 +190,7 @@ function Item({
   size = "default",
   asChild = false,
   ...props
-}: React.ComponentProps<"div"> & {
+}: React.ComponentPropsWithoutRef<"div"> & {
   variant?: ItemVariant;
   size?: ItemSize;
   asChild?: boolean;
@@ -206,7 +214,7 @@ function ItemMedia({
   className,
   variant = "default",
   ...props
-}: React.ComponentProps<"div"> & {
+}: React.ComponentPropsWithoutRef<"div"> & {
   variant?: ItemMediaVariant;
 }) {
   return (
@@ -219,7 +227,10 @@ function ItemMedia({
   );
 }
 
-function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
+function ItemContent({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       data-slot="item-content"
@@ -229,7 +240,10 @@ function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
+function ItemTitle({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       data-slot="item-title"
@@ -239,7 +253,10 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
+function ItemDescription({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"p">) {
   return (
     <p
       data-slot="item-description"
@@ -249,7 +266,10 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
   );
 }
 
-function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
+function ItemActions({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       data-slot="item-actions"
@@ -259,7 +279,10 @@ function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
+function ItemHeader({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       data-slot="item-header"
@@ -269,7 +292,10 @@ function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
+function ItemFooter({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       data-slot="item-footer"

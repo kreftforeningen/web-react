@@ -1,11 +1,10 @@
-import { Switch } from "@/lib/main";
+import { Page, Switch } from "@/lib/main";
 
 export default function SwitchDemo() {
   return (
-    <>
-      <h2>Switch</h2>
+    <Page.Block width="3xl" gutters>
+      <h2 className="margin">Switch</h2>
       <Switch />
-    </>
+    </Page.Block>
   );
 }
-

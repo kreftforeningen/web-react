@@ -1,11 +1,10 @@
-import { Progress } from "@/lib/main";
+import { Page, Progress } from "@/lib/main";
 
 export default function ProgressDemo() {
   return (
-    <>
-      <h2>Progress</h2>
+    <Page.Block width="3xl" gutters>
+      <h2 className="margin">Progress</h2>
       <Progress value={50} />
-    </>
+    </Page.Block>
   );
 }
-

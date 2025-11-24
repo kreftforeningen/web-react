@@ -11,11 +11,17 @@ const PopoverGlobalStyles = createGlobalStyle`
     padding: calc(var(--kf-spacing, 0.25rem) * 4);
     border-radius: var(--kf-radius-md, 0.375rem);
     border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
-    background: var(--kf-color-gray-50, #ffffff);
-    color: var(--kf-color-gray-950, #0f172a);
+    background: var(--kf-color-gray-50, oklch(0.98 0 0));
+    color: var(--kf-color-gray-950, oklch(0.039 0.01 240));
     box-shadow: var(--kf-shadow-md, 0 4px 6px -1px rgb(15 23 42 / 0.1), 0 2px 4px -2px rgb(15 23 42 / 0.08));
     outline: none;
     z-index: 50;
+  }
+
+  .dark .kf-popover__content {
+    background: var(--kf-color-gray-900, oklch(0.039 0.01 240));
+    color: var(--kf-color-gray-50, oklch(0.98 0 0));
+    border-color: var(--kf-color-gray-800, oklch(0.08 0.01 240));
   }
 
   .kf-popover__content[data-state="open"] {
@@ -114,16 +120,18 @@ function PopoverContent({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Content>) {
   return (
-    <PopoverPrimitive.Portal>
+    <>
       <PopoverGlobalStyles />
-      <PopoverPrimitive.Content
-        data-slot="popover-content"
-        align={align}
-        sideOffset={sideOffset}
-        className={cn("kf-popover__content", className)}
-        {...props}
-      />
-    </PopoverPrimitive.Portal>
+      <PopoverPrimitive.Portal>
+        <PopoverPrimitive.Content
+          data-slot="popover-content"
+          align={align}
+          sideOffset={sideOffset}
+          className={cn("kf-popover__content", className)}
+          {...props}
+        />
+      </PopoverPrimitive.Portal>
+    </>
   );
 }
 

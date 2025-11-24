@@ -61,11 +61,11 @@
     "input-otp": "^1.4.2",
     "lucide-react": "^0.554.0",
     "next-themes": "^0.4.6",
-    "react-day-picker": "^9.11.1",
+    "react-day-picker": "^9.11.2",
     "react-icons": "^5.5.0",
     "react-resizable-panels": "^3.0.6",
     "react-router-dom": "^7.9.6",
-    "recharts": "^3.4.1",
+    "recharts": "^3.5.0",
     "sonner": "^2.0.7",
     "styled-components": "^6.1.19",
     "vaul": "^1.1.2"
@@ -73,9 +73,9 @@
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
     "@eslint/js": "^9.39.1",
-    "@kreftforeningen/web-css": "^1.0.9",
+    "@kreftforeningen/web-css": "^1.0.13",
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
+    "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",
@@ -83,8 +83,8 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.2",
+    "typescript-eslint": "^8.47.0",
+    "vite": "^7.2.4",
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-dts": "^4.5.4"
   },
@@ -99,5 +99,5 @@
     "url": "https://github.com/kreftforeningen/web-react/issues"
   },
   "homepage": "https://github.com/kreftforeningen/web-react#readme",
-  "packageManager": "pnpm@10.22.0"
+  "packageManager": "pnpm@10.23.0"
 }

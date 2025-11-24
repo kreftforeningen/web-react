@@ -6,30 +6,29 @@ import { cn } from "@/lib/utils";
 
 const SwitchGlobalStyles = createGlobalStyle`
   .kf-switch {
-    font-family: var(--kf-font-sans);
     display: inline-flex;
     align-items: center;
     width: 2rem;
     height: 1.15rem;
     border-radius: var(--kf-radius-full, 9999px);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
-    background: var(--kf-color-gray-50, rgba(15, 23, 42, 0.08));
+    border: none;
+    background: var(--kf-color-gray-400, oklch(0.85 0 0));
     cursor: pointer;
-    transition: background 120ms var(--kf-ease-in-out, ease), border-color 120ms var(--kf-ease-in-out, ease);
+    transition: background 120ms var(--kf-ease-in-out, ease);
     outline: none;
+    position: relative;
+  }
+
+  .dark .kf-switch {
+    background: var(--kf-color-gray-700, oklch(0.3 0 0));
   }
 
   .kf-switch[data-state="checked"] {
-    background: var(--kf-color-blue-600, #1d4ed8);
-    border-color: var(--kf-color-blue-600, #1d4ed8);
+    background: var(--kf-color-blue-600, oklch(0.18 0 0));
   }
 
-  .kf-switch[data-state="unchecked"] {
-    background: var(--kf-color-gray-50, rgba(15, 23, 42, 0.08));
-  }
-
-  .dark .kf-switch[data-state="unchecked"] {
-    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 80%, transparent);
+  .dark .kf-switch[data-state="checked"] {
+    background: var(--kf-color-blue-100, #e6f0ff);
   }
 
   .kf-switch:focus-visible {
@@ -47,19 +46,22 @@ const SwitchGlobalStyles = createGlobalStyle`
     pointer-events: none;
     width: calc(var(--kf-spacing, 0.25rem) * 4);
     height: calc(var(--kf-spacing, 0.25rem) * 4);
-    border-radius: 9999px;
-    background: color-mix(in srgb, var(--kf-color-gray-200, rgba(148, 163, 184, 0.16)) 100%, transparent);
-    transform: translateX(0);
-    transition: transform 120ms var(--kf-ease-in-out, ease), background 120ms var(--kf-ease-in-out, ease);
+    border-radius: var(--kf-radius-full, 9999px);
+    background: var(--kf-color-white, #ffffff);
+    position: absolute;
+    left: calc((1.15rem - 1rem) / 2);
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 120ms var(--kf-ease-in-out, ease), background 120ms var(--kf-ease-in-out, ease);
   }
 
   .kf-switch[data-state="checked"] .kf-switch__thumb {
-    transform: translateX(calc(100% - 2px));
-    background: var(--kf-color-blue-50, #ffffff);
+    left: calc(100% - 1rem - (1.15rem - 1rem) / 2);
+    background: var(--kf-color-white, #ffffff);
   }
 
-  .dark .kf-switch[data-state="unchecked"] .kf-switch__thumb {
-    background: var(--kf-color-gray-500, rgba(226, 232, 240, 0.6));
+  .dark .kf-switch[data-state="checked"] .kf-switch__thumb {
+    background: var(--kf-color-blue-950, oklch(0.18 0 0));
   }
 `;
 

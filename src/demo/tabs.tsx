@@ -1,9 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/lib/main";
+import { Page, Tabs, TabsContent, TabsList, TabsTrigger } from "@/lib/main";
 
 export default function TabsDemo() {
   return (
-    <>
-      <h2>Tabs</h2>
+    <Page.Block width="3xl" gutters>
+      <h2 className="margin">Tabs</h2>
       <Tabs defaultValue="account">
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
@@ -16,6 +16,6 @@ export default function TabsDemo() {
         <TabsContent value="password">Change your password here.</TabsContent>
         <TabsContent value="delete">Delete your account here.</TabsContent>
       </Tabs>
-    </>
+    </Page.Block>
   );
 }

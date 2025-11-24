@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 const LabelGlobalStyles = createGlobalStyle`
   .kf-label {
     display: inline-flex;
-    align-items: center;
+    align-items: start;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     font-size: var(--kf-text-base, 1rem);
-    line-height: var(--kf-text-base--line-height, 1.5);
+    line-height: 1;
     font-weight: var(--kf-font-weight-medium, 500);
     user-select: none;
   }

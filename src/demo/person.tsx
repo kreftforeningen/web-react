@@ -1,14 +1,14 @@
 import {
+  HGrid,
   Page,
   Person,
-  PersonItem,
-  PersonItemContent,
-  PersonItemDescription,
-  PersonItemEmail,
-  PersonItemImage,
-  PersonItemName,
-  PersonItemPhone,
-  PersonItemTitle,
+  PersonContent,
+  PersonDescription,
+  PersonEmail,
+  PersonImage,
+  PersonName,
+  PersonPhone,
+  PersonTitle,
 } from "@/lib/main";
 
 const people = [
@@ -39,31 +39,29 @@ const people = [
 export default function PersonDemo() {
   return (
     <Page.Block width="xl" gutters>
-      <h2>Person</h2>
-      <Person>
+      <h2 className="margin">Person</h2>
+      <HGrid columns={{ sm: 1, md: 2, lg: 3, xl: 3 }}>
         {people.map((item) => (
-          <PersonItem key={item.id}>
-            <PersonItemImage
+          <Person key={item.id}>
+            <PersonImage
               src={item.image}
               alt={`${item.firstName} ${item.lastName}`}
               fallback={`${item.firstName.charAt(0)}${item.lastName.charAt(0)}`}
             />
-            <PersonItemContent>
-              <PersonItemName>
+            <PersonContent>
+              <PersonName>
                 {item.firstName} {item.lastName}
-              </PersonItemName>
-              <PersonItemTitle>{item.title}</PersonItemTitle>
-              <PersonItemEmail href={`mailto:${item.email}`}>
+              </PersonName>
+              <PersonTitle>{item.title}</PersonTitle>
+              <PersonEmail href={`mailto:${item.email}`}>
                 {item.email}
-              </PersonItemEmail>
-              <PersonItemPhone href={`tel:${item.phone}`}>
-                {item.phone}
-              </PersonItemPhone>
-              <PersonItemDescription>{item.description}</PersonItemDescription>
-            </PersonItemContent>
-          </PersonItem>
+              </PersonEmail>
+              <PersonPhone href={`tel:${item.phone}`}>{item.phone}</PersonPhone>
+              <PersonDescription>{item.description}</PersonDescription>
+            </PersonContent>
+          </Person>
         ))}
-      </Person>
+      </HGrid>
     </Page.Block>
   );
 }

@@ -13,7 +13,6 @@ import { useTheme } from "@/theme-provider";
 
 const ModeToggleGlobalStyles = createGlobalStyle`
   .kf-mode-toggle {
-    font-family: var(--kf-font-sans);
     display: inline-flex;
     align-items: center;
     justify-content: center;

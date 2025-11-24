@@ -5,18 +5,18 @@
 - [x] Alert
 - [x] Alert Dialog
 - [x] Aspect Ratio
-- [ ] Avatar
+- [x] Avatar
 - [x] Badge
 - [ ] Banner
-- [ ] Box
-- [ ] Breadcrumb
-- [ ] Button
+- [x] Box
+- [x] Breadcrumb
+- [x] Button
 - [ ] Button Group
 - [ ] Calendar
 - [x] Card
-- [ ] Carousel
+- [x] Carousel
 - [ ] Chart
-- [ ] Checkbox
+- [x] Checkbox
 - [ ] Collapsible
 - [ ] Command
 - [ ] Context Menu
@@ -31,45 +31,45 @@
 - [x] Footer
 - [x] Header
 - [x] HGrid
-- [ ] Hover Card
-- [ ] HStack
+- [x] Hover Card
+- [x] HStack
 - [x] Infographic
 - [x] Input
 - [ ] Input Group
 - [ ] Input OTP
-- [ ] Item
+- [x] Item
 - [ ] Kbd
-- [ ] Label
-- [ ] Link List
+- [x] Label
+- [x] Link List
 - [ ] Menubar
 - [ ] Mode Toggle
 - [ ] Native Select
 - [ ] Navigation Menu
 - [x] Page
-- [ ] Pagination
-- [ ] Person
-- [ ] Popover
-- [ ] Progress
+- [x] Pagination
+- [x] Person
+- [x] Popover
+- [x] Progress
 - [ ] Radio Group
 - [ ] Resizable
 - [ ] Scroll Area
 - [x] Select
-- [ ] Separator
+- [x] Separator
 - [ ] Sheet
 - [ ] Sidebar
-- [ ] Skeleton
+- [x] Skeleton
 - [x] Slider
 - [ ] Sonner
-- [ ] Spinner
-- [ ] Switch
+- [x] Spinner
+- [x] Switch
 - [ ] Table
-- [ ] Tabs
-- [ ] Textarea
-- [ ] Timeline
-- [ ] Toggle
+- [x] Tabs
+- [x] Textarea
+- [x] Timeline
+- [x] Toggle
 - [ ] Toggle Group
 - [x] Tooltip
-- [ ] Mode Toggle
+- [x] Mode Toggle
 - [ ] Sonner
 - [ ] Sidebar
 - [ ] Style (Global)

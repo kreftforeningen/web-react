@@ -331,14 +331,13 @@ export {
 } from "../pagination";
 export {
   Person,
-  PersonItem,
-  PersonItemImage,
-  PersonItemContent,
-  PersonItemName,
-  PersonItemTitle,
-  PersonItemEmail,
-  PersonItemPhone,
-  PersonItemDescription,
+  PersonImage,
+  PersonContent,
+  PersonName,
+  PersonTitle,
+  PersonEmail,
+  PersonPhone,
+  PersonDescription,
 } from "../person";
 export {
   Popover,
