@@ -108,4 +108,4 @@ const Page = PageComponent as PageComponentType;
 
 Page.Block = PageBlock;
 
-export { Page };
+export { Page, PageBlock };
