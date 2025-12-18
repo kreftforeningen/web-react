@@ -22,7 +22,7 @@
     "dev": "vite --host 0.0.0.0 --port 3003 --clearScreen false",
     "check-types": "tsc --noEmit",
     "lint": "eslint src/",
-    "release": "pnpm publish --access public --no-git-checks"
+    "release": "npm publish --access public --no-git-checks"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
