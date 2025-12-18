@@ -1,3 +1,5 @@
+"use client";
+
 import { ExternalLink } from "lucide-react";
 import * as React from "react";
 import { createGlobalStyle } from "styled-components";

@@ -1,0 +1,1 @@
+- use vanilla css, not tailwindcss

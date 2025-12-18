@@ -1,3 +1,5 @@
+"use client";
+
 import { Download as DownloadIcon, ShoppingCart } from "lucide-react";
 import { createGlobalStyle } from "styled-components";
 

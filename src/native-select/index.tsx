@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { ChevronDownIcon } from "lucide-react";
 import { createGlobalStyle } from "styled-components";

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { createGlobalStyle } from "styled-components";
 import { cn } from "@/lib/utils";
