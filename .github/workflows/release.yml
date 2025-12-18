@@ -30,14 +30,19 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build package
-        run: npm run build
+        run: pnpm build
 
       - name: Publish to npm
-        run: npm run release
+        run: pnpm release
         env:
           NODE_AUTH_TOKEN: ""
           NPM_TOKEN: ""
