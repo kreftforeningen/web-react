@@ -319,7 +319,7 @@ export {
   NavigationMenuIndicator,
   NavigationMenuViewport,
 } from "../navigation-menu";
-export { Page } from "../page";
+export { Page, PageBlock } from "../page";
 export {
   Pagination,
   PaginationContent,
