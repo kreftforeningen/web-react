@@ -43,3 +43,6 @@ jobs:
 
       - name: Publish to npm
         run: pnpm release
+        env:
+          NODE_AUTH_TOKEN: ""
+          NPM_TOKEN: ""
