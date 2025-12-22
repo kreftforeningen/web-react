@@ -153,6 +153,11 @@ const ItemGlobalStyles = createGlobalStyle`
     justify-content: space-between;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
   }
+
+  .kf-item-header img,
+  .kf-item-header picture > img {
+    border-radius: var(--kf-radius-md, 0.375rem);
+  }
 `;
 
 function ItemGroup({
