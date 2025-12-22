@@ -16,6 +16,30 @@ const CardGlobalStyles = createGlobalStyle`
     overflow: hidden;
     background: var(--kf-color-gray-100, #ffffff);
     color: var(--kf-color-gray-950, #0f172a);
+    height: 100%;
+  }
+
+  a:has(> .kf-card),
+  a:has(> .kf-card):hover,
+  a:has(> .kf-card):focus,
+  a:has(> .kf-card):active {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  a:hover .kf-card,
+  a:focus-visible .kf-card {
+    background-color: var(--kf-color-gray-200, rgba(148, 163, 184, 0.95));
+  }
+
+  a:focus .kf-card,
+  a:focus-visible .kf-card {
+    border-radius: 0;
+    outline: 0;
+    box-shadow:
+      0 0 0 var(--kf-ring-offset-width) var(--kf-ring-offset-color),
+      0 0 0 calc(var(--kf-ring-offset-width) + var(--kf-ring-width)) var(--kf-ring-color);
   }
 
   .kf-card:has(> [data-radix-aspect-ratio-wrapper]:first-child > .kf-card__image) {

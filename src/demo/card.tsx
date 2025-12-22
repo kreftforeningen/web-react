@@ -63,6 +63,27 @@ export default function CardDemo() {
             <p>Card Footer</p>
           </CardFooter>
         </Card>
+
+        <a href="#">
+          <Card>
+            <CardHeader>
+              <CardDescription>29.05.2020</CardDescription>
+              <CardTitle>– In About Five Minutes I'll Be There</CardTitle>
+              <CardAction>
+                <Badge>Badge</Badge>
+              </CardAction>
+            </CardHeader>
+            <CardContent>
+              <p>
+                During the first few minutes of the conversation, I'll be there.
+                But where will you be?
+              </p>
+            </CardContent>
+            <CardFooter>
+              <p>Card Footer</p>
+            </CardFooter>
+          </Card>
+        </a>
       </HGrid>
     </Page.Block>
   );
