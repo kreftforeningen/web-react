@@ -64,6 +64,7 @@ export {
   CardFooter,
   CardHeader,
   CardTitle,
+  CardImage,
 } from "../card";
 export {
   Carousel,
