@@ -60,6 +60,26 @@ export default function BannerDemo() {
             </BannerButtons>
           </BannerContent>
         </Banner>
+        <Banner>
+          <BannerContent>
+            <BannerTitle>Banner</BannerTitle>
+            <BannerDescription>
+              <p>
+                Text. Text. Text. Text. Text. Text. Text. Text. Text. Text.
+                Text. Text. Text. Text. Text. Text. Text. Text. Text. Text.
+                Text. Text. Text. Text. Text. Text.
+              </p>
+            </BannerDescription>
+            <BannerButtons>
+              <BannerButtonPrimary href="https://example.com">
+                Example
+              </BannerButtonPrimary>
+              <BannerButtonSecondary href="https://example.com">
+                Example
+              </BannerButtonSecondary>
+            </BannerButtons>
+          </BannerContent>
+        </Banner>
         <Banner variant="right">
           <BannerImage
             src="https://picsum.photos/id/240/1600/900"

@@ -38,6 +38,9 @@ const BannerGlobalStyles = createGlobalStyle`
   @container banner-container (min-width: 40rem) {
     .kf-banner {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .kf-banner:has(.kf-banner__image) {
       min-height: 25rem;
     }
 
@@ -47,11 +50,6 @@ const BannerGlobalStyles = createGlobalStyle`
 
     .kf-banner[data-variant="full"] {
       grid-template-columns: 1fr;
-      min-height: 25rem;
-    }
-
-    .kf-banner[data-variant="full"] .kf-banner__image {
-      max-height: none;
     }
   }
 
