@@ -12,27 +12,18 @@ type BannerVariant = "default" | "right" | "full";
 type BannerColor = "default";
 
 const BannerGlobalStyles = createGlobalStyle`
+  .kf-banner-container {
+    container-type: inline-size;
+    container-name: banner-container;
+  }
+
   .kf-banner {
     display: grid;
     grid-template-columns: 1fr;
     border-radius: var(--kf-radius-2xl, 1rem);
     overflow: hidden;
     min-height: auto;
-  }
-
-  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
-    .kf-banner {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      min-height: 25rem;
-    }
-  }
-
-  .kf-banner[data-color="default"] {
-    background: var(--kf-color-blue-100, #dbeafe);
-  }
-
-  .dark .kf-banner[data-color="default"] {
-    background: var(--kf-color-blue-900, #1d4ed8);
+    position: relative;
   }
 
   .kf-banner__image {
@@ -44,17 +35,39 @@ const BannerGlobalStyles = createGlobalStyle`
     object-position: center;
   }
 
-  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+  @container banner-container (min-width: 40rem) {
+    .kf-banner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      min-height: 25rem;
+    }
+
     .kf-banner__image {
       max-height: none;
     }
+
+    .kf-banner[data-variant="full"] {
+      grid-template-columns: 1fr;
+      min-height: 25rem;
+    }
+
+    .kf-banner[data-variant="full"] .kf-banner__image {
+      max-height: none;
+    }
+  }
+
+  .kf-banner[data-color="default"] {
+    background: var(--kf-color-blue-100, #dbeafe);
+  }
+
+  .dark .kf-banner[data-color="default"] {
+    background: var(--kf-color-blue-900, #1d4ed8);
   }
 
   .kf-banner[data-variant="right"] .kf-banner__image {
     order: 1;
   }
 
-  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+  @container banner-container (min-width: 40rem) {
     .kf-banner[data-variant="right"] .kf-banner__image {
       order: 2;
     }
@@ -62,17 +75,50 @@ const BannerGlobalStyles = createGlobalStyle`
 
   .kf-banner[data-variant="full"] .kf-banner__image {
     grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    z-index: 0;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
+
 
   .kf-banner__content {
     order: 2;
     display: flex;
     flex-direction: column;
-    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    justify-content: center;
+    gap: calc(var(--kf-spacing, 0.25rem) * 6);
     padding: calc(var(--kf-spacing, 0.25rem) * 8);
   }
 
-  @media (min-width: var(--kf-breakpoint-sm, 40rem)) {
+  .kf-banner[data-variant="full"] .kf-banner__content {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    align-self: center;
+    justify-self: flex-start;
+    max-width: 26rem;
+    color: var(--kf-color-white, #ffffff);
+    position: relative;
+    z-index: 2;
+  }
+
+  .kf-banner[data-variant="full"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-900, #1d4ed8) 75%,
+      transparent
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @container banner-container (min-width: 40rem) {
     .kf-banner[data-variant="right"] .kf-banner__content {
       order: 1;
     }
@@ -80,18 +126,40 @@ const BannerGlobalStyles = createGlobalStyle`
 
   .kf-banner__title {
     margin: 0;
-    font-size: var(--kf-text-2xl, 1.5rem);
-    line-height: var(--kf-text-2xl--line-height, 1.3333333333);
+    font-size: var(--kf-text-3xl, 2rem);
+    line-height: var(--kf-text-3xl--line-height, 1.3333333333);
     font-weight: 700;
   }
 
   .kf-banner__description {
-    font-size: var(--kf-text-sm, 0.875rem);
-    line-height: var(--kf-text-sm--line-height, 1.4285714286);
-    color: var(--kf-color-gray-950, #0f172a);
+    line-height: var(--kf-text-base--line-height, 1.4285714286);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    overflow: hidden;
+
+    & > p:first-child {
+      margin-block-start: 0;
+    }
+
+    & > p:last-child {
+      margin-block-end: 0;
+    }
   }
 
+  .kf-banner[data-variant="full"] .kf-banner__description {
+    -webkit-line-clamp: 3;
+  }
+
+  @container banner-container (min-width: 40rem) {
+    .kf-banner[data-variant="full"] .kf-banner__description {
+      -webkit-line-clamp: 4;
+    }
+  }
+  
+
   .kf-banner__actions {
+    margin-block-start: calc(var(--kf-spacing, 0.25rem) * 2);
     display: flex;
     flex-wrap: wrap;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
@@ -109,19 +177,19 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
     { variant = "default", color = "default", className, children, ...props },
     ref
   ) => (
-    <>
+    <div className="kf-banner-container">
       <BannerGlobalStyles />
       <div
         ref={ref}
         data-slot="banner"
         data-variant={variant}
         data-color={color}
-        className={cn("kf-banner", className)}
+        className={cn("kf-banner", variant === "full" && "dark", className)}
         {...props}
       >
         {children}
       </div>
-    </>
+    </div>
   )
 );
 
