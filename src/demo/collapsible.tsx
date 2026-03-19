@@ -5,6 +5,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
+  Page,
 } from "@/lib/main";
 import { ChevronsUpDown } from "lucide-react";
 
@@ -12,7 +13,7 @@ export default function CollapsibleDemo() {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Collapsible</h2>
       <Collapsible
         open={isOpen}
@@ -36,7 +37,7 @@ export default function CollapsibleDemo() {
           <div className="app-code-chip">@stitches/react</div>
         </CollapsibleContent>
       </Collapsible>
-    </>
+    </Page.Block>
   );
 }
 

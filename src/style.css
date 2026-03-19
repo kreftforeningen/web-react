@@ -182,8 +182,9 @@ h2 {
     var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
   padding: calc(var(--kf-spacing, 0.25rem) * 2)
     calc(var(--kf-spacing, 0.25rem) * 4);
-  font-family: var(--kf-font-mono, ui-monospace);
+  font-family: var(--kf-font-sans, ui-serif);
   font-size: var(--kf-text-sm, 0.875rem);
+  margin-block: calc(var(--kf-spacing, 0.25rem) * 2);
 }
 
 .app-centered-panel {
