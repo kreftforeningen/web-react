@@ -193,6 +193,41 @@ h2 {
   margin-inline: auto;
 }
 
+.app-context-trigger-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 16rem;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--kf-radius-xl, 0.75rem);
+  border: 1px dashed
+    color-mix(
+      in srgb,
+      var(--kf-color-gray-500, rgba(148, 163, 184, 0.8)) 70%,
+      transparent
+    );
+  font-size: var(--kf-text-sm, 0.875rem);
+  color: var(--kf-color-gray-100, #e5e7eb);
+}
+
+.app-hidden-pointer-fine,
+.app-hidden-pointer-coarse {
+  display: inline-block;
+}
+
+@media (pointer: fine) {
+  .app-hidden-pointer-coarse {
+    display: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .app-hidden-pointer-fine {
+    display: none;
+  }
+}
+
 .app-panel-message {
   padding: calc(var(--kf-spacing, 0.25rem) * 4);
   padding-bottom: 0;

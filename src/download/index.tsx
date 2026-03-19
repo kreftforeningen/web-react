@@ -63,8 +63,12 @@ const DownloadGlobalStyles = createGlobalStyle`
   @container download-container (min-width: 32rem) {
     .kf-download__content {
       padding-inline-end: calc(var(--kf-spacing, 0.25rem) * 6);
-      color: var(--kf-color-gray-950, #f8fafc);
+      color: var(--kf-color-gray-950, #0f172a);
     }
+  }
+
+  .dark .kf-download__content {
+    color: var(--kf-color-gray-50, #f9fafb);
   }
 
   .kf-download__main {
@@ -91,6 +95,10 @@ const DownloadGlobalStyles = createGlobalStyle`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+  }
+
+  .dark .kf-download__description {
+    color: var(--kf-color-gray-300, #e5e7eb);
   }
 
   .kf-download__footer {

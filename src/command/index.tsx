@@ -31,12 +31,16 @@ const CommandGlobalStyles = createGlobalStyle`
     padding: 0;
     overflow: hidden;
     border: 0;
-    border-radius: var(--kf-radius-lg, 0.5rem);
-    background: var(--kf-color-gray-50, #ffffff);
+    border-radius: var(--kf-radius-2xl, 1rem);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-50, #f9fafb) 96%,
+      transparent
+    );
     color: var(--kf-color-gray-950, #0f172a);
     box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.45),
-      0 0 0 1px rgba(15, 23, 42, 0.55);
+      0 24px 60px rgba(15, 23, 42, 0.35),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
   }
 
   .kf-command__sr-only {
@@ -176,8 +180,11 @@ const CommandGlobalStyles = createGlobalStyle`
 
   @media (prefers-color-scheme: dark) {
     .kf-command-dialog__content {
-      background: var(--kf-color-gray-900, #020617);
+      background: var(--kf-color-gray-950, #020617);
       color: var(--kf-color-gray-50, #f9fafb);
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(15, 23, 42, 0.65);
     }
 
     .kf-command__input::placeholder {
