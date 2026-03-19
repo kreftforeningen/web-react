@@ -131,6 +131,30 @@ const DrawerGlobalStyles = createGlobalStyle`
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.66));
   }
 
+  @media (prefers-color-scheme: dark) {
+    .kf-drawer__overlay {
+      background: color-mix(in srgb, #000000 70%, transparent);
+    }
+
+    .kf-drawer__content {
+      background: var(--kf-color-gray-900, #020617);
+      color: var(--kf-color-gray-50, #f9fafb);
+      border-color: var(--kf-color-gray-800, rgba(15, 23, 42, 0.6));
+    }
+
+    .kf-drawer__handle {
+      background: var(--kf-color-gray-700, rgba(148, 163, 184, 0.6));
+    }
+
+    .kf-drawer__title {
+      color: var(--kf-color-gray-50, #f9fafb);
+    }
+
+    .kf-drawer__description {
+      color: var(--kf-color-gray-400, rgba(148, 163, 184, 0.9));
+    }
+  }
+
   @keyframes kf-drawer-fade-in {
     from {
       opacity: 0;
