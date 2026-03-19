@@ -16,8 +16,18 @@ const MenubarGlobalStyles = createGlobalStyle`
     height: calc(var(--kf-spacing, 0.25rem) * 11);
     padding: calc(var(--kf-spacing, 0.25rem) * 1);
     border-radius: var(--kf-radius-md, 0.375rem);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
-    background: var(--kf-color-gray-50, #ffffff);
+    border: var(--kf-border-1, 1px)
+      solid
+      color-mix(
+        in srgb,
+        var(--kf-color-gray-300, rgba(15, 23, 42, 0.18)) 60%,
+        transparent
+      );
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-50, #f9fafb) 96%,
+      transparent
+    );
     box-shadow: var(--kf-shadow-xs, 0 1px 2px 0 rgb(15 23 42 / 0.04));
   }
 
@@ -28,7 +38,7 @@ const MenubarGlobalStyles = createGlobalStyle`
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     padding-inline: calc(var(--kf-spacing, 0.25rem) * 2);
     padding-block: calc(var(--kf-spacing, 0.25rem) * 1.5);
-    border-radius: var(--kf-radius-sm, 0.25rem);
+    border-radius: var(--kf-radius-md, 0.375rem);
     background: transparent;
     color: var(--kf-color-gray-950, #0f172a);
     font-size: var(--kf-text-base, 1rem);
@@ -68,10 +78,20 @@ const MenubarGlobalStyles = createGlobalStyle`
   .kf-menubar__sub-content {
     min-width: 12rem;
     padding: calc(var(--kf-spacing, 0.25rem) * 1);
-    background: var(--kf-color-gray-50, #ffffff);
-    color: var(--kf-color-gray-950, #0f172a);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-50, #f9fafb) 96%,
+      transparent
+    );
+    color: var(--kf-color-gray-950, #020617);
     border-radius: var(--kf-radius-md, 0.375rem);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
+    border: var(--kf-border-1, 1px)
+      solid
+      color-mix(
+        in srgb,
+        var(--kf-color-gray-300, rgba(15, 23, 42, 0.18)) 65%,
+        transparent
+      );
     box-shadow: var(--kf-shadow-md, 0 4px 6px -1px rgb(15 23 42 / 0.1), 0 2px 4px -2px rgb(15 23 42 / 0.08));
     outline: none;
     z-index: 50;
@@ -216,6 +236,80 @@ const MenubarGlobalStyles = createGlobalStyle`
     font-size: var(--kf-text-xs, 0.75rem);
     letter-spacing: 0.08em;
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+  }
+
+  .dark .kf-menubar {
+    background: var(--kf-color-gray-950, #020617);
+    border-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-800, #1f2937) 75%,
+      transparent
+    );
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(15, 23, 42, 0.5);
+  }
+
+  .dark .kf-menubar__trigger,
+  .dark .kf-menubar__sub-trigger {
+    color: var(--kf-color-gray-100, #e5e7eb);
+  }
+
+  .dark .kf-menubar__trigger[data-state="open"],
+  .dark .kf-menubar__trigger:hover,
+  .dark .kf-menubar__trigger:focus-visible,
+  .dark .kf-menubar__sub-trigger[data-state="open"],
+  .dark .kf-menubar__sub-trigger:hover,
+  .dark .kf-menubar__sub-trigger:focus-visible {
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 70%,
+      transparent
+    );
+    color: var(--kf-color-gray-50, #f9fafb);
+  }
+
+  .dark .kf-menubar__content,
+  .dark .kf-menubar__sub-content {
+    background: var(--kf-color-gray-950, #020617);
+    color: var(--kf-color-gray-50, #f9fafb);
+    border-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 75%,
+      transparent
+    );
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(15, 23, 42, 0.55);
+  }
+
+  .dark .kf-menubar__item:hover,
+  .dark .kf-menubar__item:focus-visible,
+  .dark .kf-menubar__checkbox-item:hover,
+  .dark .kf-menubar__checkbox-item:focus-visible,
+  .dark .kf-menubar__radio-item:hover,
+  .dark .kf-menubar__radio-item:focus-visible,
+  .dark .kf-menubar__sub-trigger[data-state="open"] {
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 75%,
+      transparent
+    );
+    color: var(--kf-color-gray-50, #f9fafb);
+  }
+
+  .dark .kf-menubar__item[data-variant="destructive"] {
+    color: var(--kf-color-red-400, #f87171);
+  }
+
+  .dark .kf-menubar__item[data-variant="destructive"]:hover,
+  .dark .kf-menubar__item[data-variant="destructive"]:focus-visible {
+    background: color-mix(
+      in srgb,
+      var(--kf-color-red-500, #ef4444) 20%,
+      transparent
+    );
+    color: var(--kf-color-red-100, #fee2e2);
   }
 
   .kf-menubar__sub-trigger-icon {

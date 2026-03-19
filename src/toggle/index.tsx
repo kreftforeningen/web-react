@@ -19,7 +19,7 @@ const ToggleGlobalStyles = createGlobalStyle`
     font-size: var(--kf-text-base, 1rem);
     font-weight: 500;
     background: transparent;
-    color: var(--kf-color-gray-950, #0f172a);
+    color: var(--kf-color-gray-900, #111827);
     cursor: pointer;
     outline: none;
     transition:
@@ -44,23 +44,37 @@ const ToggleGlobalStyles = createGlobalStyle`
   }
 
   .kf-toggle[data-variant="outline"] {
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
+    border: var(--kf-border-1, 1px)
+      solid
+      var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
     box-shadow: var(--kf-shadow-xs, 0 1px 2px 0 rgb(15 23 42 / 0.05));
   }
 
   .kf-toggle[data-variant="outline"]:hover {
-    background: var(--kf-color-gray-200, rgba(148, 163, 184, 0.16));
-    color: var(--kf-color-gray-900, #0f172a);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-200, rgba(148, 163, 184, 0.16)) 70%,
+      transparent
+    );
+    color: var(--kf-color-gray-900, #111827);
   }
 
   .kf-toggle[data-variant="default"]:hover {
-    background: var(--kf-color-gray-100, rgba(148, 163, 184, 0.16));
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-100, #e5e7eb) 70%,
+      transparent
+    );
   }
 
   .kf-toggle[data-variant="default"][data-state="on"],
   .kf-toggle[data-variant="outline"][data-state="on"] {
-    background: color-mix(in srgb, var(--kf-color-gray-900, #0f172a) 20%, transparent);
-    color: var(--kf-color-gray-900, #0f172a);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-blue-600, #2563eb) 18%,
+      transparent
+    );
+    color: var(--kf-color-blue-900, #1e3a8a);
   }
 
   .kf-toggle[data-size="default"] {
@@ -100,6 +114,55 @@ const ToggleGlobalStyles = createGlobalStyle`
   .kf-toggle[disabled] {
     pointer-events: none;
     opacity: 0.5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .kf-toggle {
+      color: var(--kf-color-gray-100, #e5e7eb);
+    }
+
+    .kf-toggle[data-variant="outline"] {
+      border-color: color-mix(
+        in srgb,
+        var(--kf-color-gray-700, #374151) 80%,
+        transparent
+      );
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(15, 23, 42, 0.6);
+    }
+
+    .kf-toggle[data-variant="outline"]:hover {
+      background: color-mix(
+        in srgb,
+        var(--kf-color-gray-700, #374151) 70%,
+        transparent
+      );
+      color: var(--kf-color-gray-50, #f9fafb);
+    }
+
+    .kf-toggle[data-variant="default"]:hover {
+      background: color-mix(
+        in srgb,
+        var(--kf-color-gray-800, #1f2937) 65%,
+        transparent
+      );
+    }
+
+    .kf-toggle[data-variant="default"][data-state="on"],
+    .kf-toggle[data-variant="outline"][data-state="on"] {
+      background: color-mix(
+        in srgb,
+        var(--kf-color-blue-500, #3b82f6) 28%,
+        transparent
+      );
+      color: var(--kf-color-blue-50, #eff6ff);
+      border-color: var(--kf-color-blue-400, #60a5fa);
+    }
+
+    .kf-toggle__icon {
+      color: inherit;
+    }
   }
 `;
 

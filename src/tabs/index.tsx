@@ -10,26 +10,29 @@ const TabsGlobalStyles = createGlobalStyle`
   .kf-tabs {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--kf-spacing, 0.25rem) * 2);
+    gap: calc(var(--kf-spacing, 0.25rem) * 4);
   }
 
   .kf-tabs__list {
-    background: var(--kf-color-gray-100, oklch(0.95 0.01 240));
-    color: var(--kf-color-gray-600, oklch(0.45 0.01 240));
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-100, #f1f5f9) 96%,
+      transparent
+    );
+    color: var(--kf-color-gray-600, #4b5563);
     display: inline-flex;
     height: calc(var(--kf-spacing, 0.25rem) * 9);
     width: fit-content;
     align-items: center;
     justify-content: center;
-    border-radius: var(--kf-radius-lg, 0.5rem);
+    border-radius: var(--kf-radius-xl, 0.75rem);
     padding: 3px;
   }
 
   .dark .kf-tabs__list {
-      background: var(--kf-color-gray-800, oklch(0.3 0.01 240));
-      color: var(--kf-color-gray-400, oklch(0.55 0.01 240));
-    }
-  
+    background: var(--kf-color-gray-900, #020617);
+    color: var(--kf-color-gray-400, #9ca3af);
+  }
 
   .kf-tabs__trigger {
     display: inline-flex;
@@ -38,7 +41,7 @@ const TabsGlobalStyles = createGlobalStyle`
     align-items: center;
     justify-content: center;
     gap: calc(var(--kf-spacing, 0.25rem) * 1.5);
-    border-radius: var(--kf-radius-md, 0.375rem);
+    border-radius: var(--kf-radius-lg, 0.5rem);
     border: 1px solid transparent;
     padding: calc(var(--kf-spacing, 0.25rem) * 1) calc(var(--kf-spacing, 0.25rem) * 2);
     font-size: var(--kf-text-sm, 0.875rem);
@@ -47,7 +50,7 @@ const TabsGlobalStyles = createGlobalStyle`
     transition: color 150ms var(--kf-ease-in-out, ease), box-shadow 150ms var(--kf-ease-in-out, ease);
     outline: none;
     background: transparent;
-    color: var(--kf-color-gray-950, oklch(0.18 0 0));
+    color: var(--kf-color-gray-700, #374151);
     cursor: pointer;
   }
 
@@ -62,9 +65,9 @@ const TabsGlobalStyles = createGlobalStyle`
   }
 
   .kf-tabs__trigger[data-state="active"] {
-    background: var(--kf-color-white, oklch(0.97 0 0));
-    color: var(--kf-color-gray-950, oklch(0.18 0 0));
-    box-shadow: var(--kf-shadow-xs, 0 1px 2px 0 rgb(15 23 42 / 0.05));
+    background: var(--kf-color-white, #ffffff);
+    color: var(--kf-color-gray-950, #020617);
+    box-shadow: var(--kf-shadow-xs, 0 1px 2px 0 rgb(15 23 42 / 0.06));
   }
 
   .kf-tabs__trigger:focus-visible {
@@ -85,13 +88,17 @@ const TabsGlobalStyles = createGlobalStyle`
   }
 
   .dark .kf-tabs__trigger {
-    color: var(--kf-color-gray-400, oklch(0.55 0.01 240));
+    color: var(--kf-color-gray-400, #9ca3af);
   }
 
   .dark .kf-tabs__trigger[data-state="active"] {
-    background: color-mix(in srgb, var(--kf-color-gray-800, oklch(0.3 0.01 240)) 30%, transparent);
-    color: var(--kf-color-gray-100, oklch(0.95 0.01 240));
-    border-color: var(--kf-color-gray-700, oklch(0.4 0.01 240));
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-800, #1f2937) 60%,
+      transparent
+    );
+    color: var(--kf-color-gray-50, #f9fafb);
+    border-color: var(--kf-color-gray-700, #374151);
   }
 
   .kf-tabs__content {

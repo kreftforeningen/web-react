@@ -6,12 +6,13 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
+  Page,
 } from "@/lib/main";
 import { ArrowUpRightIcon, FolderCodeIcon } from "lucide-react";
 
 export default function EmptyDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Empty</h2>
       <Empty>
         <EmptyHeader>
@@ -36,6 +37,6 @@ export default function EmptyDemo() {
           </a>
         </Button>
       </Empty>
-    </>
+    </Page.Block>
   );
 }

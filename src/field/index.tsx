@@ -23,16 +23,20 @@ const FieldGlobalStyles = createGlobalStyle`
   }
 
   .kf-field-legend {
+    margin: 0;
     margin-bottom: calc(var(--kf-spacing, 0.25rem) * 3);
     font-weight: 500;
+    color: var(--kf-color-gray-950, #020617);
   }
 
   .kf-field-legend[data-variant="legend"] {
     font-size: var(--kf-text-base, 1rem);
+    line-height: var(--kf-text-base--line-height, 1.5);
   }
 
   .kf-field-legend[data-variant="label"] {
     font-size: var(--kf-text-sm, 0.875rem);
+    line-height: var(--kf-text-sm--line-height, 1.4285714286);
   }
 
   .kf-field-group {
@@ -123,6 +127,9 @@ const FieldGlobalStyles = createGlobalStyle`
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     width: fit-content;
     line-height: 1.4;
+    font-size: var(--kf-text-sm, 0.875rem);
+    font-weight: 500;
+    color: var(--kf-color-gray-950, #020617);
   }
 
   .kf-field[data-disabled="true"] .kf-field-label,
@@ -130,20 +137,8 @@ const FieldGlobalStyles = createGlobalStyle`
     opacity: 0.5;
   }
 
-  .kf-field-label:has(> [data-slot="field"]) {
-    width: 100%;
-    flex-direction: column;
-    border-radius: var(--kf-radius-md, 0.375rem);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
-  }
-
-  .kf-field-label:has(> [data-slot="field"]) > [data-slot="field"] {
-    padding: calc(var(--kf-spacing, 0.25rem) * 4);
-  }
-
-  .kf-field-label:has([data-state="checked"]) {
-    border-color: var(--kf-color-blue-600, #0f172a);
-    background: color-mix(in srgb, var(--kf-color-blue-600, #0f172a) 10%, transparent);
+  .dark .kf-field-label {
+    color: var(--kf-color-gray-50, #f9fafb);
   }
 
   .kf-field-title {
@@ -256,7 +251,7 @@ const orientationClasses: Record<FieldOrientation, string> = {
 
 function Field({
   className,
-  orientation = "vertical",
+  orientation = "responsive",
   ...props
 }: React.ComponentProps<"div"> & { orientation?: FieldOrientation }) {
   return (

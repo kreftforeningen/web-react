@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ScrollArea, Separator } from "@/lib/main";
+import { Page, ScrollArea, Separator } from "@/lib/main";
 
 const tags = Array.from({ length: 20 }).map(
   (_, index, array) => `v1.2.0-beta.${array.length - index}`
@@ -8,7 +8,7 @@ const tags = Array.from({ length: 20 }).map(
 
 export default function ScrollAreaDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Scroll Area</h2>
       <ScrollArea className="app-padding-md">
         <div className="app-padding-md">
@@ -21,6 +21,6 @@ export default function ScrollAreaDemo() {
           ))}
         </div>
       </ScrollArea>
-    </>
+    </Page.Block>
   );
 }

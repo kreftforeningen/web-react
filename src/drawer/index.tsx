@@ -128,7 +128,7 @@ const DrawerGlobalStyles = createGlobalStyle`
   .kf-drawer__description {
     font-size: var(--kf-text-sm, 0.875rem);
     line-height: var(--kf-text-sm--line-height, 1.4285714286);
-    color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.66));
+    color: var(--kf-color-gray-700, #374151);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -151,7 +151,7 @@ const DrawerGlobalStyles = createGlobalStyle`
     }
 
     .kf-drawer__description {
-      color: var(--kf-color-gray-400, rgba(148, 163, 184, 0.9));
+      color: var(--kf-color-gray-200, #e5e7eb);
     }
   }
 

@@ -1,8 +1,8 @@
-import { Label, RadioGroup, RadioGroupItem } from "@/lib/main";
+import { Label, Page, RadioGroup, RadioGroupItem } from "@/lib/main";
 
 export default function RadioGroupDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Radio Group</h2>
       <RadioGroup defaultValue="option-one">
         <div className="app-inline-space">
@@ -14,6 +14,6 @@ export default function RadioGroupDemo() {
           <Label htmlFor="radio-option-two">Option Two</Label>
         </div>
       </RadioGroup>
-    </>
+    </Page.Block>
   );
 }

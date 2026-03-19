@@ -11,13 +11,14 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
+  Page,
   RadioGroup,
   RadioGroupItem,
 } from "@/lib/main";
 
 export default function MenubarDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Menubar</h2>
       <Menubar>
         <MenubarMenu>
@@ -85,6 +86,6 @@ export default function MenubarDemo() {
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
-    </>
+    </Page.Block>
   );
 }

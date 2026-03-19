@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 type TimelineVariant = "default" | "icon";
 
-type TimelineItemProps = React.ComponentPropsWithoutRef<"div"> & {
+type TimelineItemProps = React.ComponentPropsWithoutRef<"li"> & {
   variant?: TimelineVariant;
   isLast?: boolean;
 };
@@ -16,6 +16,9 @@ const TimelineGlobalStyles = createGlobalStyle`
   .kf-timeline {
     display: flex;
     flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .kf-timeline__item {
@@ -103,18 +106,19 @@ function Timeline({
   variant = "default",
   children,
   ...props
-}: React.ComponentPropsWithoutRef<"div"> & { variant?: TimelineVariant }) {
+}: React.ComponentPropsWithoutRef<"ul"> & { variant?: TimelineVariant }) {
   return (
     <>
       <TimelineGlobalStyles />
-      <div
+      <ul
+        role="list"
         data-slot="timeline"
         data-variant={variant}
         className={cn("kf-timeline", className)}
         {...props}
       >
         {children}
-      </div>
+      </ul>
     </>
   );
 }
@@ -127,26 +131,24 @@ function TimelineItem({
   ...props
 }: TimelineItemProps) {
   return (
-    <>
-      <div
-        data-slot="timeline-item"
-        data-variant={variant}
-        className={cn("kf-timeline__item", className)}
-        {...props}
-      >
-        <div className="kf-timeline__item-content-wrapper">
-          <div className="kf-timeline__node">
-            <span className="kf-timeline__spacer-top" aria-hidden="true" />
-            <span className="kf-timeline__dot" aria-hidden="true" />
-            <span className="kf-timeline__spacer-bottom" aria-hidden="true" />
-            {!isLast && (
-              <span className="kf-timeline__connector" aria-hidden="true" />
-            )}
-          </div>
-          <div className="kf-timeline__content">{children}</div>
+    <li
+      data-slot="timeline-item"
+      data-variant={variant}
+      className={cn("kf-timeline__item", className)}
+      {...props}
+    >
+      <div className="kf-timeline__item-content-wrapper">
+        <div className="kf-timeline__node">
+          <span className="kf-timeline__spacer-top" aria-hidden="true" />
+          <span className="kf-timeline__dot" aria-hidden="true" />
+          <span className="kf-timeline__spacer-bottom" aria-hidden="true" />
+          {!isLast && (
+            <span className="kf-timeline__connector" aria-hidden="true" />
+          )}
         </div>
+        <div className="kf-timeline__content">{children}</div>
       </div>
-    </>
+    </li>
   );
 }
 

@@ -22,9 +22,13 @@ const ItemGlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     gap: calc(var(--kf-spacing, 0.25rem) * 4);
-    border-radius: var(--kf-radius-md, 0.375rem);
+    border-radius: var(--kf-radius-xl, 0.75rem);
     border: var(--kf-border-1, 1px) solid transparent;
-    transition: color 120ms var(--kf-ease-in-out, ease), box-shadow 120ms var(--kf-ease-in-out, ease);
+    transition:
+      background-color 120ms var(--kf-ease-in-out, ease),
+      border-color 120ms var(--kf-ease-in-out, ease),
+      color 120ms var(--kf-ease-in-out, ease),
+      box-shadow 120ms var(--kf-ease-in-out, ease);
     outline: none;
     text-decoration: none;
     flex-wrap: wrap;
@@ -35,7 +39,11 @@ const ItemGlobalStyles = createGlobalStyle`
   }
 
   .kf-item[data-variant="muted"] {
-    background: color-mix(in srgb, var(--kf-color-gray-50, rgba(148, 163, 184, 0.16)) 50%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-50, #f9fafb) 70%,
+      transparent
+    );
   }
 
   .kf-item[data-size="default"] {
@@ -55,9 +63,12 @@ const ItemGlobalStyles = createGlobalStyle`
       0 0 0 4px color-mix(in srgb, var(--kf-color-blue-400, rgba(59, 130, 246, 0.2)) 65%, transparent);
   }
 
-  .kf-item a:hover {
-    background: color-mix(in srgb, var(--kf-color-gray-200, rgba(148, 163, 184, 0.16)) 50%, transparent);
-    transition: color 100ms var(--kf-ease-in-out, ease);
+  .kf-item:hover {
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-100, #f3f4f6) 75%,
+      transparent
+    );
   }
 
   .kf-item-media {
@@ -117,17 +128,17 @@ const ItemGlobalStyles = createGlobalStyle`
   .kf-item-description {
     font-size: var(--kf-text-sm, 0.875rem);
     line-height: var(--kf-text-sm--line-height, 1.4285714286);
-    color: var(--kf-color-gray-600, oklch(0.4 0 0));
+    color: var(--kf-color-gray-600, #4b5563);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-wrap: balance;
-    margin-block: 0
+    margin-block: 0;
   }
 
   .dark .kf-item-description {
-    color: var(--kf-color-gray-300, oklch(0.7 0 0));
+    color: var(--kf-color-gray-300, #e5e7eb);
   }
 
   .kf-item-description a {
@@ -136,7 +147,7 @@ const ItemGlobalStyles = createGlobalStyle`
   }
 
   .kf-item-description a:hover {
-    color: var(--kf-color-blue-600, oklch(0.4 0 0));
+    color: var(--kf-color-blue-600, #2563eb);
   }
 
   .kf-item-actions {
@@ -157,6 +168,30 @@ const ItemGlobalStyles = createGlobalStyle`
   .kf-item-header img,
   .kf-item-header picture > img {
     border-radius: var(--kf-radius-md, 0.375rem);
+  }
+
+  .dark .kf-item[data-variant="outline"] {
+    border-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 75%,
+      transparent
+    );
+  }
+
+  .dark .kf-item[data-variant="muted"] {
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-800, #1f2937) 80%,
+      transparent
+    );
+  }
+
+  .dark .kf-item:hover {
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 70%,
+      transparent
+    );
   }
 `;
 
