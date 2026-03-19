@@ -9,6 +9,10 @@ body {
   }
 }
 
+h2 {
+  margin-bottom: calc(var(--kf-spacing, 0.25rem) * 4);
+}
+
 .app-main-section {
   width: 100%;
   max-width: clamp(20rem, 66vw, var(--kf-container-5xl, 64rem));
