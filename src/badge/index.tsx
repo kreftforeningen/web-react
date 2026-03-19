@@ -22,6 +22,7 @@ const BadgeGlobalStyles = createGlobalStyle`
     font-size: var(--kf-text-xs, 0.75rem);
     line-height: var(--kf-text-xs--line-height, 1.3333333333);
     font-weight: 500;
+    min-height: calc(var(--kf-spacing, 0.25rem) * 5);
     min-width: fit-content;
     white-space: nowrap;
     flex-shrink: 0;
@@ -87,13 +88,40 @@ const BadgeGlobalStyles = createGlobalStyle`
 
   .kf-badge--outline {
     background: transparent;
-    color: var(--kf-color-gray-950, #0f172a);
-    border-color: var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
+    color: var(--kf-color-gray-900, #111827);
+    border-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-300, #d1d5db) 80%,
+      transparent
+    );
   }
 
   .kf-badge--outline:is(a:hover, a:focus-visible) {
-    background: var(--kf-color-gray-200, rgba(148, 163, 184, 0.16));
-    color: var(--kf-color-gray-900, #0f172a);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-100, #f3f4f6) 60%,
+      transparent
+    );
+    border-color: var(--kf-color-gray-400, #9ca3af);
+  }
+
+  .dark .kf-badge--outline {
+    background: transparent;
+    color: var(--kf-color-gray-100, #f3f4f6);
+    border-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-600, #4b5563) 80%,
+      transparent
+    );
+  }
+
+  .dark .kf-badge--outline:is(a:hover, a:focus-visible) {
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 45%,
+      transparent
+    );
+    border-color: var(--kf-color-gray-500, #6b7280);
   }
 `;
 
