@@ -1,0 +1,7 @@
+minimumReleaseAge: 10080
+
+minimumReleaseAgeExclude:
+  - react@19.2.1
+  - react-dom@19.2.1
+  - "@vitejs/plugin-react@5.1.2"
+  - "@rolldown/pluginutils@1.0.0-beta.53"
