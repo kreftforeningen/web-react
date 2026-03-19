@@ -13,7 +13,6 @@ const CardGlobalStyles = createGlobalStyle`
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     border-radius: var(--kf-radius-2xl, 1rem);
     padding-block: calc(var(--kf-spacing, 0.25rem) * 8);
-    overflow: hidden;
     background: var(--kf-color-gray-100, #ffffff);
     color: var(--kf-color-gray-950, #0f172a);
     height: 100%;
@@ -52,6 +51,15 @@ const CardGlobalStyles = createGlobalStyle`
   .dark .kf-card {
     background: var(--kf-color-gray-900, #0f172a);
     color: var(--kf-color-gray-200, #ffffff);
+  }
+
+  .dark a:hover .kf-card,
+  .dark a:focus-visible .kf-card {
+    background-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-800, #1f2937) 85%,
+      transparent
+    );
   }
 
   .kf-card__header {
@@ -100,7 +108,7 @@ const CardGlobalStyles = createGlobalStyle`
   .kf-card__image {
     position: relative;
     overflow: hidden;
-    border-radius: inherit;
+    border-radius: var(--kf-radius-2xl, 1rem) var(--kf-radius-2xl, 1rem) 0 0;
     background: var(--kf-color-gray-200, rgba(148, 163, 184, 0.2));
     margin-bottom: calc(var(--kf-spacing, 0.25rem) * 4);
   }
@@ -118,7 +126,15 @@ const CardGlobalStyles = createGlobalStyle`
     height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: inherit;
+  }
+
+  .kf-card__image.kf-aspect-ratio img,
+  .kf-card__image.kf-aspect-ratio picture > img {
+    border-radius: var(--kf-radius-2xl, 1rem) var(--kf-radius-2xl, 1rem) 0 0;
+  }
+
+  .dark .kf-card__image {
+    background: var(--kf-color-gray-800, #1f2937);
   }
 
   .kf-card__footer {
