@@ -11,20 +11,39 @@ const HoverCardGlobalStyles = createGlobalStyle`
     font-family: var(--kf-font-sans);
     z-index: 50;
     width: 16rem;
-    border-radius: var(--kf-radius-md, 0.375rem);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
-    background: var(--kf-color-gray-50, oklch(0.98 0 0));
-    color: var(--kf-color-gray-950, oklch(0.039 0.01 240));
+    border-radius: var(--kf-radius-xl, 0.75rem);
+    border: var(--kf-border-1, 1px)
+      solid
+      color-mix(
+        in srgb,
+        var(--kf-color-gray-300, rgba(15, 23, 42, 0.18)) 65%,
+        transparent
+      );
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-50, #f9fafb) 96%,
+      transparent
+    );
+    color: var(--kf-color-gray-950, #020617);
     padding: calc(var(--kf-spacing, 0.25rem) * 4);
-    box-shadow: var(--kf-shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+    box-shadow:
+      0 16px 40px rgba(15, 23, 42, 0.28),
+      0 0 0 1px rgba(15, 23, 42, 0.04);
     outline: none;
     transform-origin: var(--radix-hover-card-content-transform-origin, center);
   }
 
   .dark .kf-hover-card__content {
-    background: var(--kf-color-gray-900, oklch(0.039 0.01 240));
-    color: var(--kf-color-gray-50, oklch(0.98 0 0));
-    border-color: var(--kf-color-gray-800, oklch(0.08 0.01 240));
+    background: var(--kf-color-gray-950, #020617);
+    color: var(--kf-color-gray-50, #f9fafb);
+    border-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 75%,
+      transparent
+    );
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(15, 23, 42, 0.6);
   }
 
   .kf-hover-card__content[data-state="open"] {
