@@ -125,6 +125,10 @@ const CalendarGlobalStyles = createGlobalStyle`
   }
 
   .kf-calendar__caption-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
     font-weight: 600;
     user-select: none;
     font-size: var(--kf-text-sm, 0.875rem);
@@ -252,6 +256,60 @@ const CalendarGlobalStyles = createGlobalStyle`
   .kf-calendar__day-button[data-today="true"] {
     background: var(--kf-color-gray-200, rgba(148, 163, 184, 0.2));
     color: var(--kf-color-gray-900, #0f172a);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .kf-calendar {
+      background: color-mix(
+        in srgb,
+        var(--kf-color-gray-900, #020617) 92%,
+        transparent
+      );
+    }
+
+    .kf-calendar__weekday {
+      color: var(--kf-color-gray-300, #d1d5db);
+    }
+
+    .kf-calendar__week-number {
+      color: var(--kf-color-gray-500, rgba(148, 163, 184, 0.8));
+    }
+
+    .kf-calendar__day-button {
+      background: transparent;
+      color: var(--kf-color-gray-100, #f9fafb);
+    }
+
+    .kf-calendar__day-button[data-selected-single="true"],
+    .kf-calendar__day-button[data-range-start="true"],
+    .kf-calendar__day-button[data-range-end="true"] {
+      background: var(--kf-color-blue-500, #3b82f6);
+      color: var(--kf-color-blue-50, #eff6ff);
+    }
+
+    .kf-calendar__day-button[data-range-middle="true"] {
+      background: color-mix(
+        in srgb,
+        var(--kf-color-blue-500, #3b82f6) 30%,
+        transparent
+      );
+      color: var(--kf-color-gray-100, #f9fafb);
+    }
+
+    .kf-calendar__day-button[data-outside="true"] {
+      color: var(--kf-color-gray-500, rgba(148, 163, 184, 0.7));
+    }
+
+    .kf-calendar__day-button[data-today="true"]:not([data-selected-single="true"]):not(
+        [data-range-start="true"]
+      ):not([data-range-end="true"]):not([data-range-middle="true"]) {
+      background: color-mix(
+        in srgb,
+        var(--kf-color-gray-700, #374151) 40%,
+        transparent
+      );
+      color: var(--kf-color-gray-100, #f9fafb);
+    }
   }
 
   .kf-calendar__hidden {
