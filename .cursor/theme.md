@@ -1,2 +1,9 @@
 - for colors, use the kf variables from web-css, and a fallback, ie var(--kf-color-red-700, #b91c1c)
 - all styling should be for both light and dark mode
+- visual style: calm, high‑contrast editorial UI with large rounded surfaces (cards, banners, footer/header blocks) that feel slightly “soft” rather than sharp; primary shapes are pills, rounded rectangles, and circular icon buttons
+- typography: use the existing sans as body and a condensed display family for headings/titles; headings are bold, left‑aligned, and slightly oversized; supporting text is smaller, muted, and compact (tight leading)
+- layout: components are self‑contained sections with generous padding, clear vertical rhythm, and container queries where useful; prefer responsive single‑column on small screens, splitting into 2+ columns at 32–40rem using either container or media queries
+- interaction: hover/focus states are clear but not loud – mainly subtle background and border changes plus strong focus rings; respect reduced‑motion; keyboard focus must always be visible
+- elevation: avoid heavy borders; instead use soft shadows and subtle color‑mix backgrounds for depth (e.g. cards, command/dialog, context menus), with slightly stronger elevation for overlays/menus than for inline cards
+- dark mode: treat dark mode as first‑class; backgrounds shift to near‑black grays, text to off‑white, with carefully tuned mid‑gray accents; destructive/semantic colors should stay vivid but slightly deepened
+- components: navigation (header, footer, navigation menu), media panels (banner, card, download, carousel), and accent links should all feel like part of one system – consistent corner radii, spacing scale (multiples of var(--kf-spacing)), and icon sizing (typically 1rem inside controls)
