@@ -99,11 +99,12 @@ const ButtonGroupGlobalStyles = createGlobalStyle`
 
   .kf-button-group__separator[data-orientation="horizontal"] {
     width: 1px;
+    height: 100%;
   }
 
   .kf-button-group__separator[data-orientation="vertical"] {
-    height: auto;
-    width: auto;
+    height: 1px;
+    width: 100%;
   }
 `;
 

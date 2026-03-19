@@ -269,8 +269,8 @@ const ButtonGlobalStyles = createGlobalStyle`
     font-size: var(--kf-font-size-lg, 1.125rem);
   }
   .kf-btn--size-icon {
-    width: var(--kf-btn-height-icon, 36px);
-    height: var(--kf-btn-height-icon, 36px);
+    width: var(--kf-btn-height-md, 44px);
+    height: var(--kf-btn-height-md, 44px);
     padding: 0;
   }
 

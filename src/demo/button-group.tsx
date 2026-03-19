@@ -1,18 +1,46 @@
+import * as React from "react";
+
 import {
   Button,
   ButtonGroup,
-  ButtonGroupSeparator,
-  ButtonGroupText,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+  Page,
 } from "@/lib/main";
-import { ArrowLeftIcon } from "lucide-react";
+import {
+  ArchiveIcon,
+  ArrowLeftIcon,
+  CalendarPlusIcon,
+  ClockIcon,
+  ListFilterIcon,
+  MailCheckIcon,
+  MoreHorizontalIcon,
+  TagIcon,
+  Trash2Icon,
+} from "lucide-react";
 
 export default function ButtonGroupDemo() {
+  const [label, setLabel] = React.useState("personal");
+
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Button Group</h2>
       <ButtonGroup>
         <ButtonGroup>
-          <Button variant="outline" size="icon" aria-label="Go Back">
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label="Go Back"
+          >
             <ArrowLeftIcon />
           </Button>
         </ButtonGroup>
@@ -20,13 +48,77 @@ export default function ButtonGroupDemo() {
           <Button variant="outline">Archive</Button>
           <Button variant="outline">Report</Button>
         </ButtonGroup>
-        <ButtonGroupSeparator />
         <ButtonGroup>
-          <Button variant="outline">Archive</Button>
-          <Button variant="outline">Report</Button>
+          <Button variant="outline">Snooze</Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                aria-label="More Options"
+              >
+                <MoreHorizontalIcon />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="app-menu-width-sm">
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <MailCheckIcon />
+                  Mark as Read
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <ArchiveIcon />
+                  Archive
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <ClockIcon />
+                  Snooze
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <CalendarPlusIcon />
+                  Add to Calendar
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <ListFilterIcon />
+                  Add to List
+                </DropdownMenuItem>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>
+                    <TagIcon />
+                    Label As...
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuRadioGroup
+                      value={label}
+                      onValueChange={setLabel}
+                    >
+                      <DropdownMenuRadioItem value="personal">
+                        Personal
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="work">
+                        Work
+                      </DropdownMenuRadioItem>
+                      <DropdownMenuRadioItem value="other">
+                        Other
+                      </DropdownMenuRadioItem>
+                    </DropdownMenuRadioGroup>
+                  </DropdownMenuSubContent>
+                </DropdownMenuSub>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem variant="destructive">
+                  <Trash2Icon />
+                  Trash
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </ButtonGroup>
-        <ButtonGroupText>Button Group Text</ButtonGroupText>
       </ButtonGroup>
-    </>
+    </Page.Block>
   );
 }
