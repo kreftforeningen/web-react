@@ -2,7 +2,7 @@ import { Button, Page } from "@/lib/main";
 
 export default function ButtonDemo() {
   return (
-    <Page.Block width="xl" gutters>
+    <Page.Block width="3xl" gutters>
       <h2>Button</h2>
       <div className="app-button-row">
         <Button variant="default">Default</Button>
