@@ -5,6 +5,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 import { createGlobalStyle } from "styled-components";
 
+import { Button } from "@/button";
 import { cn } from "@/lib/utils";
 
 const DialogGlobalStyles = createGlobalStyle`
@@ -13,6 +14,19 @@ const DialogGlobalStyles = createGlobalStyle`
     inset: 0;
     z-index: 50;
     background: color-mix(in srgb, #000000 50%, transparent);
+    backdrop-filter: blur(3px);
+  }
+
+  .kf-command__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .kf-dialog__overlay[data-state="open"] {
@@ -32,19 +46,38 @@ const DialogGlobalStyles = createGlobalStyle`
     gap: calc(var(--kf-spacing, 0.25rem) * 4);
     width: min(32rem, calc(100% - calc(var(--kf-spacing, 0.25rem) * 8)));
     transform: translate(-50%, -50%);
-    background: var(--kf-color-gray-50, #ffffff);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-50, #f9fafb) 96%,
+      transparent
+    );
     color: var(--kf-color-gray-950, #0f172a);
-    border-radius: var(--kf-radius-lg, 0.5rem);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
+    border-radius: var(--kf-radius-2xl, 1rem);
+    border: var(--kf-border-1, 1px)
+      solid
+      color-mix(
+        in srgb,
+        var(--kf-color-gray-300, rgba(15, 23, 42, 0.22)) 60%,
+        transparent
+      );
     padding: calc(var(--kf-spacing, 0.25rem) * 6);
-    box-shadow: var(--kf-shadow-xl, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04));
+    box-shadow:
+      0 24px 60px rgba(15, 23, 42, 0.35),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
     background-clip: padding-box;
   }
 
   .dark .kf-dialog__content {
-    background: var(--kf-color-gray-950, oklch(0.039 0.01 240));
-    color: var(--kf-color-gray-50, oklch(0.98 0 0));
-    border-color: var(--kf-color-gray-500, oklch(0.72 0.016 240));
+    background: var(--kf-color-gray-950, #020617);
+    color: var(--kf-color-gray-50, #f9fafb);
+    border-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 75%,
+      transparent
+    );
+    box-shadow:
+      0 28px 70px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(15, 23, 42, 0.65);
   }
 
   .kf-dialog__content[data-state="open"] {
@@ -100,37 +133,10 @@ const DialogGlobalStyles = createGlobalStyle`
     position: absolute;
     top: calc(var(--kf-spacing, 0.25rem) * 4);
     right: calc(var(--kf-spacing, 0.25rem) * 4);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    border-radius: var(--kf-radius-sm, 0.125rem);
-    background: transparent;
-    color: inherit;
-    opacity: 0.7;
-    cursor: pointer;
-    transition: opacity 120ms var(--kf-ease-in-out, ease);
-  }
-
-  .kf-dialog__close:hover {
-    opacity: 1;
-  }
-
-  .kf-dialog__close:focus-visible {
-    outline: none;
-    --kf-ring-color: var(--kf-color-blue-400, rgba(59, 130, 246, 0.6));
-    --kf-ring-offset-color: var(--kf-color-gray-50, #ffffff);
-    --kf-ring-width: 2px;
-    --kf-ring-offset-width: 2px;
-    box-shadow:
-      0 0 0 var(--kf-ring-offset-width) var(--kf-ring-offset-color),
-      0 0 0 calc(var(--kf-ring-offset-width) + var(--kf-ring-width)) var(--kf-ring-color);
-  }
-
-  .kf-dialog__close svg {
-    width: calc(var(--kf-spacing, 0.25rem) * 4);
-    height: calc(var(--kf-spacing, 0.25rem) * 4);
-    pointer-events: none;
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: transparent;
   }
 
   .kf-dialog__sr-only {
@@ -246,8 +252,14 @@ function DialogContent({
             data-slot="dialog-close"
             className="kf-dialog__close"
           >
-            <XIcon aria-hidden="true" focusable="false" />
-            <span className="kf-dialog__sr-only">Close</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              shape="square"
+              aria-label="Close dialog"
+            >
+              <XIcon aria-hidden="true" focusable="false" />
+            </Button>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>

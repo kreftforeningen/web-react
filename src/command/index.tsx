@@ -22,14 +22,21 @@ const CommandGlobalStyles = createGlobalStyle`
     width: 100%;
     height: 100%;
     overflow: hidden;
-    border-radius: var(--kf-radius-md, 0.375rem);
-    background: var(--kf-color-gray-50, #ffffff);
-    color: var(--kf-color-gray-950, #0f172a);
+    border-radius: inherit;
+    background: transparent;
+    color: inherit;
   }
 
   .kf-command-dialog__content {
     padding: 0;
     overflow: hidden;
+    border: 0;
+    border-radius: var(--kf-radius-lg, 0.5rem);
+    background: var(--kf-color-gray-50, #ffffff);
+    color: var(--kf-color-gray-950, #0f172a);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(15, 23, 42, 0.55);
   }
 
   .kf-command__sr-only {
@@ -165,6 +172,50 @@ const CommandGlobalStyles = createGlobalStyle`
     line-height: var(--kf-text-xs--line-height, 1.3333333333);
     letter-spacing: 0.08em;
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .kf-command-dialog__content {
+      background: var(--kf-color-gray-900, #020617);
+      color: var(--kf-color-gray-50, #f9fafb);
+    }
+
+    .kf-command__input::placeholder {
+      color: var(--kf-color-gray-400, #9ca3af);
+    }
+
+    .kf-command__empty {
+      color: var(--kf-color-gray-500, #6b7280);
+    }
+
+    .kf-command__group {
+      color: var(--kf-color-gray-50, #f9fafb);
+    }
+
+    .kf-command__group [cmdk-group-heading] {
+      color: var(--kf-color-gray-400, #9ca3af);
+    }
+
+    .kf-command__separator {
+      background: var(--kf-color-gray-800, #1f2937);
+    }
+
+    .kf-command__item svg:not([class*="text-"]) {
+      color: var(--kf-color-gray-400, #9ca3af);
+    }
+
+    .kf-command__item[data-selected="true"] {
+      background: color-mix(
+        in srgb,
+        var(--kf-color-blue-500, #3b82f6) 25%,
+        transparent
+      );
+      color: var(--kf-color-gray-50, #f9fafb);
+    }
+
+    .kf-command__shortcut {
+      color: var(--kf-color-gray-400, #9ca3af);
+    }
   }
 `;
 

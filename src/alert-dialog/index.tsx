@@ -12,10 +12,19 @@ const AlertDialogGlobalStyles = createGlobalStyle`
     position: fixed;
     inset: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--kf-color-gray-950, #020617) 50%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-950, #020617) 50%,
+      transparent
+    );
+    backdrop-filter: blur(3px);
   }
   .dark .kf-alert-dialog__overlay {
-    background: color-mix(in srgb, var(--kf-color-gray-950, #020617) 70%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-950, #020617) 70%,
+      transparent
+    );
   }
 
   .kf-alert-dialog__overlay[data-state="open"] {
@@ -35,18 +44,37 @@ const AlertDialogGlobalStyles = createGlobalStyle`
     gap: calc(var(--kf-spacing, 0.25rem) * 4);
     width: min(32rem, calc(100% - calc(var(--kf-spacing, 0.25rem) * 8)));
     transform: translate(-50%, -50%);
-    background: var(--kf-color-gray-50, #ffffff);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-50, #f9fafb) 96%,
+      transparent
+    );
     color: var(--kf-color-gray-950, #0f172a);
-    border-radius: var(--kf-radius-lg, 0.5rem);
-    border: var(--kf-border-1, 1px) solid var(--kf-color-gray-300, rgba(15, 23, 42, 0.12));
+    border-radius: var(--kf-radius-2xl, 1rem);
+    border: var(--kf-border-1, 1px)
+      solid
+      color-mix(
+        in srgb,
+        var(--kf-color-gray-300, rgba(15, 23, 42, 0.22)) 60%,
+        transparent
+      );
     padding: calc(var(--kf-spacing, 0.25rem) * 6);
-    box-shadow: var(--kf-shadow-xl, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04));
+    box-shadow:
+      0 24px 60px rgba(15, 23, 42, 0.35),
+      0 0 0 1px rgba(15, 23, 42, 0.06);
     background-clip: padding-box;
   }
   .dark .kf-alert-dialog__content {
-    background: var(--kf-color-gray-900, #111827);
-    color: var(--kf-color-gray-50, #f8fafc);
-    border-color: var(--kf-color-gray-400, rgba(148, 163, 184, 0.4));
+    background: var(--kf-color-gray-950, #020617);
+    color: var(--kf-color-gray-50, #f9fafb);
+    border-color: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 75%,
+      transparent
+    );
+    box-shadow:
+      0 28px 70px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(15, 23, 42, 0.65);
   }
 
   .kf-alert-dialog__content[data-state="open"] {
