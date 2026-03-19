@@ -1,0 +1,1 @@
+- when i refer to components or component files, i mean those in the subfolders of src/ , except the demo files that are in src/demo/

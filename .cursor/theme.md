@@ -1,0 +1,2 @@
+- for colors, use the kf variables from web-css, and a fallback, ie var(--kf-color-red-700, #b91c1c)
+- all styling should be for both light and dark mode
