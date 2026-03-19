@@ -4,6 +4,7 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
+  Page,
 } from "@/lib/main";
 import type { ChartConfig } from "@/lib/main";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
@@ -28,7 +29,7 @@ const chartConfig = {
 
 export default function ChartDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Chart</h2>
       <ChartContainer config={chartConfig}>
         <BarChart accessibilityLayer data={chartData}>
@@ -48,6 +49,6 @@ export default function ChartDemo() {
           <Bar dataKey="mobile" fill="var(--kf-color-red-700)" radius={4} />
         </BarChart>
       </ChartContainer>
-    </>
+    </Page.Block>
   );
 }

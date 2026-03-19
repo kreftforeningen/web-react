@@ -6,11 +6,12 @@ import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
+  Page,
 } from "@/lib/main";
 
 export default function HoverCardDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Hover Card</h2>
       <HoverCard>
         <HoverCardTrigger asChild>
@@ -30,6 +31,6 @@ export default function HoverCardDemo() {
           </div>
         </HoverCardContent>
       </HoverCard>
-    </>
+    </Page.Block>
   );
 }

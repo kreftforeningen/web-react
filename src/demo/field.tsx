@@ -15,11 +15,12 @@ import {
   SelectTrigger,
   SelectValue,
   Textarea,
+  Page,
 } from "@/lib/main";
 
 export default function FieldDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Field</h2>
       <div className="app-max-width">
         <form>
@@ -132,6 +133,6 @@ export default function FieldDemo() {
           </FieldGroup>
         </form>
       </div>
-    </>
+    </Page.Block>
   );
 }

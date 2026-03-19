@@ -8,11 +8,12 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
+  Page,
 } from "@/lib/main";
 
 export default function DrawerDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Drawer</h2>
       <Drawer>
         <DrawerTrigger asChild>
@@ -34,7 +35,7 @@ export default function DrawerDemo() {
           </div>
         </DrawerContent>
       </Drawer>
-    </>
+    </Page.Block>
   );
 }
 

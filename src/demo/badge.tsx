@@ -1,9 +1,9 @@
-import { Badge } from "@/lib/main";
+import { Badge, Page } from "@/lib/main";
 import { CircleCheck } from "lucide-react";
 
 export default function BadgeDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Badge</h2>
       <div className="app-centered-column-sm">
         <div className="app-flex-row-wrap">
@@ -19,7 +19,7 @@ export default function BadgeDemo() {
           </Badge>
         </div>
       </div>
-    </>
+    </Page.Block>
   );
 }
 

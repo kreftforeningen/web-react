@@ -9,11 +9,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
   Button,
+  Page,
 } from "@/lib/main";
 
 export default function AlertDialogDemo() {
   return (
-    <>
+    <Page.Block width="3xl" gutters>
       <h2>Alert Dialog</h2>
       <AlertDialog>
         <AlertDialogTrigger asChild>
@@ -33,7 +34,7 @@ export default function AlertDialogDemo() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </>
+    </Page.Block>
   );
 }
 
