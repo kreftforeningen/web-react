@@ -25,7 +25,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External dependencies that shouldn't be bundled
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: ["react", "react-dom", "react/jsx-runtime", "styled-components"],
       output: {
         assetFileNames: "assets/[name].[extname]",
         entryFileNames: "[name].[format].js",
