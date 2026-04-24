@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState, useSyncExternalStore } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { StyleSheetManager } from "styled-components";
 
 type Theme = "dark" | "light" | "system";
@@ -83,6 +83,17 @@ function ThemeProvider({
     () => (theme === "system" ? (isSystemDark ? "dark" : "light") : theme),
     [isSystemDark, theme]
   );
+
+  useEffect(() => {
+    const body = window.document.body;
+    body.setAttribute("data-kreftforeningen-web-react", "");
+    body.classList.remove("light", "dark");
+    body.classList.add(resolvedTheme);
+    return () => {
+      body.removeAttribute("data-kreftforeningen-web-react");
+      body.classList.remove("light", "dark");
+    };
+  }, [resolvedTheme]);
 
   const value = {
     theme,
