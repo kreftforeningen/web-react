@@ -53,5 +53,45 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Validate publish version
+        run: |
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          LOCAL_VERSION=$(node -p "require('./package.json').version")
+          PUBLISHED_VERSION=$(npm view "$PACKAGE_NAME" version 2>/dev/null || true)
+          echo "Package: $PACKAGE_NAME"
+          echo "Local version: $LOCAL_VERSION"
+          echo "Published version: ${PUBLISHED_VERSION:-<none>}"
+          node -e "
+            const [local, published, name] = process.argv.slice(1);
+            if (!published) process.exit(0);
+            const parse = (v) => {
+              const [core, pre = ''] = String(v).split('-');
+              const [maj, min, patch] = core.split('.').map(Number);
+              if ([maj, min, patch].some((n) => Number.isNaN(n))) return null;
+              return { maj, min, patch, pre };
+            };
+            const a = parse(local);
+            const b = parse(published);
+            if (!a || !b) {
+              console.error(\`Unable to compare versions local=\${local} published=\${published}\`);
+              process.exit(1);
+            }
+            const cmpCore =
+              a.maj - b.maj ||
+              a.min - b.min ||
+              a.patch - b.patch;
+            const cmpPre = (() => {
+              if (a.pre === b.pre) return 0;
+              if (!a.pre && b.pre) return 1;
+              if (a.pre && !b.pre) return -1;
+              return a.pre > b.pre ? 1 : -1;
+            })();
+            const isGreater = cmpCore > 0 || (cmpCore === 0 && cmpPre > 0);
+            if (!isGreater) {
+              console.error(\`package.json version must be higher than npm published version for \${name}. local=\${local} published=\${published}\`);
+              process.exit(1);
+            }
+          " "$LOCAL_VERSION" "$PUBLISHED_VERSION" "$PACKAGE_NAME"
+
       - name: Publish (OIDC via npm Trusted Publishing)
-        run: pnpm release
+        run: npm publish --access public --provenance --no-git-checks
