@@ -120,7 +120,7 @@ const ItemGlobalStyles = createGlobalStyle`
     display: inline-flex;
     gap: calc(var(--kf-spacing, 0.25rem) * 2);
     align-items: center;
-    font-size: var(--kf-text-sm, 0.875rem);
+    font-size: var(--kf-font-size-md, 1rem);
     line-height: var(--kf-text-sm--line-height, 1.4285714286);
     font-weight: 500;
   }
