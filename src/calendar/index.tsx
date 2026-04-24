@@ -258,7 +258,7 @@ const CalendarGlobalStyles = createGlobalStyle`
     color: var(--kf-color-gray-900, #0f172a);
   }
 
-  @media (prefers-color-scheme: dark) {
+  .dark {
     .kf-calendar {
       background: color-mix(
         in srgb,
