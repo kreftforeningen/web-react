@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { StyleSheetManager } from "styled-components";
 
 type Theme = "dark" | "light" | "system";
 
@@ -15,6 +16,8 @@ type ThemeProviderState = {
   setTheme: (theme: Theme) => void;
 };
 
+const WEB_REACT_SCOPE = "[data-kreftforeningen-web-react]";
+
 const initialState: ThemeProviderState = {
   theme: "system",
   setTheme: () => null,
@@ -22,13 +25,44 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
+function scopeSelector(selector: string) {
+  if (selector.includes(WEB_REACT_SCOPE)) return selector;
+
+  const trimmedSelector = selector.trim();
+
+  if (trimmedSelector === "html" || trimmedSelector === "body")
+    return WEB_REACT_SCOPE;
+
+  if (trimmedSelector.startsWith("html ") || trimmedSelector.startsWith("body ")) {
+    return `${WEB_REACT_SCOPE} ${trimmedSelector.slice(trimmedSelector.indexOf(" ") + 1)}`;
+  }
+
+  if (selector.includes(":root")) {
+    return selector.replaceAll(":root", WEB_REACT_SCOPE);
+  }
+
+  return `${WEB_REACT_SCOPE} ${selector}`;
+}
+
+function namespacePlugin(element: {
+  type?: string;
+  props?: string[];
+  parent?: { value?: string };
+}) {
+  if (element.type !== "rule" || !Array.isArray(element.props)) return;
+  if (typeof element.parent?.value === "string" && element.parent.value.includes("@keyframes")) return;
+  element.props = element.props.map(scopeSelector);
+}
+
 function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "vite-ui-theme",
-  ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [resolvedTheme, setResolvedTheme] = useState<"dark" | "light">(
+    defaultTheme === "dark" ? "dark" : "light"
+  );
 
   useEffect(() => {
     const storedTheme = localStorage.getItem(storageKey) as Theme | null;
@@ -36,35 +70,37 @@ function ThemeProvider({
   }, [storageKey]);
 
   useEffect(() => {
-    const root = window.document.documentElement;
-
-    root.classList.remove("light", "dark");
-
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      setResolvedTheme(mediaQuery.matches ? "dark" : "light");
 
-      root.classList.add(systemTheme);
-      return;
+      const updateTheme = (event: MediaQueryListEvent) => {
+        setResolvedTheme(event.matches ? "dark" : "light");
+      };
+
+      mediaQuery.addEventListener("change", updateTheme);
+      return () => mediaQuery.removeEventListener("change", updateTheme);
     }
 
-    root.classList.add(theme);
+    setResolvedTheme(theme);
   }, [theme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+    setTheme: (nextTheme: Theme) => {
+      localStorage.setItem(storageKey, nextTheme);
+      setTheme(nextTheme);
     },
   };
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
-    </ThemeProviderContext.Provider>
+    <StyleSheetManager stylisPlugins={[namespacePlugin]}>
+      <div data-kreftforeningen-web-react className={resolvedTheme}>
+        <ThemeProviderContext.Provider value={value}>
+          {children}
+        </ThemeProviderContext.Provider>
+      </div>
+    </StyleSheetManager>
   );
 }
 
