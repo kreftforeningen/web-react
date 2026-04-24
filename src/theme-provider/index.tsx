@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useMemo, useState, useSyncExternalStore } from "react";
 import { StyleSheetManager } from "styled-components";
 
 type Theme = "dark" | "light" | "system";
@@ -59,31 +59,30 @@ function ThemeProvider({
   defaultTheme = "system",
   storageKey = "vite-ui-theme",
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
-  const [resolvedTheme, setResolvedTheme] = useState<"dark" | "light">(
-    defaultTheme === "dark" ? "dark" : "light"
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return defaultTheme;
+    const storedTheme = localStorage.getItem(storageKey) as Theme | null;
+    return storedTheme || defaultTheme;
+  });
+
+  const isSystemDark = useSyncExternalStore(
+    (onChange) => {
+      if (typeof window === "undefined") return () => {};
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      mediaQuery.addEventListener("change", onChange);
+      return () => mediaQuery.removeEventListener("change", onChange);
+    },
+    () => {
+      if (typeof window === "undefined") return false;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    },
+    () => false
   );
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem(storageKey) as Theme | null;
-    if (storedTheme) setTheme(storedTheme);
-  }, [storageKey]);
-
-  useEffect(() => {
-    if (theme === "system") {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      setResolvedTheme(mediaQuery.matches ? "dark" : "light");
-
-      const updateTheme = (event: MediaQueryListEvent) => {
-        setResolvedTheme(event.matches ? "dark" : "light");
-      };
-
-      mediaQuery.addEventListener("change", updateTheme);
-      return () => mediaQuery.removeEventListener("change", updateTheme);
-    }
-
-    setResolvedTheme(theme);
-  }, [theme]);
+  const resolvedTheme = useMemo<"dark" | "light">(
+    () => (theme === "system" ? (isSystemDark ? "dark" : "light") : theme),
+    [isSystemDark, theme]
+  );
 
   const value = {
     theme,
