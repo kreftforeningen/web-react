@@ -116,7 +116,7 @@ const ToggleGlobalStyles = createGlobalStyle`
     opacity: 0.5;
   }
 
-  @media (prefers-color-scheme: dark) {
+  .dark {
     .kf-toggle {
       color: var(--kf-color-gray-100, #e5e7eb);
     }
