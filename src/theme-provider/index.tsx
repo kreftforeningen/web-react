@@ -38,7 +38,7 @@ function scopeSelector(selector: string) {
   }
 
   if (selector.includes(":root")) {
-    return selector.replaceAll(":root", WEB_REACT_SCOPE);
+    return selector.replace(/:root/g, WEB_REACT_SCOPE);
   }
 
   return `${WEB_REACT_SCOPE} ${selector}`;
