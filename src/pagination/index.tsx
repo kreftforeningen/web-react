@@ -135,39 +135,37 @@ const PaginationGlobalStyles = createGlobalStyle`
     height: calc(var(--kf-spacing, 0.25rem) * 4);
   }
 
-  @media (prefers-color-scheme: dark) {
-    .kf-pagination__link {
-      color: var(--kf-color-gray-100, #e5e7eb);
-    }
+  .dark .kf-pagination__link {
+    color: var(--kf-color-gray-100, #e5e7eb);
+  }
 
-    .kf-pagination__link[data-active="true"] {
-      border-color: var(--kf-color-blue-300, #93c5fd);
-      background: color-mix(
-        in srgb,
-        var(--kf-color-blue-300, #93c5fd) 18%,
-        transparent
-      );
-      color: var(--kf-color-blue-50, #eff6ff);
-    }
+  .dark .kf-pagination__link[data-active="true"] {
+    border-color: var(--kf-color-blue-300, #93c5fd);
+    background: color-mix(
+      in srgb,
+      var(--kf-color-blue-300, #93c5fd) 18%,
+      transparent
+    );
+    color: var(--kf-color-blue-50, #eff6ff);
+  }
 
-    .kf-pagination__link:hover {
-      background: color-mix(
-        in srgb,
-        var(--kf-color-gray-700, #374151) 70%,
-        transparent
-      );
-    }
+  .dark .kf-pagination__link:hover {
+    background: color-mix(
+      in srgb,
+      var(--kf-color-gray-700, #374151) 70%,
+      transparent
+    );
+  }
 
-    .kf-pagination__link:focus-visible {
-      border-color: var(--kf-color-blue-300, #93c5fd);
-      box-shadow:
-        0 0 0 2px rgba(15, 23, 42, 1),
-        0 0 0 4px var(--kf-color-blue-500, #3b82f6);
-    }
+  .dark .kf-pagination__link:focus-visible {
+    border-color: var(--kf-color-blue-300, #93c5fd);
+    box-shadow:
+      0 0 0 2px rgba(15, 23, 42, 1),
+      0 0 0 4px var(--kf-color-blue-500, #3b82f6);
+  }
 
-    .kf-pagination__ellipsis {
-      color: var(--kf-color-gray-400, #9ca3af);
-    }
+  .dark .kf-pagination__ellipsis {
+    color: var(--kf-color-gray-400, #9ca3af);
   }
 `;
 

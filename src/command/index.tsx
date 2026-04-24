@@ -178,7 +178,7 @@ const CommandGlobalStyles = createGlobalStyle`
     color: var(--kf-color-gray-500, rgba(15, 23, 42, 0.6));
   }
 
-  @media (prefers-color-scheme: dark) {
+  .dark {
     .kf-command-dialog__content {
       background: var(--kf-color-gray-950, #020617);
       color: var(--kf-color-gray-50, #f9fafb);

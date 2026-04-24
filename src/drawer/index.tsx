@@ -131,7 +131,7 @@ const DrawerGlobalStyles = createGlobalStyle`
     color: var(--kf-color-gray-700, #374151);
   }
 
-  @media (prefers-color-scheme: dark) {
+  .dark {
     .kf-drawer__overlay {
       background: color-mix(in srgb, #000000 70%, transparent);
     }

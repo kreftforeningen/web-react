@@ -272,7 +272,7 @@ const ContextMenuGlobalStyles = createGlobalStyle`
     }
   }
 
-  @media (prefers-color-scheme: dark) {
+  .dark {
     .kf-context-menu__content,
     .kf-context-menu__sub-content {
       background: var(--kf-color-gray-900, #020617);
