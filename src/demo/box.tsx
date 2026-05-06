@@ -31,8 +31,31 @@ export default function BoxDemo() {
         </p>
       </Box>
 
+      <Box color="green" margin={{ base: "1rem 0", md: "1.5rem 0" }}>
+        <p>
+          <strong>Using margin on Box</strong>
+        </p>
+        <p>
+          This box uses the <code>margin</code> prop to create vertical spacing.
+        </p>
+      </Box>
+
+      <Box color="orange" marginInline="auto" maxWidth="28rem" marginBlock="1rem">
+        <p>
+          <strong>Using marginInline and marginBlock</strong>
+        </p>
+        <p>
+          This box is centered with <code>marginInline="auto"</code> and spaced
+          with <code>marginBlock</code>.
+        </p>
+      </Box>
+
       <Bleed>
-        <Box as="article" color="gray">
+        <Box
+          as="article"
+          color="gray"
+          margin={{ base: "0 auto", sm: "0 auto 2rem auto" }}
+        >
           <p>
             <strong>Box as layout primitive</strong>
           </p>

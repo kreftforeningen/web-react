@@ -24,9 +24,9 @@ type ResponsiveValue<T> = T | ResponsiveObject<T>;
 
 const propertyConfig = {
   padding: { css: "padding", fallback: "0" },
-  margin: { css: "margin", fallback: "0" },
-  "margin-inline": { css: "margin-inline", fallback: "0" },
-  "margin-block": { css: "margin-block", fallback: "0" },
+  margin: { css: "margin", fallback: "unset" },
+  "margin-inline": { css: "margin-inline", fallback: "unset" },
+  "margin-block": { css: "margin-block", fallback: "unset" },
   width: { css: "width", fallback: "auto" },
   "min-width": { css: "min-width", fallback: "0" },
   "max-width": { css: "max-width", fallback: "none" },
