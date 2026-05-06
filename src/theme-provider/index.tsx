@@ -85,11 +85,15 @@ function ThemeProvider({
   );
 
   useEffect(() => {
+    const html = window.document.documentElement;
     const body = window.document.body;
+    html.classList.remove("light", "dark");
+    html.classList.add(resolvedTheme);
     body.setAttribute("data-kreftforeningen-web-react", "");
     body.classList.remove("light", "dark");
     body.classList.add(resolvedTheme);
     return () => {
+      html.classList.remove("light", "dark");
       body.removeAttribute("data-kreftforeningen-web-react");
       body.classList.remove("light", "dark");
     };
