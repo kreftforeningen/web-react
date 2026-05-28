@@ -4,6 +4,7 @@
     "lib": ["dom", "ES2015"], // Add DOM types for browser environment
     "sourceMap": true, // Generate source maps
     "types": ["node"], // Include type definitions
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".", // Base directory for imports
     "paths": {
       "@/*": ["./src/*"] // Enable @ imports

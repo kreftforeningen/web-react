@@ -84,11 +84,11 @@ const ResizableGlobalStyles = createGlobalStyle`
 function ResizablePanelGroup({
   className,
   ...props
-}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) {
+}: React.ComponentProps<typeof ResizablePrimitive.Group>) {
   return (
     <>
       <ResizableGlobalStyles />
-      <ResizablePrimitive.PanelGroup
+      <ResizablePrimitive.Group
         data-slot="resizable-panel-group"
         className={cn("kf-resizable-group", className)}
         {...props}
@@ -107,11 +107,11 @@ function ResizableHandle({
   withHandle,
   className,
   ...props
-}: React.ComponentProps<typeof ResizablePrimitive.PanelResizeHandle> & {
+}: React.ComponentProps<typeof ResizablePrimitive.Separator> & {
   withHandle?: boolean;
 }) {
   return (
-    <ResizablePrimitive.PanelResizeHandle
+    <ResizablePrimitive.Separator
       data-slot="resizable-handle"
       className={cn("kf-resizable-handle", className)}
       {...props}
@@ -125,7 +125,7 @@ function ResizableHandle({
           />
         </div>
       )}
-    </ResizablePrimitive.PanelResizeHandle>
+    </ResizablePrimitive.Separator>
   );
 }
 
