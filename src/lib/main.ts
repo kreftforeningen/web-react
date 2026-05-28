@@ -419,7 +419,8 @@ export {
 } from "../table";
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "../tabs";
 export { Textarea } from "../textarea";
-export { ThemeProvider, useTheme } from "../theme-provider";
+export { ThemeProvider } from "../theme-provider";
+export { useTheme } from "../theme-provider/use-theme";
 export {
   Timeline,
   TimelineItem,

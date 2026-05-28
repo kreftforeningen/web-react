@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "../dropdown-menu";
 
-import { useTheme } from "@/theme-provider";
+import { useTheme } from "@/theme-provider/use-theme";
 
 const ModeToggleGlobalStyles = createGlobalStyle`
   .kf-mode-toggle {

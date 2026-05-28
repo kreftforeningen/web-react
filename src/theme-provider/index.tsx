@@ -1,9 +1,9 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { StyleSheetManager } from "styled-components";
 
-type Theme = "dark" | "light" | "system";
+import { ThemeProviderContext, type Theme } from "./context";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -11,19 +11,7 @@ type ThemeProviderProps = {
   storageKey?: string;
 };
 
-type ThemeProviderState = {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-};
-
 const WEB_REACT_SCOPE = "[data-kreftforeningen-web-react]";
-
-const initialState: ThemeProviderState = {
-  theme: "system",
-  setTheme: () => null,
-};
-
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 function scopeSelector(selector: string) {
   if (selector.includes(WEB_REACT_SCOPE)) return selector;
@@ -118,13 +106,4 @@ function ThemeProvider({
   );
 }
 
-const useTheme = () => {
-  const context = useContext(ThemeProviderContext);
-
-  if (context === undefined)
-    throw new Error("useTheme must be used within a ThemeProvider");
-
-  return context;
-};
-
-export { ThemeProvider, useTheme };
+export { ThemeProvider };

@@ -10,7 +10,7 @@ export default function ResizableDemo() {
     <Page.Block width="3xl" gutters>
       <h2>Resizable</h2>
       <div className="app-resizable-example">
-        <ResizablePanelGroup direction="vertical">
+        <ResizablePanelGroup orientation="vertical">
           <ResizablePanel defaultSize={30}>
             <div className="app-panel-centered">
               <span className="app-font-semibold">Header</span>

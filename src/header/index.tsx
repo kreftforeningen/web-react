@@ -2,7 +2,7 @@
 
 import { createGlobalStyle } from "styled-components";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/theme-provider";
+import { useTheme } from "@/theme-provider/use-theme";
 
 import { Button } from "@/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../input-group";
