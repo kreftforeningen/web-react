@@ -21,7 +21,7 @@ const isExternal = (id: string) =>
 
 export default defineConfig({
   plugins: [
-    dts({ include: ["src/lib"] }),
+    dts({ include: ["src"], exclude: ["src/App.tsx", "src/main.tsx", "src/demo/**"] }),
     react(), // Enable React
     cssInjectedByJsPlugin(), // Inject CSS into JS
   ],
