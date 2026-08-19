@@ -11,10 +11,10 @@
   ],
   "main": "./dist/main.cjs.js",
   "module": "./dist/main.es.js",
-  "types": "./dist/src/lib/main.d.ts",
+  "types": "./dist/lib/main.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/src/lib/main.d.ts",
+      "types": "./dist/lib/main.d.ts",
       "import": "./dist/main.es.js",
       "require": "./dist/main.cjs.js",
       "default": "./dist/main.es.js"
