@@ -1,5 +1,6 @@
 //src/lib/main.ts
 import "../style.css";
+export { cn } from "./utils";
 export {
   AccentuatedLink,
   AccentuatedLinkSubtitle,
@@ -49,7 +50,7 @@ export {
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
 } from "../breadcrumb";
-export { Button } from "@/button";
+export { Button, buttonVariants } from "@/button";
 export {
   ButtonGroup,
   ButtonGroupSeparator,
@@ -379,6 +380,7 @@ export {
 } from "../sheet";
 export { Show } from "../show";
 export {
+  useSidebar,
   Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -437,4 +439,5 @@ export {
   TooltipProvider,
   TooltipTrigger,
 } from "../tooltip";
+export { useIsMobile } from "../hooks/use-mobile";
 export { VStack } from "@/vstack";

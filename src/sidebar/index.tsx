@@ -1037,6 +1037,7 @@ function SidebarMenuSubButton({
 }
 
 export {
+  useSidebar,
   Sidebar,
   SidebarContent,
   SidebarFooter,
