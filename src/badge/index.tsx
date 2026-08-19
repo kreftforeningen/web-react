@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot as SlotPrimitive } from "radix-ui";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
@@ -139,7 +139,7 @@ type BadgeProps = React.ComponentPropsWithoutRef<"span"> & {
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, variant = "default", asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "span";
+    const Comp = asChild ? SlotPrimitive.Root : "span";
 
     return (
       <>

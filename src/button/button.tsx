@@ -1,5 +1,7 @@
+"use client";
+
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot as SlotPrimitive } from "radix-ui";
 import { type VariantProps } from "class-variance-authority";
 import { createGlobalStyle } from "styled-components";
 import { cn } from "@/lib/utils";
@@ -289,7 +291,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, shape, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+    const Comp = asChild ? SlotPrimitive.Root : "button";
 
     return (
       <>

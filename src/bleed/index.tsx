@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot as SlotPrimitive } from "radix-ui";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
@@ -246,7 +246,7 @@ const Bleed = React.forwardRef<HTMLDivElement, BleedProps>(
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : as ?? "div";
+    const Comp = asChild ? SlotPrimitive.Root : as ?? "div";
 
     const styleVars: React.CSSProperties = {
       ...assignBleedVars(marginInline, "margin-inline", "inline", true),

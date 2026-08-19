@@ -1,5 +1,6 @@
 //src/lib/main.ts
 import "../style.css";
+export { cn } from "./utils";
 export {
   AccentuatedLink,
   AccentuatedLinkSubtitle,
@@ -26,6 +27,17 @@ export {
   AlertDialogCancel,
 } from "../alert-dialog";
 export { AspectRatio } from "../aspect-ratio";
+export {
+  Attachment,
+  AttachmentMedia,
+  AttachmentContent,
+  AttachmentTitle,
+  AttachmentDescription,
+  AttachmentActions,
+  AttachmentAction,
+  AttachmentTrigger,
+  AttachmentGroup,
+} from "../attachment";
 export { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 export { Badge } from "../badge";
 export {
@@ -39,6 +51,12 @@ export {
   BannerButtonSecondary,
 } from "../banner";
 export { Bleed } from "../bleed";
+export {
+  Bubble,
+  BubbleContent,
+  BubbleReactions,
+  BubbleGroup,
+} from "../bubble";
 export { Box } from "../box";
 export {
   Breadcrumb,
@@ -49,7 +67,7 @@ export {
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
 } from "../breadcrumb";
-export { Button } from "@/button";
+export { Button, buttonVariants } from "@/button";
 export {
   ButtonGroup,
   ButtonGroupSeparator,
@@ -119,6 +137,7 @@ export {
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
 } from "../context-menu";
+export { DirectionProvider, useDirection } from "../direction";
 export {
   Dialog,
   DialogClose,
@@ -286,6 +305,7 @@ export {
   LinkListTitle,
   LinkListDescription,
 } from "../link-list";
+export { Marker, MarkerIcon, MarkerContent } from "../marker";
 export {
   Menubar,
   MenubarPortal,
@@ -379,6 +399,7 @@ export {
 } from "../sheet";
 export { Show } from "../show";
 export {
+  useSidebar,
   Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -437,4 +458,5 @@ export {
   TooltipProvider,
   TooltipTrigger,
 } from "../tooltip";
+export { useIsMobile } from "../hooks/use-mobile";
 export { VStack } from "@/vstack";

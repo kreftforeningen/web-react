@@ -1,6 +1,6 @@
 "use client";
 
-import { Slot } from "@radix-ui/react-slot";
+import { Slot as SlotPrimitive } from "radix-ui";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
@@ -134,7 +134,7 @@ function ButtonGroupText({
 }: React.ComponentProps<"div"> & {
   asChild?: boolean;
 }) {
-  const Comp = asChild ? Slot : "div";
+  const Comp = asChild ? SlotPrimitive.Root : "div";
 
   return <Comp className={cn("kf-button-group__text", className)} {...props} />;
 }

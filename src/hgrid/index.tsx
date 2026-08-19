@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot as SlotPrimitive } from "radix-ui";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
@@ -222,7 +222,7 @@ function HGrid<T extends React.ElementType = "div">({
   style,
   ...props
 }: HGridProps<T>) {
-  const Comp = asChild ? Slot : as ?? "div";
+  const Comp = asChild ? SlotPrimitive.Root : as ?? "div";
 
   const styleVars: React.CSSProperties = {
     ...assignResponsiveVars(columns, formatColumnsValue, "columns"),
