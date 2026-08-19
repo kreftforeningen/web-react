@@ -32,10 +32,12 @@ const AccordionDemo = lazy(() => import("@/demo/accordion"));
 const AlertDemo = lazy(() => import("@/demo/alert"));
 const AlertDialogDemo = lazy(() => import("@/demo/alert-dialog"));
 const AspectRatioDemo = lazy(() => import("@/demo/aspect-ratio"));
+const AttachmentDemo = lazy(() => import("@/demo/attachment"));
 const AvatarDemo = lazy(() => import("@/demo/avatar"));
 const BadgeDemo = lazy(() => import("@/demo/badge"));
 const BannerDemo = lazy(() => import("@/demo/banner"));
 const BoxDemo = lazy(() => import("@/demo/box"));
+const BubbleDemo = lazy(() => import("@/demo/bubble"));
 const BreadcrumbDemo = lazy(() => import("@/demo/breadcrumb"));
 const ButtonDemo = lazy(() => import("@/demo/button"));
 const ButtonGroupDemo = lazy(() => import("@/demo/button-group"));
@@ -48,6 +50,7 @@ const CollapsibleDemo = lazy(() => import("@/demo/collapsible"));
 const CommandDemo = lazy(() => import("@/demo/command"));
 const ContextMenuDemo = lazy(() => import("@/demo/context-menu"));
 const DialogDemo = lazy(() => import("@/demo/dialog"));
+const DirectionDemo = lazy(() => import("@/demo/direction"));
 const DownloadDemo = lazy(() => import("@/demo/download"));
 const DrawerDemo = lazy(() => import("@/demo/drawer"));
 const DropdownMenuDemo = lazy(() => import("@/demo/dropdown-menu"));
@@ -66,6 +69,7 @@ const ItemDemo = lazy(() => import("@/demo/item"));
 const KbdDemo = lazy(() => import("@/demo/kbd"));
 const LabelDemo = lazy(() => import("@/demo/label"));
 const LinkListDemo = lazy(() => import("@/demo/link-list"));
+const MarkerDemo = lazy(() => import("@/demo/marker"));
 const MenubarDemo = lazy(() => import("@/demo/menubar"));
 const ModeToggleDemo = lazy(() => import("@/demo/mode-toggle"));
 const NativeSelectDemo = lazy(() => import("@/demo/native-select"));
@@ -126,6 +130,10 @@ const navigationItems = [
     to: "/aspect-ratio",
   },
   {
+    label: "Attachment",
+    to: "/attachment",
+  },
+  {
     label: "Avatar",
     to: "/avatar",
   },
@@ -140,6 +148,10 @@ const navigationItems = [
   {
     label: "Box",
     to: "/box",
+  },
+  {
+    label: "Bubble",
+    to: "/bubble",
   },
   {
     label: "Breadcrumb",
@@ -188,6 +200,10 @@ const navigationItems = [
   {
     label: "Dialog",
     to: "/dialog",
+  },
+  {
+    label: "Direction",
+    to: "/direction",
   },
   {
     label: "Download",
@@ -260,6 +276,10 @@ const navigationItems = [
   {
     label: "Link List",
     to: "/link-list",
+  },
+  {
+    label: "Marker",
+    to: "/marker",
   },
   {
     label: "Menubar",
@@ -454,6 +474,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/attachment",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AttachmentDemo />
+          </Suspense>
+        ),
+      },
+      {
         path: "/avatar",
         element: (
           <Suspense fallback={<Spinner />}>
@@ -482,6 +510,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <BoxDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/bubble",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <BubbleDemo />
           </Suspense>
         ),
       },
@@ -578,6 +614,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <DialogDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/direction",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <DirectionDemo />
           </Suspense>
         ),
       },
@@ -722,6 +766,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner />}>
             <LinkListDemo />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/marker",
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <MarkerDemo />
           </Suspense>
         ),
       },

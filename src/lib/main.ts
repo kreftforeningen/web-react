@@ -27,6 +27,17 @@ export {
   AlertDialogCancel,
 } from "../alert-dialog";
 export { AspectRatio } from "../aspect-ratio";
+export {
+  Attachment,
+  AttachmentMedia,
+  AttachmentContent,
+  AttachmentTitle,
+  AttachmentDescription,
+  AttachmentActions,
+  AttachmentAction,
+  AttachmentTrigger,
+  AttachmentGroup,
+} from "../attachment";
 export { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 export { Badge } from "../badge";
 export {
@@ -40,6 +51,12 @@ export {
   BannerButtonSecondary,
 } from "../banner";
 export { Bleed } from "../bleed";
+export {
+  Bubble,
+  BubbleContent,
+  BubbleReactions,
+  BubbleGroup,
+} from "../bubble";
 export { Box } from "../box";
 export {
   Breadcrumb,
@@ -120,6 +137,7 @@ export {
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
 } from "../context-menu";
+export { DirectionProvider, useDirection } from "../direction";
 export {
   Dialog,
   DialogClose,
@@ -287,6 +305,7 @@ export {
   LinkListTitle,
   LinkListDescription,
 } from "../link-list";
+export { Marker, MarkerIcon, MarkerContent } from "../marker";
 export {
   Menubar,
   MenubarPortal,
