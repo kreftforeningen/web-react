@@ -9,7 +9,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [
-    dts({ include: ["src/lib"] }), // Generate .d.ts files
+    dts({ include: ["src/lib"] }),
     react(), // Enable React
     cssInjectedByJsPlugin(), // Inject CSS into JS
   ],
@@ -20,16 +20,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, "src/lib/main.ts"), // Library entry point
-      formats: ["es", "cjs"], // Output formats
+      entry: resolve(__dirname, "src/lib/main.ts"),
+      formats: ["es", "cjs"],
+      fileName: (format) => (format === "es" ? "main.es.js" : "main.cjs.js"),
     },
     rollupOptions: {
-      // External dependencies that shouldn't be bundled
       external: ["react", "react-dom", "react/jsx-runtime", "styled-components"],
-      output: {
-        assetFileNames: "assets/[name].[extname]",
-        entryFileNames: "[name].[format].js",
-      },
     },
   },
 });
