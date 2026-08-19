@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot as SlotPrimitive } from "radix-ui";
 import { createGlobalStyle } from "styled-components";
 
 import { cn } from "@/lib/utils";
@@ -237,7 +237,7 @@ function Item({
   size?: ItemSize;
   asChild?: boolean;
 }) {
-  const Comp = asChild ? Slot : "div";
+  const Comp = asChild ? SlotPrimitive.Root : "div";
   return (
     <>
       <ItemGlobalStyles />
