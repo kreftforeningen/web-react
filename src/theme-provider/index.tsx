@@ -33,9 +33,9 @@ function scopeSelector(selector: string) {
 }
 
 function namespacePlugin(element: {
-  type?: string;
-  props?: string[];
-  parent?: { value?: string };
+  type: string;
+  props: string | string[];
+  parent: { value?: string } | null;
 }) {
   if (element.type !== "rule" || !Array.isArray(element.props)) return;
   if (typeof element.parent?.value === "string" && element.parent.value.includes("@keyframes")) return;
