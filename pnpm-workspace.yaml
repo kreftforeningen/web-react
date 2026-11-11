@@ -17,5 +17,8 @@ overrides:
 
 minimumReleaseAge: 10080
 
+minimumReleaseAgeExclude:
+  - '@kreftforeningen/web-css'
+
 allowBuilds:
   esbuild: true
