@@ -84,8 +84,8 @@ importers:
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.13.0)
       '@kreftforeningen/web-css':
-        specifier: ^1.0.22
-        version: 1.0.22
+        specifier: ^1.0.24
+        version: 1.0.24
       '@types/node':
         specifier: ^26.6.5
         version: 26.6.5
@@ -315,8 +315,8 @@ packages:
   '@keyv/serialize@1.1.1':
     resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
 
-  '@kreftforeningen/web-css@1.0.22':
-    resolution: {integrity: sha512-rcLGiXyTrQ+nVCxkeXnUvXNXiwPb6CvJxiQZrtdChY+yk378PhMjqB204U507YZTJuMjII9c3WP6AfpJgoVnzw==}
+  '@kreftforeningen/web-css@1.0.24':
+    resolution: {integrity: sha512-SxD4rszB7WHN6I4lFI0uFO1gsXbBKRI7AT4C1vSxD9U31DlUPx+q8iPvSjEjgfbyVD91zHzmFe9P1RIlOAA7Dg==}
 
   '@oxc-project/types@0.155.0':
     resolution: {integrity: sha512-SeE8JPwW1xs1tHeNycjUtUBdhorRa8o4jlvjwk49R7/Z291i+4DQa7JJIgOm/TaYQZx+QrPQbVJ/9c8dMIZN8Q==}
@@ -2464,7 +2464,7 @@ snapshots:
 
   '@keyv/serialize@1.1.1': {}
 
-  '@kreftforeningen/web-css@1.0.22': {}
+  '@kreftforeningen/web-css@1.0.24': {}
 
   '@oxc-project/types@0.155.0': {}
 
